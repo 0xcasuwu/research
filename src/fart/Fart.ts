@@ -9,6 +9,8 @@ import {
   StoredU256,
   StoredAddress,
   ADDRESS_BYTE_LENGTH,
+  DeployableOP_20,
+  OP20InitParameters,
 } from '@btc-vision/btc-runtime/runtime';
 import { u256 } from '@btc-vision/as-bignum/assembly';
 import { SafeMath } from '@btc-vision/btc-runtime/runtime/types/SafeMath';
@@ -24,7 +26,7 @@ const balancesPointer: u16 = Blockchain.nextPointer;
 const claimedPointer: u16 = Blockchain.nextPointer;
 
 @final
-export class Fart extends OP_NET {
+export class Fart extends DeployableOP_20 {
   public readonly NAME: string = 'Fart';
 
   // State variables initialized in constructor
@@ -43,19 +45,27 @@ export class Fart extends OP_NET {
   }
 
   constructor() {
-    super();
+    super(null);
     this._remainingSupply = new StoredU256(remainingSupplyPointer, u256.Zero, u256.Zero);
     this._totalClaimers = new StoredU256(totalClaimersPointer, u256.Zero, u256.Zero);
     this._firstClaimer = new StoredAddress(firstClaimerPointer, Address.dead());
     this._lastClaimer = new StoredAddress(lastClaimerPointer, Address.dead());
   }
 
+  public override onDeployment(_calldata: Calldata): void {
+    const maxSupply: u256 = SafeMath.mul(u256.from(100000), u256.from(1000000000000000000)); // 100,000 FART
+    const decimals: u8 = 18;
+    const name: string = 'Fart Token';
+    const symbol: string = 'FART';
+
+    this.instantiate(new OP20InitParameters(maxSupply, decimals, name, symbol), true);
+    this._remainingSupply.value = maxSupply;
+  }
+
   public override execute(method: Selector, calldata: Calldata): BytesWriter {
     switch (method) {
       case encodeSelector('claim'):
         return this.claim();
-      case encodeSelector('balanceOf'):
-        return this.balanceOf(calldata);
       case encodeSelector('claimStats'):
         return this.getClaimStats();
       default:
@@ -66,9 +76,12 @@ export class Fart extends OP_NET {
   private claim(): BytesWriter {
     const claimer = Blockchain.tx.sender;
     
-    // Initialize supply on first claim
+    if (this._remainingSupply.value == u256.Zero) {
+      throw new Revert('No tokens left to claim');
+    }
+
+    // Initialize first claimer if not set
     if (this._totalClaimers.value == u256.Zero) {
-      this._remainingSupply.value = SafeMath.mul(u256.from(100000), u256.from(1000000000000000000)); // 100,000 FART
       this._firstClaimer.value = claimer;
     }
 
@@ -81,29 +94,17 @@ export class Fart extends OP_NET {
     // Update claim status
     claimed.value = u256.One;
 
-    // Update balance
-    const balance = this.getBalance(claimer);
-    balance.value = u256.from(1000000000000000000); // 1 FART
+    // Mint tokens to claimer (using protected _mint with onlyOwner=false)
+    const claimAmount = u256.from(1000000000000000000); // 1 FART
+    this._mint(claimer, claimAmount, false); // Important: pass false to bypass owner check
 
     // Update state
-    this._remainingSupply.value = SafeMath.sub(
-      this._remainingSupply.value,
-      u256.from(1000000000000000000)
-    );
+    this._remainingSupply.value = SafeMath.sub(this._remainingSupply.value, claimAmount);
     this._totalClaimers.value = SafeMath.add(this._totalClaimers.value, u256.One);
     this._lastClaimer.value = claimer;
 
     const response = new BytesWriter(1);
     response.writeBoolean(true);
-    return response;
-  }
-
-  private balanceOf(calldata: Calldata): BytesWriter {
-    const account = calldata.readAddress();
-    const balance = this.getBalance(account);
-    
-    const response = new BytesWriter(32);
-    response.writeU256(balance.value);
     return response;
   }
 
