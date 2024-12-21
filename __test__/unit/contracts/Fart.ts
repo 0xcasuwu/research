@@ -1,6 +1,7 @@
 import { Address, BinaryReader, BinaryWriter } from '@btc-vision/transaction';
 import { BytecodeManager, ContractDetails, ContractRuntime } from '@btc-vision/unit-test-framework';
 import { encodeNumericSelector } from './utils';
+import { u256 } from '@btc-vision/as-bignum';
 
 export type ClaimStats = {
   totalClaimers: bigint;
@@ -14,7 +15,7 @@ export class Fart extends ContractRuntime {
   protected readonly transferSelector = encodeNumericSelector('transfer');
   protected readonly balanceOfSelector = encodeNumericSelector('balanceOf');
   protected readonly claimStatsSelector = encodeNumericSelector('claimStats');
-
+  protected readonly approveSelector = encodeNumericSelector('approve');
   constructor(details: ContractDetails) {
     super(details);
     this.preserveState();
@@ -60,6 +61,17 @@ export class Fart extends ContractRuntime {
     return reader.readU256();
   }
 
+  public async transfer(to: Address, amount: bigint): Promise<boolean> {
+    const calldata = new BinaryWriter();
+    calldata.writeSelector(this.transferSelector);
+    calldata.writeAddress(to);
+    calldata.writeU256(amount);
+    
+    const response = await this.getResponse(calldata.getBuffer());
+    const reader = new BinaryReader(response);
+    return reader.readBoolean();
+  }
+
   public async claimStats(): Promise<ClaimStats> {
     const calldata = new BinaryWriter();
     calldata.writeSelector(this.claimStatsSelector);
@@ -75,6 +87,17 @@ export class Fart extends ContractRuntime {
     };
   }
 
+  public async approve(spender: Address, amount: bigint): Promise<boolean> {
+    const calldata = new BinaryWriter();
+    calldata.writeSelector(this.approveSelector);
+    calldata.writeAddress(spender);
+    calldata.writeU256(amount);
+    
+    const response = await this.getResponse(calldata.getBuffer());
+    const reader = new BinaryReader(response);
+    return reader.readBoolean();
+  }
+  
   protected defineRequiredBytecodes(): void {
     BytecodeManager.loadBytecode(`./build/Fart.wasm`, this.address);
   }
