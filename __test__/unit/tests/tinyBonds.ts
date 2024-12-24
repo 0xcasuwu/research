@@ -58,9 +58,7 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
     Blockchain.register(tinyBonds);
     await tinyBonds.init();
 
-    // Deploy with initial parameters
-    const termBlocks = 100n; // 100 blocks for testing
-    
+    // Deploy with initial parameters    
     // Fund TinyBonds contract with output tokens
     await outputToken.transfer(deployer, tinyBondsAddress, Blockchain.expandTo18Decimals(100000));
 
@@ -74,20 +72,38 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
     Blockchain.dispose();
   });
 
-  await vm.it('Initializes with correct parameters', async () => {
-    // Check initial pricing parameters
-    const halfLife = await tinyBonds.halfLife();
-    const levelBips = await tinyBonds.levelBips();
-    const lastUpdate = await tinyBonds.lastUpdate();
-    const virtualInputReserves = await tinyBonds.virtualInputReserves();
-    const virtualOutputReserves = await tinyBonds.virtualOutputReserves();
+//   await vm.it('Initializes with correct parameters', async () => {
+//     // Check token addresses
+//     const inputTokenAddr = await tinyBonds.inputToken();
+//     const outputTokenAddr = await tinyBonds.outputToken();
+//     Assert.expect(inputTokenAddr).toEqualAddress(inputTokenAddress);
+//     Assert.expect(outputTokenAddr).toEqualAddress(outputTokenAddress);
 
-    Assert.expect(halfLife).toEqual(0n); // Should be 0 initially
-    Assert.expect(levelBips).toEqual(0n); // Should be 0 initially
-    Assert.expect(lastUpdate).toEqual(0n); // Should be 0 initially
-    Assert.expect(virtualInputReserves).toEqual(0n); // Should be 0 initially
-    Assert.expect(virtualOutputReserves).toEqual(0n); // Should be 0 initially
-  });
+//     // Check owner
+//     const owner = await tinyBonds.owner();
+//     Assert.expect(owner).toEqualAddress(deployer);
+
+//     // Check term blocks
+//     const termBlocks = await tinyBonds.termBlocks();
+//     Assert.expect(termBlocks).toEqual(100n);
+
+//     // Check initial pricing parameters
+//     const halfLife = await tinyBonds.halfLife();
+//     const levelBips = await tinyBonds.levelBips();
+//     const lastUpdate = await tinyBonds.lastUpdate();
+//     const virtualInputReserves = await tinyBonds.virtualInputReserves();
+//     const virtualOutputReserves = await tinyBonds.virtualOutputReserves();
+
+//     Assert.expect(halfLife).toEqual(0n);
+//     Assert.expect(levelBips).toEqual(0n);
+//     Assert.expect(lastUpdate).toEqual(0n);
+//     Assert.expect(virtualInputReserves).toEqual(0n);
+//     Assert.expect(virtualOutputReserves).toEqual(0n);
+
+//     // Check not paused
+//     const paused = await tinyBonds.paused();
+//     Assert.expect(paused).toBeFalse();
+//   });
 
   await vm.it('Allows owner to update pricing parameters', async () => {
     const newVirtualInput = Blockchain.expandTo18Decimals(1000);

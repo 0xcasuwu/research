@@ -24,7 +24,7 @@ import {
   const totalDebtPointer: u16 = Blockchain.nextPointer;
   const ownerPointer: u16 = Blockchain.nextPointer;
   
-  // Bond struct equivalent
+  // Bond struct equivalentmak
   class Bond {
     owed: StoredU256;
     redeemed: StoredU256;
@@ -104,24 +104,26 @@ import {
       }
     }
   
-    public override onDeployment(calldata: Calldata): void {
-      if (this.initialized.value) {
-        throw new Revert('Already initialized');
-      }
-
+    protected onDeploy(calldata: Calldata): void {
       // Read deployment parameters
-      const inputTokenAddr = calldata.readAddress();
-      const outputTokenAddr = calldata.readAddress();
-      const termValue = calldata.readU256();
+      const inputTokenAddress = calldata.readAddress();
+      const outputTokenAddress = calldata.readAddress();
+      const termBlocks = calldata.readU256();
 
-      // Set initial state
-      this.inputToken = new StoredAddress(Blockchain.nextPointer, inputTokenAddr);
-      this.outputToken = new StoredAddress(Blockchain.nextPointer, outputTokenAddr);
-      this.term = new StoredU256(Blockchain.nextPointer, termValue, u256.Zero);
-      
-      this.owner.value = Blockchain.tx.sender;
+      // Initialize storage variables
+      this.owner.value = Blockchain.tx.origin;
+      this.inputToken.value = inputTokenAddress;
+      this.outputToken.value = outputTokenAddress;
+      this.term.value = termBlocks;
+      this.paused.value = false;
       this.initialized.value = true;
-      this.paused.value = true;
+
+      // Initialize pricing with default values
+      this.pricing.virtualInputReserves.value = u256.Zero;
+      this.pricing.virtualOutputReserves.value = u256.Zero;
+      this.pricing.halfLife.value = u256.Zero;
+      this.pricing.levelBips.value = u256.Zero;
+      this.pricing.lastUpdate.value = u256.Zero;
     }
 
     public override execute(method: Selector, calldata: Calldata): BytesWriter {
@@ -384,40 +386,17 @@ import {
       const newVirtualOutput = calldata.readU256();
       const newHalfLife = calldata.readU256();
       const newLevelBips = calldata.readU256();
-      const lastUpdateNow = calldata.readBoolean();
-      const pause = calldata.readBoolean();
 
-      // Update virtual input reserves if not max value
-      if (newVirtualInput != u256.Max) {
-        this.pricing.virtualInputReserves.value = newVirtualInput;
-      }
+      this.pricing.virtualInputReserves.value = newVirtualInput;
+      this.pricing.virtualOutputReserves.value = newVirtualOutput;
+      this.pricing.halfLife.value = newHalfLife;
+      this.pricing.levelBips.value = newLevelBips;
+      this.pricing.lastUpdate.value = u256.from(Blockchain.block.numberU64);
 
-      // Update virtual output reserves if not max value
-      if (newVirtualOutput != u256.Max) {
-        this.pricing.virtualOutputReserves.value = newVirtualOutput;
-      }
-
-      // Update half life if not max value
-      if (newHalfLife != u256.Max) {
-        this.pricing.halfLife.value = newHalfLife;
-      }
-
-      // Update level bips if not max value
-      if (newLevelBips != u256.Max) {
-        this.pricing.levelBips.value = newLevelBips;
-      }
-
-      // Update last update timestamp if requested
-      if (lastUpdateNow) {
-        this.pricing.lastUpdate.value = u256.from(Blockchain.block.numberU64);
-      }
-
-      // Update pause state if requested
-      if (pause) {
-        this.paused.value = !this.paused.value;
-      }
-
-      return new BytesWriter(0);
+      // Return success response
+      const response = new BytesWriter(32);
+      response.writeBoolean(true);
+      return response;
     }
 
     // Helper Functions
