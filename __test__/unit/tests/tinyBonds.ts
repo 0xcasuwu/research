@@ -6,6 +6,7 @@ import { rnd } from '../contracts/configs';
 const deployer: Address = rnd();
 
 await opnet('TinyBonds', async (vm: OPNetUnit) => {
+  // Set blockchain context before any contract creation
   Blockchain.msgSender = deployer;
   Blockchain.txOrigin = deployer;
 
@@ -22,6 +23,10 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
     Blockchain.clearContracts();
     await Blockchain.init();
 
+    // Important: Reset msgSender after blockchain init
+    Blockchain.msgSender = deployer;
+    Blockchain.txOrigin = deployer;
+
     // Setup input token
     inputToken = new OP_20({
       file: './lib/bytecode/OP20.wasm',
@@ -31,37 +36,23 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
     });
     Blockchain.register(inputToken);
     await inputToken.init();
-    await inputToken.mint(deployer, 1000000); // 1M tokens
 
-    // Setup output token
-    outputToken = new OP_20({
-      file: './lib/bytecode/OP20.wasm',
-      address: outputTokenAddress,
-      decimals: 18,
-      deployer,
-    });
-    Blockchain.register(outputToken);
-    await outputToken.init();
-    await outputToken.mint(deployer, 1000000); // 1M tokens
-
-    // Setup TinyBonds
+    // Create deployment calldata
     const deployCalldata = new BinaryWriter();
     deployCalldata.writeAddress(inputTokenAddress);
     deployCalldata.writeAddress(outputTokenAddress);
-    deployCalldata.writeU256(100n); // termBlocks
+    deployCalldata.writeU256(100n);
+
+    // Setup TinyBonds
     tinyBonds = new TinyBonds({
       address: tinyBondsAddress,
       deployer,
-      gasLimit: 0n,
       deploymentCalldata: Buffer.from(deployCalldata.getBuffer()),
     });
     Blockchain.register(tinyBonds);
     await tinyBonds.init();
 
-    // Deploy with initial parameters    
-    // Fund TinyBonds contract with output tokens
-    await outputToken.transfer(deployer, tinyBondsAddress, Blockchain.expandTo18Decimals(100000));
-
+    // Reset msgSender after initialization
     Blockchain.msgSender = deployer;
   });
 
@@ -106,6 +97,7 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
 //   });
 
   await vm.it('Allows owner to update pricing parameters', async () => {
+    // Get and log the owner address
     const newVirtualInput = Blockchain.expandTo18Decimals(1000);
     const newVirtualOutput = Blockchain.expandTo18Decimals(1000);
     const newHalfLife = 100n;

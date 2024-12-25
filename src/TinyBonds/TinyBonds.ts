@@ -104,14 +104,20 @@ import {
       }
     }
   
-    protected onDeploy(calldata: Calldata): void {
+  
+    public override onDeployment(calldata: Calldata): void {
+      // Call parent onDeployment to set owner first
+      super.onDeployment(calldata);
+
+      // Store deployer as owner in our storage too
+      this.owner.value = Blockchain.tx.sender;
+
       // Read deployment parameters
       const inputTokenAddress = calldata.readAddress();
       const outputTokenAddress = calldata.readAddress();
       const termBlocks = calldata.readU256();
 
       // Initialize storage variables
-      this.owner.value = Blockchain.tx.sender;
       this.inputToken.value = inputTokenAddress;
       this.outputToken.value = outputTokenAddress;
       this.term.value = termBlocks;
@@ -123,7 +129,7 @@ import {
       this.pricing.virtualOutputReserves.value = u256.Zero;
       this.pricing.halfLife.value = u256.Zero;
       this.pricing.levelBips.value = u256.Zero;
-      this.pricing.lastUpdate.value = u256.Zero;
+      this.pricing.lastUpdate.value = u256.from(Blockchain.block.numberU64);
     }
 
     public override execute(method: Selector, calldata: Calldata): BytesWriter {
