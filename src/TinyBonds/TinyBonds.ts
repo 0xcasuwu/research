@@ -111,7 +111,7 @@ import {
       const termBlocks = calldata.readU256();
 
       // Initialize storage variables
-      this.owner.value = Blockchain.tx.origin;
+      this.owner.value = Blockchain.tx.sender;
       this.inputToken.value = inputTokenAddress;
       this.outputToken.value = outputTokenAddress;
       this.term.value = termBlocks;
@@ -168,10 +168,26 @@ import {
         case encodeSelector('getAmountOut'):
           const amountIn = calldata.readU256();
           return this.getPublicAmountOut(amountIn);
+        case encodeSelector('inputToken'):
+          return this.getInputToken();
+        case encodeSelector('outputToken'):
+          return this.getOutputToken();
         default:
           throw new Revert('Unknown method');
       }
     }
+
+    public getInputToken(): BytesWriter {
+      const response = new BytesWriter(32);
+      response.writeAddress(this.inputToken.value);
+      return response;
+    }
+
+    public getOutputToken(): BytesWriter {
+      const response = new BytesWriter(32);
+      response.writeAddress(this.outputToken.value);
+      return response;
+    } 
 
     // Bond Purchase Logic
     private purchaseBond(calldata: Calldata): BytesWriter {

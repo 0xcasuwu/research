@@ -30,6 +30,8 @@ export class TinyBonds extends ContractRuntime {
   protected readonly levelBipsSelector = encodeNumericSelector('levelBips');
   protected readonly virtualOutputReservesSelector = encodeNumericSelector('virtualOutputReserves');
   protected readonly virtualInputReservesSelector = encodeNumericSelector('virtualInputReserves');
+  protected readonly inputTokenSelector = encodeNumericSelector('inputToken');
+  protected readonly outputTokenSelector = encodeNumericSelector('outputToken');
 
   constructor(details: ContractDetails) {
     super(details);
@@ -256,6 +258,22 @@ export class TinyBonds extends ContractRuntime {
     const response = await this.getResponse(calldata.getBuffer());
     const reader = new BinaryReader(response);
     return reader.readU256();
+  }
+
+  public async inputToken(): Promise<Address> {
+    const calldata = new BinaryWriter();
+    calldata.writeSelector(this.inputTokenSelector);
+    const response = await this.getResponse(calldata.getBuffer());
+    const reader = new BinaryReader(response);
+    return reader.readAddress();
+  }
+
+  public async outputToken(): Promise<Address> {
+    const calldata = new BinaryWriter();
+    calldata.writeSelector(this.outputTokenSelector);
+    const response = await this.getResponse(calldata.getBuffer());
+    const reader = new BinaryReader(response);
+    return reader.readAddress();
   }
 
   protected defineRequiredBytecodes(): void {
