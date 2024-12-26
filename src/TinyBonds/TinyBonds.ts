@@ -106,34 +106,41 @@ import {
   
   
     public override onDeployment(calldata: Calldata): void {
-      // Call parent onDeployment to set owner first
       super.onDeployment(calldata);
-
-      // Store deployer as owner in our storage too
-      this.owner.value = Blockchain.tx.sender;
-
-      // Read deployment parameters
-      const inputTokenAddress = calldata.readAddress();
-      const outputTokenAddress = calldata.readAddress();
+      
+      const inputTokenAddr = calldata.readAddress();
+      const outputTokenAddr = calldata.readAddress();
       const termBlocks = calldata.readU256();
 
-      // Initialize storage variables
-      this.inputToken.value = inputTokenAddress;
-      this.outputToken.value = outputTokenAddress;
-      this.term.value = termBlocks;
-      this.paused.value = false;
-      this.initialized.value = true;
+      Blockchain.log(`TinyBonds.onDeployment: 
+          inputToken=${inputTokenAddr.toString()},
+          outputToken=${outputTokenAddr.toString()},
+          termBlocks=${termBlocks.toString()}`
+      );
 
-      // Initialize pricing with default values
-      this.pricing.virtualInputReserves.value = u256.Zero;
-      this.pricing.virtualOutputReserves.value = u256.Zero;
-      this.pricing.halfLife.value = u256.Zero;
-      this.pricing.levelBips.value = u256.Zero;
-      this.pricing.lastUpdate.value = u256.from(Blockchain.block.numberU64);
+      this.inputToken.value = inputTokenAddr;
+      this.outputToken.value = outputTokenAddr;
+      this.term.value = termBlocks;
+      this.owner.value = Blockchain.tx.sender;
+
+      Blockchain.log(`TinyBonds.onDeployment state set:
+          owner=${this.owner.value.toString()},
+          initialized=${this.initialized.value}`
+      );
     }
 
     public override execute(method: Selector, calldata: Calldata): BytesWriter {
+      Blockchain.log(`TinyBonds.execute: method=${method.toString()}`);
+      
       switch (method) {
+        case encodeSelector('inputToken'): {
+          Blockchain.log(`TinyBonds.inputToken: value=${this.inputToken.value.toString()}`);
+          return this.getInputToken();
+        }
+        case encodeSelector('outputToken'): {
+          Blockchain.log(`TinyBonds.outputToken: value=${this.outputToken.value.toString()}`);
+          return this.getOutputToken();
+        }
         case encodeSelector('purchaseBond'):
           return this.purchaseBond(calldata);
         case encodeSelector('redeemBond'):
@@ -174,10 +181,6 @@ import {
         case encodeSelector('getAmountOut'):
           const amountIn = calldata.readU256();
           return this.getPublicAmountOut(amountIn);
-        case encodeSelector('inputToken'):
-          return this.getInputToken();
-        case encodeSelector('outputToken'):
-          return this.getOutputToken();
         default:
           throw new Revert('Unknown method');
       }
@@ -197,11 +200,18 @@ import {
 
     // Bond Purchase Logic
     private purchaseBond(calldata: Calldata): BytesWriter {
+      Blockchain.log(`TinyBonds.purchaseBond: start`);
       this.whenNotPaused();
 
       const to = calldata.readAddress();
       const amountIn = calldata.readU256();
       const minOutput = calldata.readU256();
+
+      Blockchain.log(`TinyBonds.purchaseBond params:
+          to=${to.toString()},
+          amountIn=${amountIn.toString()},
+          minOutput=${minOutput.toString()}`
+      );
 
       // Calculate output amount
       const output = this.getAmountOut(

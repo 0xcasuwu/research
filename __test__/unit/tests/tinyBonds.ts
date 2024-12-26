@@ -18,6 +18,8 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
   const tinyBondsAddress: Address = rnd();
 
   vm.beforeEach(async () => {
+    console.log('\n=== Test Setup Starting ===');
+    
     // Reset blockchain state
     Blockchain.dispose();
     Blockchain.clearContracts();
@@ -36,12 +38,25 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
     });
     Blockchain.register(inputToken);
     await inputToken.init();
+    console.log('Input token initialized');
+
+    // Setup output token
+    outputToken = new OP_20({
+      file: './lib/bytecode/OP20.wasm',
+      address: outputTokenAddress,
+      decimals: 18,
+      deployer,
+    });
+    Blockchain.register(outputToken);
+    await outputToken.init();
+    console.log('Output token initialized');
 
     // Create deployment calldata
     const deployCalldata = new BinaryWriter();
     deployCalldata.writeAddress(inputTokenAddress);
     deployCalldata.writeAddress(outputTokenAddress);
     deployCalldata.writeU256(100n);
+    console.log('Deployment calldata created');
 
     // Setup TinyBonds
     tinyBonds = new TinyBonds({
@@ -49,17 +64,27 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
       deployer,
       deploymentCalldata: Buffer.from(deployCalldata.getBuffer()),
     });
-    Blockchain.register(tinyBonds);
-    await tinyBonds.init();
+    console.log('TinyBonds instance created');
 
-    // Reset msgSender after initialization
-    Blockchain.msgSender = deployer;
+    Blockchain.register(tinyBonds);
+    console.log('TinyBonds registered');
+    
+    await tinyBonds.init();
+    console.log('TinyBonds initialized');
+
+    // Mint some tokens to deployer for testing
+    await inputToken.mint(deployer, 10000000);
+    await outputToken.mint(deployer, 1000000);
+    console.log('Tokens minted to deployer');
+
+    console.log('=== Test Setup Complete ===\n');
   });
 
   vm.afterEach(() => {
-    tinyBonds.dispose();
-    inputToken.dispose();
-    outputToken.dispose();
+    // Only dispose if the contracts exist
+    if (tinyBonds) tinyBonds.dispose();
+    if (inputToken) inputToken.dispose();
+    if (outputToken) outputToken.dispose();
     Blockchain.dispose();
   });
 
@@ -249,43 +274,19 @@ await opnet('TinyBonds', async (vm: OPNetUnit) => {
   });
 
   await vm.it('Should properly set input and output tokens during deployment', async () => {
-    // Reset blockchain state
-    Blockchain.dispose();
-    Blockchain.clearContracts();
-    await Blockchain.init();
-
-    // Setup deployment parameters
-    const inputTokenAddress: Address = rnd();
-    const outputTokenAddress: Address = rnd();
-    const tinyBondsAddress: Address = rnd();
+    console.log('\n=== Token Setup Test Starting ===');
     
-    // Create deployment calldata
-    const deployCalldata = new BinaryWriter();
-    deployCalldata.writeAddress(inputTokenAddress);
-    deployCalldata.writeAddress(outputTokenAddress);
-    deployCalldata.writeU256(100n); // termBlocks
-
-    // Create contract instance
-    const tinyBonds = new TinyBonds({
-      address: tinyBondsAddress,
-      deployer,
-      deploymentCalldata: Buffer.from(deployCalldata.getBuffer()),
-    });
-    
-    // Register and init
-    Blockchain.register(tinyBonds);
-    await tinyBonds.init();
-
-    // Check token addresses
     const actualInputToken = await tinyBonds.inputToken();
+    console.log(`Expected input token: ${inputTokenAddress.toString()}`);
+    console.log(`Actual input token: ${actualInputToken.toString()}`);
+
     const actualOutputToken = await tinyBonds.outputToken();
-    
-    console.log('Expected input token:', inputTokenAddress.toString());
-    console.log('Actual input token:', actualInputToken.toString());
-    console.log('Expected output token:', outputTokenAddress.toString());
-    console.log('Actual output token:', actualOutputToken.toString());
+    console.log(`Expected output token: ${outputTokenAddress.toString()}`);
+    console.log(`Actual output token: ${actualOutputToken.toString()}`);
 
     Assert.expect(actualInputToken).toEqualAddress(inputTokenAddress);
     Assert.expect(actualOutputToken).toEqualAddress(outputTokenAddress);
+    
+    console.log('=== Token Setup Test Complete ===\n');
   });
 });
