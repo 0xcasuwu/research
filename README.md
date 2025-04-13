@@ -1,69 +1,236 @@
-# OP_NET Starter Template - Vesting Contract
+# Bonding Contract for Alkanes
 
-A simple contract to serve as a template repo for writing and testing OP_NET contracts 🚀
+This repository contains an implementation of a bonding contract for the Alkanes metaprotocol. The bonding contract allows users to swap an alkane for diesel (the genesis alkane) following a smooth price curve. As more alkane is swapped for diesel, the price becomes more expensive until the curve is filled.
 
-## Code Structure
+## Project Structure
 
 ```
-- __test__
-   - unit              // unit tests
-      - contracts      // contract interfaces
-      - tests          // test files
-   - integration       // integration tests
-      - interfaces     // contract interfaces and ABIs
-- src
-   - vesting           // each contract has a separate folder for the Makefile build process
-- build                // compiled contract bytecode
-- lib
-   - bytecode          // bytecode of contracts we depend on, but don't own
+boiler/
+├── Cargo.toml                 # Workspace manifest
+├── contracts/                 # Directory for contract crates
+│   └── bonding-contract/      # Bonding contract implementation
+│       ├── Cargo.toml         # Contract manifest
+│       └── src/               # Contract source code
+│           └── lib.rs         # Contract implementation
+└── crates/                    # Supporting crates
+    ├── alkanes-runtime/       # Runtime environment
+    ├── alkanes-support/       # Support utilities
+    ├── alkanes-macros/        # Macros for contract development
+    └── ...                    # Other supporting crates
 ```
 
-## Compiling, Testing, Deploying
+## Bonding Contract
 
-I've provided a `Makefile` which bundles all the common commands into one convenient file, instead of crowding the `package.json` scripts and `asconfig.json` targets as OP_NET projects currently do.  
-To see available commands, run `make help`.
+The bonding contract implements a quadratic bonding curve where the price of tokens increases as more tokens are minted. The contract provides the following functionality:
+
+- **Buy tokens with diesel**: Users can send diesel to the contract and receive tokens based on the bonding curve.
+- **Sell tokens for diesel**: Users can send tokens back to the contract and receive diesel based on the bonding curve.
+- **Query contract information**: Users can query the current price, total supply, reserve, and other contract information.
+
+### Bonding Curve
+
+The contract uses a quadratic bonding curve where the price is determined by the formula:
+
+```
+price = reserve / (supply^2)
+```
+
+This creates a smooth curve that becomes more expensive as the supply increases.
+
+## Building and Deploying
+
+### Prerequisites
+
+- Rust and Cargo
+- wasm32-unknown-unknown target
+
+### Building
+
+To build the bonding contract, use the provided build script:
 
 ```bash
-$ make help
-=== OP_NET Makefile Command Overview ===
-make                             runs make compile
-make compile                     compiles contracts, installs dependencies
-make clean                       deletes build artifacts and node_modules
-make test                        runs unit tests, compiling contracts if necessary
-make test-only name=<file name>  runs only the given test file.
-make interact                    runs the integration test file to interact with contracts on regtest.
-make help                        prints this message
-make check_node_modules          run implicitly by other commands
+./scripts/build.sh
 ```
 
-Most of the commands depend on each other for a smooth developer experience. For example, running `make test` on a fresh clone of this repository will run `make check_node_modules` to install dependencies, then run `make compile` to compile contracts and finally run tests when everything is in order.
-I recommend sticking to this approach to begin with, as it simplifies the overhead of the many different layers of OP_NET contracts that you have to deal with due to the lack of a one stop shop tool like foundry.
+This will:
+1. Check if the wasm32-unknown-unknown target is installed and install it if needed
+2. Build the bonding contract
+3. Copy the WASM file to the `dist` directory
 
-### Notes on automatisation when using the provided Makefile
+You can also run tests or examples with the build script:
 
-The makefile automatically detects contract files and test files based on certain heuristics that you'll have to follow in order for it to work.
+```bash
+./scripts/build.sh --test    # Run tests
+./scripts/build.sh --example # Run example
+```
 
-#### Contract Heuristics
+### Testing
 
-1. A Contract is defined as an index.ts file which contains the string `Blockchain.contract`
-2. A Contract is compiled to a wasm file based on the name of the directory in which the contract's index.ts file is located
-   i.e. `src/vesting/index.ts` gets compiled to `build/vesting.wasm`
+The project includes several types of tests:
 
-#### Test Heuristics
+#### Running All Tests
 
-1. A test file is any file in the test directory, defined as `__test__/unit/tests`
-2. When running tests using `make test-only` the file name you provide is expanded as follows: `__test/unit/tests/<name>.ts`, for example: `make test-only name=vesting` runs the test file `__test__/unit/tests/vesting.ts`
-   If you need to define fixtures or non-test files in the tests directory, simply create a subdirectory, for example: `__test__/unit/tests/fixtures`
+To run all tests and generate a report:
 
-### Unit Tests
+```bash
+./scripts/run_tests.sh
+```
 
-I've provided some simple tests that verify the functionality of the vesting contract, as well as a sample of how fuzz testing can be implemented in OP_NET at the moment.
+This script will run all test suites and generate a report with the results. The test logs are saved in the `test-reports` directory.
 
-### Deploying contracts
+#### Individual Test Suites
 
-Currently, the simplest way to deploy contracts is using OP_Wallet, instructions can be found in OP_NET official documentation, though it's just a simple drag and drop.
+You can also run individual test suites:
 
-### Integration testing
+##### Unit Tests
 
-The integration testing provided in this repo is to be considered a bare minimum setup. It provides a simple file with some example code that can be used to interact with a deployed contract.
-You will need to set some environment variables according to `.env.template`.
+Basic unit tests for the bonding contract:
+
+```bash
+cargo test -p bonding-contract
+```
+
+##### Integration Tests
+
+Integration tests that simulate real-world usage of the contract:
+
+```bash
+cargo test --test integration_test
+```
+
+##### Market Simulation Tests
+
+Tests that simulate market behavior with multiple participants:
+
+```bash
+cargo test --test market_simulation_test
+```
+
+##### Benchmark Tests
+
+Performance benchmarks for different operations:
+
+```bash
+cargo test --test benchmark_test
+```
+
+These tests help ensure that the bonding contract works correctly and efficiently in various scenarios.
+
+### Configuration
+
+The bonding contract can be configured for different environments using the provided configuration script:
+
+```bash
+# Generate deployment scripts and configuration summaries for the default environment
+./scripts/configure.js
+
+# Generate for a specific environment (testnet or mainnet)
+./scripts/configure.js testnet
+./scripts/configure.js mainnet
+```
+
+This will generate:
+- Environment-specific deployment scripts in the `scripts` directory
+- Configuration summaries in the `docs` directory
+
+### Deploying
+
+To deploy the bonding contract, use the provided deploy scripts:
+
+```bash
+# Deploy with default configuration
+./scripts/deploy.sh
+
+# Deploy with environment-specific configuration
+./scripts/deploy-testnet.sh
+./scripts/deploy-mainnet.sh
+```
+
+These scripts provide guidance on how to deploy the contract using the Alkanes CLI or SDK.
+
+In a real deployment, you would use code like this:
+
+```rust
+let cellpack = Cellpack {
+    target: AlkaneId { block: 1, tx: 0 },
+    inputs: vec![
+        0,              // Initialize opcode
+        0x424f4e44,     // "BOND" as u128 (name)
+        0x424e44,       // "BND" as u128 (symbol)
+        1000000,        // Initial supply
+        1000000,        // Initial reserve
+    ],
+};
+```
+
+The deployment parameters can be customized in the `contracts/bonding-contract/config.json` file.
+
+## Usage
+
+### Buying Tokens
+
+To buy tokens with diesel:
+
+```rust
+// First, send diesel to the contract
+let diesel_transfer = AlkaneTransfer {
+    id: AlkaneId { block: 2, tx: 0 }, // Diesel is [2, 0]
+    value: 1000,
+};
+
+// Then call the buy function
+let buy_cellpack = Cellpack {
+    target: contract_id,
+    inputs: vec![
+        1,        // Buy opcode
+    ],
+};
+```
+
+### Selling Tokens
+
+To sell tokens for diesel:
+
+```rust
+// First, send tokens to the contract
+let token_transfer = AlkaneTransfer {
+    id: contract_id,
+    value: 1000,
+};
+
+// Then call the sell function
+let sell_cellpack = Cellpack {
+    target: contract_id,
+    inputs: vec![
+        2,        // Sell opcode
+        1000,     // Amount
+    ],
+};
+```
+
+### Querying Contract Information
+
+To get information about the contract:
+
+```rust
+// Get the current price
+let get_current_price_cellpack = Cellpack {
+    target: contract_id,
+    inputs: vec![
+        3,        // GetCurrentPrice opcode
+    ],
+};
+
+// Get the buy price for a specific amount
+let get_buy_price_cellpack = Cellpack {
+    target: contract_id,
+    inputs: vec![
+        4,        // GetBuyPrice opcode
+        1000,     // Amount
+    ],
+};
+```
+
+## License
+
+MIT

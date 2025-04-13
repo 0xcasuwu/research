@@ -1,0 +1,16 @@
+[package]
+name = "bonding-contract"
+version = "0.1.0"
+edition = "2021"
+description = "Bonding contract implementation for the Alkanes metaprotocol"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+alkanes-runtime = { workspace = true, features = ["test-utils"] }
+alkanes-support = { workspace = true }
+alkanes-macros = { workspace = true }
+alkanes-common = { workspace = true }
+metashrew-support = { workspace = true }
+anyhow = { workspace = true }
