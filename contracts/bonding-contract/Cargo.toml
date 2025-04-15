@@ -8,9 +8,13 @@ description = "Bonding contract implementation for the Alkanes metaprotocol"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-alkanes-runtime = { workspace = true, features = ["test-utils"] }
+alkanes-runtime = { path = "/Users/erickdelgado/Documents/GitHub/boiler/crates/alkanes-runtime", features = ["test-utils"] }
 alkanes-support = { workspace = true }
 alkanes-macros = { workspace = true }
 alkanes-common = { workspace = true }
 metashrew-support = { workspace = true }
 anyhow = { workspace = true }
+
+[features]
+default = []
+gc = []  # Feature flag for garbage collection

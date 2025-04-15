@@ -9,7 +9,7 @@ use super::*;
 use alkanes_support::id::AlkaneId;
 use alkanes_support::parcel::{AlkaneTransfer, AlkaneTransferParcel};
 use crate::mock_context::set_mock_context;
-use crate::mock_runtime::clear_mock_storage;
+use crate::reset_mock_environment::reset_mock_environment;
 
 // Helper function to create a context with incoming alkanes
 fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
@@ -56,8 +56,8 @@ fn init_test_contract(initial_diesel_reserve: u128, k_factor: u128, n_exponent: 
 
 #[test]
 fn test_max_diesel_reserve() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with maximum diesel reserve
     // Using u128::MAX / 2 to avoid immediate overflow in calculations
@@ -91,8 +91,8 @@ fn test_max_diesel_reserve() {
 
 #[test]
 fn test_max_alkane_supply() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with reasonable reserve but maximum alkane supply
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -135,8 +135,8 @@ fn test_max_alkane_supply() {
 
 #[test]
 fn test_max_k_factor() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with maximum k factor
     let contract = init_test_contract(1_000_000, u128::MAX / 2, 1);
@@ -170,8 +170,8 @@ fn test_max_k_factor() {
 
 #[test]
 fn test_near_max_values() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with near-maximum values
     let near_max = u128::MAX - 1_000_000;
@@ -215,8 +215,8 @@ fn test_near_max_values() {
 
 #[test]
 fn test_cascading_overflow() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with values that will cause cascading overflow
     let large_value = u128::MAX / 2;
@@ -250,8 +250,8 @@ fn test_cascading_overflow() {
 
 #[test]
 fn test_contract_with_extreme_values() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = BondingContractAlkane::default();

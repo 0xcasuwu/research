@@ -1,103 +1,118 @@
-//! Mock runtime functions for testing
+//! Mock runtime implementation for testing
 
-use std::collections::HashMap;
-use std::sync::Arc;
+use alkanes_runtime::runtime::AlkaneResponder;
+use alkanes_support::context::Context;
+use alkanes_support::response::CallResponse;
+use anyhow::{anyhow, Result};
 use std::cell::RefCell;
+use std::collections::HashMap;
+use crate::reset_mock_environment;
 
-// Thread-local storage for mock storage
+// Thread-local storage for mock context
 thread_local! {
-    static MOCK_STORAGE: RefCell<HashMap<Vec<u8>, Arc<Vec<u8>>>> = RefCell::new(HashMap::new());
+    pub static MOCK_CONTEXT: RefCell<Option<Context>> = RefCell::new(None);
+    pub static MOCK_STORAGE: RefCell<HashMap<Vec<u8>, Vec<u8>>> = RefCell::new(HashMap::new());
 }
 
-// Mock implementation of __load_storage
-#[no_mangle]
-pub extern "C" fn __load_storage(key_ptr: *const u8, key_len: usize) -> *const u8 {
-    // Safety check for null pointer
-    if key_ptr.is_null() {
-        // Return an empty vector for null pointers
-        let empty = Arc::new(Vec::new());
-        let ptr = empty.as_ptr();
-        // Store the Arc in the storage to prevent it from being dropped
-        MOCK_STORAGE.with(|storage| {
-            storage.borrow_mut().insert(vec![0], empty);
-        });
-        return ptr;
-    }
-    
-    // Safety check for key_len
-    if key_len > isize::MAX as usize {
-        // Return an empty vector for invalid lengths
-        let empty = Arc::new(Vec::new());
-        let ptr = empty.as_ptr();
-        // Store the Arc in the storage to prevent it from being dropped
-        MOCK_STORAGE.with(|storage| {
-            storage.borrow_mut().insert(vec![0], empty);
-        });
-        return ptr;
-    }
-    
-    let key = unsafe { std::slice::from_raw_parts(key_ptr, key_len).to_vec() };
-    
-    let result = MOCK_STORAGE.with(|storage| {
-        storage.borrow().get(&key).cloned()
-    });
-    
-    match result {
-        Some(value) => {
-            // Return a pointer to the data
-            value.as_ptr()
-        }
-        None => {
-            // Return an empty vector but store it in the storage to prevent it from being dropped
-            let empty = Arc::new(Vec::new());
-            let ptr = empty.as_ptr();
-            // Store the Arc in the storage to prevent it from being dropped
-            MOCK_STORAGE.with(|storage| {
-                storage.borrow_mut().insert(key, empty);
-            });
-            ptr
-        }
+// Helper function to get the mock context
+pub fn get_mock_context() -> Option<Context> {
+    // Check if we're in a test environment
+    if reset_mock_environment::is_test_environment() {
+        MOCK_CONTEXT.with(|c| c.borrow().clone())
+    } else {
+        None
     }
 }
 
-// Mock implementation of __request_storage
-#[no_mangle]
-pub extern "C" fn __request_storage(key_ptr: *const u8, key_len: usize, value_ptr: *const u8, value_len: usize) {
-    // Safety check for null pointers
-    if key_ptr.is_null() || value_ptr.is_null() {
-        return;
-    }
-    
-    // Safety check for lengths
-    if key_len > isize::MAX as usize || value_len > isize::MAX as usize {
-        return;
-    }
-    
-    let key = unsafe { std::slice::from_raw_parts(key_ptr, key_len).to_vec() };
-    let value = unsafe { std::slice::from_raw_parts(value_ptr, value_len).to_vec() };
-    
-    MOCK_STORAGE.with(|storage| {
-        storage.borrow_mut().insert(key, Arc::new(value));
+// Helper function to get the context (used by lib.rs)
+pub fn get_context() -> Option<Context> {
+    get_mock_context()
+}
+
+// Helper function to set the mock context
+pub fn set_mock_context(context: Context) {
+    MOCK_CONTEXT.with(|c| {
+        // First clear any existing context to ensure proper cleanup
+        if c.borrow().is_some() {
+            *c.borrow_mut() = None;
+        }
+        
+        // Then set the new context
+        *c.borrow_mut() = Some(context);
     });
 }
 
-// Helper function to clear the mock storage (useful between tests)
+// Helper function to clear the mock context
+pub fn clear_mock_context() {
+    MOCK_CONTEXT.with(|c| {
+        // Explicitly drop the current context if it exists
+        if c.borrow().is_some() {
+            let mut context_ref = c.borrow_mut();
+            // Take ownership of the context and drop it
+            let _ = context_ref.take();
+        }
+    });
+}
+
+// Helper function to clear the mock storage
 pub fn clear_mock_storage() {
-    MOCK_STORAGE.with(|storage| {
-        storage.borrow_mut().clear();
+    MOCK_STORAGE.with(|s| {
+        // Create a new empty HashMap and swap it with the current one
+        let mut old_storage = HashMap::new();
+        std::mem::swap(&mut *s.borrow_mut(), &mut old_storage);
+        
+        // Explicitly drop the old storage
+        drop(old_storage);
     });
 }
 
-// Helper function to get a value from the mock storage
-pub fn get_mock_storage(key: &[u8]) -> Option<Arc<Vec<u8>>> {
-    MOCK_STORAGE.with(|storage| {
-        storage.borrow().get(key).cloned()
-    })
+// Helper function to get a value from mock storage
+pub fn get_mock_storage(key: &[u8]) -> Vec<u8> {
+    // Check if we're in a test environment
+    if reset_mock_environment::is_test_environment() {
+        MOCK_STORAGE.with(|s| {
+            s.borrow().get(key).cloned().unwrap_or_default()
+        })
+    } else {
+        Vec::new()
+    }
 }
 
-// Helper function to set a value in the mock storage
+// Helper function to set a value in mock storage
 pub fn set_mock_storage(key: &[u8], value: Vec<u8>) {
-    MOCK_STORAGE.with(|storage| {
-        storage.borrow_mut().insert(key.to_vec(), Arc::new(value));
+    MOCK_STORAGE.with(|s| {
+        // Remove any existing entry first to ensure proper cleanup
+        let mut storage_ref = s.borrow_mut();
+        if let Some(_) = storage_ref.remove(&key.to_vec()) {
+            // Old value is dropped here
+        }
+        storage_ref.insert(key.to_vec(), value);
     });
+}
+
+// Mock implementation of AlkaneResponder
+pub struct MockAlkaneResponder;
+
+impl AlkaneResponder for MockAlkaneResponder {
+    fn context(&self) -> Result<Context> {
+        if let Some(context) = get_mock_context() {
+            return Ok(context);
+        }
+        Err(anyhow!("No mock context set"))
+    }
+
+    fn execute(&self) -> Result<CallResponse> {
+        Err(anyhow!("Not implemented"))
+    }
+}
+
+// Mock runtime functions
+pub fn create_mock_runtime() -> MockAlkaneResponder {
+    // Ensure we're in a test environment
+    if !reset_mock_environment::is_test_environment() {
+        // Initialize the test environment
+        reset_mock_environment::reset();
+    }
+    
+    MockAlkaneResponder
 }

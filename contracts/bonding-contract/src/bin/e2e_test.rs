@@ -118,8 +118,8 @@ fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
 fn main() {
     println!("Running end-to-end test for the bonding contract...");
     
-    // Clear the mock storage
-    clear_mock_storage();
+    // Reset the mock environment
+    bonding_contract::reset_mock_environment::reset();
     
     // Create a new bonding contract
     let mut contract = BondingContractAlkane::default();

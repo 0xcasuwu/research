@@ -9,7 +9,7 @@ use super::*;
 use alkanes_support::id::AlkaneId;
 use alkanes_support::parcel::{AlkaneTransfer, AlkaneTransferParcel};
 use crate::mock_context::set_mock_context;
-use crate::mock_runtime::clear_mock_storage;
+use crate::reset_mock_environment::reset_mock_environment;
 
 // Helper function to create a context with incoming alkanes
 fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
@@ -56,8 +56,8 @@ fn init_test_contract(initial_diesel_reserve: u128, k_factor: u128, n_exponent: 
 
 #[test]
 fn test_small_values() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with standard values
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -136,8 +136,8 @@ fn test_small_values() {
 
 #[test]
 fn test_division_precision_loss() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with values that would cause division precision loss
     // High reserve, low k_factor
@@ -211,8 +211,8 @@ fn test_division_precision_loss() {
 
 #[test]
 fn test_rounding_error_accumulation() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with standard values
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -293,8 +293,8 @@ fn test_rounding_error_accumulation() {
 
 #[test]
 fn test_scaling_factor_impact() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with standard values
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -353,8 +353,8 @@ fn test_scaling_factor_impact() {
 
 #[test]
 fn test_consistent_scaling() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a curve with standard values
     let contract = init_test_contract(1_000_000, 1, 1);

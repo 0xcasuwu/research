@@ -1,0 +1,506 @@
+warning: both `/Users/erickdelgado/.cargo/config` and `/Users/erickdelgado/.cargo/config.toml` exist. Using `/Users/erickdelgado/.cargo/config`
+warning: both `/Users/erickdelgado/.cargo/config` and `/Users/erickdelgado/.cargo/config.toml` exist. Using `/Users/erickdelgado/.cargo/config`
+   Compiling metashrew-support v8.4.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/metashrew-support)
+   Compiling protorune-support v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/protorune-support)
+   Compiling alkanes-support v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/alkanes-support)
+   Compiling alkanes-runtime v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/alkanes-runtime)
+warning: unused import: `wasm_bindgen::prelude::*`
+ --> crates/alkanes-runtime/src/imports.rs:4:5
+  |
+4 | use wasm_bindgen::prelude::*;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `compat::to_passback_ptr`
+  --> crates/alkanes-runtime/src/imports.rs:57:29
+   |
+57 |         metashrew_support::{compat::to_passback_ptr, utils::ptr_to_vec},
+   |                             ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `a`
+  --> crates/alkanes-runtime/src/imports.rs:64:18
+   |
+64 |     pub fn abort(a: i32, b: i32, c: i32, d: i32) -> i32 {
+   |                  ^ help: if this is intentional, prefix it with an underscore: `_a`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `b`
+  --> crates/alkanes-runtime/src/imports.rs:64:26
+   |
+64 |     pub fn abort(a: i32, b: i32, c: i32, d: i32) -> i32 {
+   |                          ^ help: if this is intentional, prefix it with an underscore: `_b`
+
+warning: unused variable: `c`
+  --> crates/alkanes-runtime/src/imports.rs:64:34
+   |
+64 |     pub fn abort(a: i32, b: i32, c: i32, d: i32) -> i32 {
+   |                                  ^ help: if this is intentional, prefix it with an underscore: `_c`
+
+warning: unused variable: `d`
+  --> crates/alkanes-runtime/src/imports.rs:64:42
+   |
+64 |     pub fn abort(a: i32, b: i32, c: i32, d: i32) -> i32 {
+   |                                          ^ help: if this is intentional, prefix it with an underscore: `_d`
+
+warning: unused variable: `k`
+  --> crates/alkanes-runtime/src/imports.rs:67:27
+   |
+67 |     pub fn __load_storage(k: i32, v: i32) -> i32 {
+   |                           ^ help: if this is intentional, prefix it with an underscore: `_k`
+
+warning: unused variable: `k`
+  --> crates/alkanes-runtime/src/imports.rs:70:30
+   |
+70 |     pub fn __request_storage(k: i32) -> i32 {
+   |                              ^ help: if this is intentional, prefix it with an underscore: `_k`
+
+warning: unused variable: `who`
+  --> crates/alkanes-runtime/src/imports.rs:76:22
+   |
+76 |     pub fn __balance(who: i32, what: i32, output: i32) -> i32 {
+   |                      ^^^ help: if this is intentional, prefix it with an underscore: `_who`
+
+warning: unused variable: `what`
+  --> crates/alkanes-runtime/src/imports.rs:76:32
+   |
+76 |     pub fn __balance(who: i32, what: i32, output: i32) -> i32 {
+   |                                ^^^^ help: if this is intentional, prefix it with an underscore: `_what`
+
+warning: unused variable: `output`
+  --> crates/alkanes-runtime/src/imports.rs:76:43
+   |
+76 |     pub fn __balance(who: i32, what: i32, output: i32) -> i32 {
+   |                                           ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `output`
+   --> crates/alkanes-runtime/src/imports.rs:101:23
+    |
+101 |     pub fn __sequence(output: i32) {}
+    |                       ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `output`
+   --> crates/alkanes-runtime/src/imports.rs:102:19
+    |
+102 |     pub fn __fuel(output: i32) {}
+    |                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `output`
+   --> crates/alkanes-runtime/src/imports.rs:103:21
+    |
+103 |     pub fn __height(output: i32) {}
+    |                     ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `output`
+   --> crates/alkanes-runtime/src/imports.rs:104:29
+    |
+104 |     pub fn __returndatacopy(output: i32) {}
+    |                             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `output`
+   --> crates/alkanes-runtime/src/imports.rs:108:31
+    |
+108 |     pub fn __load_transaction(output: i32) {}
+    |                               ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `output`
+   --> crates/alkanes-runtime/src/imports.rs:112:25
+    |
+112 |     pub fn __load_block(output: i32) {}
+    |                         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_output`
+
+warning: unused variable: `cellpack`
+   --> crates/alkanes-runtime/src/imports.rs:113:19
+    |
+113 |     pub fn __call(cellpack: i32, incoming_alkanes: i32, checkpoint: i32, start_fuel: u64) -> i32 {
+    |                   ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_cellpack`
+
+warning: unused variable: `incoming_alkanes`
+   --> crates/alkanes-runtime/src/imports.rs:113:34
+    |
+113 |     pub fn __call(cellpack: i32, incoming_alkanes: i32, checkpoint: i32, start_fuel: u64) -> i32 {
+    |                                  ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_incoming_alkanes`
+
+warning: unused variable: `checkpoint`
+   --> crates/alkanes-runtime/src/imports.rs:113:57
+    |
+113 |     pub fn __call(cellpack: i32, incoming_alkanes: i32, checkpoint: i32, start_fuel: u64) -> i32 {
+    |                                                         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_checkpoint`
+
+warning: unused variable: `start_fuel`
+   --> crates/alkanes-runtime/src/imports.rs:113:74
+    |
+113 |     pub fn __call(cellpack: i32, incoming_alkanes: i32, checkpoint: i32, start_fuel: u64) -> i32 {
+    |                                                                          ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_start_fuel`
+
+warning: unused variable: `cellpack`
+   --> crates/alkanes-runtime/src/imports.rs:117:9
+    |
+117 |         cellpack: i32,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_cellpack`
+
+warning: unused variable: `incoming_alkanes`
+   --> crates/alkanes-runtime/src/imports.rs:118:9
+    |
+118 |         incoming_alkanes: i32,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_incoming_alkanes`
+
+warning: unused variable: `checkpoint`
+   --> crates/alkanes-runtime/src/imports.rs:119:9
+    |
+119 |         checkpoint: i32,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_checkpoint`
+
+warning: unused variable: `start_fuel`
+   --> crates/alkanes-runtime/src/imports.rs:120:9
+    |
+120 |         start_fuel: u64,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_start_fuel`
+
+warning: unused variable: `cellpack`
+   --> crates/alkanes-runtime/src/imports.rs:125:9
+    |
+125 |         cellpack: i32,
+    |         ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_cellpack`
+
+warning: unused variable: `incoming_alkanes`
+   --> crates/alkanes-runtime/src/imports.rs:126:9
+    |
+126 |         incoming_alkanes: i32,
+    |         ^^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_incoming_alkanes`
+
+warning: unused variable: `checkpoint`
+   --> crates/alkanes-runtime/src/imports.rs:127:9
+    |
+127 |         checkpoint: i32,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_checkpoint`
+
+warning: unused variable: `start_fuel`
+   --> crates/alkanes-runtime/src/imports.rs:128:9
+    |
+128 |         start_fuel: u64,
+    |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_start_fuel`
+
+warning: unnecessary `unsafe` block
+  --> crates/alkanes-runtime/src/runtime.rs:34:5
+   |
+34 |     unsafe {
+   |     ^^^^^^ unnecessary `unsafe` block
+   |
+   = note: `#[warn(unused_unsafe)]` on by default
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:106:13
+    |
+106 |             unsafe {
+    |             ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:118:13
+    |
+118 |             unsafe {
+    |             ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:131:9
+    |
+131 |         unsafe { __call(cellpack, outgoing_alkanes, checkpoint, fuel) }
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:139:9
+    |
+139 |         unsafe { __delegatecall(cellpack, outgoing_alkanes, checkpoint, fuel) }
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:147:9
+    |
+147 |         unsafe { __staticcall(cellpack, outgoing_alkanes, checkpoint, fuel) }
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:153:9
+    |
+153 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:161:9
+    |
+161 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:179:9
+    |
+179 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:233:9
+    |
+233 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:244:9
+    |
+244 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:251:9
+    |
+251 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> crates/alkanes-runtime/src/runtime.rs:258:9
+    |
+258 |         unsafe {
+    |         ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+  --> crates/alkanes-runtime/src/stdio.rs:10:9
+   |
+10 |         unsafe {
+   |         ^^^^^^ unnecessary `unsafe` block
+
+warning: `alkanes-runtime` (lib) generated 43 warnings (run `cargo fix --lib -p alkanes-runtime` to apply 2 suggestions)
+   Compiling bonding-contract v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract)
+warning: unused import: `declare_alkane`
+ --> contracts/bonding-contract/src/lib.rs:1:23
+  |
+1 | use alkanes_runtime::{declare_alkane, runtime::AlkaneResponder, message::MessageDispatch};
+  |                       ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `metashrew_support::compat::to_arraybuffer_layout`
+ --> contracts/bonding-contract/src/lib.rs:7:5
+  |
+7 | use metashrew_support::compat::to_arraybuffer_layout;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::prelude::*`
+  --> contracts/bonding-contract/src/bonding_curve.rs:11:5
+   |
+11 | use alkanes_support::prelude::*;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::prelude::*`
+  --> contracts/bonding-contract/src/bond_curve.rs:11:5
+   |
+11 | use alkanes_support::prelude::*;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::sync::Arc`
+  --> contracts/bonding-contract/src/isolated_tests.rs:12:5
+   |
+12 | use std::sync::Arc;
+   |     ^^^^^^^^^^^^^^
+
+warning: variable does not need to be mutable
+  --> contracts/bonding-contract/src/isolated_tests.rs:21:9
+   |
+21 |     let mut contract = BondingContractAlkane::default();
+   |         ----^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> contracts/bonding-contract/src/isolated_tests.rs:69:9
+   |
+69 |     let mut contract = BondingContractAlkane::default();
+   |         ----^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: unused variable: `diesel_amount`
+   --> contracts/bonding-contract/src/lib.rs:889:39
+    |
+889 |     fn buy_alkane_internal(&mut self, diesel_amount: u128) -> Result<CallResponse> {
+    |                                       ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_diesel_amount`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+   --> contracts/bonding-contract/src/lib.rs:986:13
+    |
+986 |         let mut response = CallResponse::forward(&context.incoming_alkanes);
+    |             ----^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: field `paused` is never read
+  --> contracts/bonding-contract/src/lib.rs:97:5
+   |
+91 | pub struct BondingContractAlkane {
+   |            --------------------- field in this struct
+...
+97 |     paused: bool,
+   |     ^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: multiple variants are never constructed
+   --> contracts/bonding-contract/src/lib.rs:106:5
+    |
+103 | enum BondingContractAlkaneMessage {
+    |      ---------------------------- variants in this enum
+...
+106 |     InitContract {
+    |     ^^^^^^^^^^^^
+...
+116 |     InitBondContract {
+    |     ^^^^^^^^^^^^^^^^
+...
+128 |     BuyAlkane {
+    |     ^^^^^^^^^
+...
+134 |     SellAlkane {
+    |     ^^^^^^^^^^
+...
+140 |     PurchaseBond {
+    |     ^^^^^^^^^^^^
+...
+147 |     RedeemBond {
+    |     ^^^^^^^^^^
+...
+153 |     RedeemBondBatch {
+    |     ^^^^^^^^^^^^^^^
+...
+159 |     TransferBond {
+    |     ^^^^^^^^^^^^
+...
+167 |     GetCurrentPrice,
+    |     ^^^^^^^^^^^^^^^
+...
+172 |     GetBuyAmount {
+    |     ^^^^^^^^^^^^
+...
+179 |     GetSellAmount {
+    |     ^^^^^^^^^^^^^
+...
+186 |     GetBondAmount {
+    |     ^^^^^^^^^^^^^
+...
+193 |     GetPositionCount {
+    |     ^^^^^^^^^^^^^^^^
+...
+200 |     GetAvailableDebt,
+    |     ^^^^^^^^^^^^^^^^
+...
+205 |     GetBond {
+    |     ^^^^^^^
+...
+212 |     SetVirtualInputReserves {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^
+...
+218 |     SetVirtualOutputReserves {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+224 |     SetHalfLife {
+    |     ^^^^^^^^^^^
+...
+230 |     SetLevelBips {
+    |     ^^^^^^^^^^^^
+...
+236 |     SetLastUpdate,
+    |     ^^^^^^^^^^^^^
+...
+240 |     SetPause,
+    |     ^^^^^^^^
+...
+244 |     UpdatePricing {
+    |     ^^^^^^^^^^^^^
+...
+256 |     GetName,
+    |     ^^^^^^^
+...
+261 |     GetSymbol,
+    |     ^^^^^^^^^
+...
+266 |     GetDieselReserve,
+    |     ^^^^^^^^^^^^^^^^
+...
+271 |     GetAlkaneSupply,
+    |     ^^^^^^^^^^^^^^^
+...
+276 |     GetKFactor,
+    |     ^^^^^^^^^^
+...
+281 |     GetNExponent,
+    |     ^^^^^^^^^^^^
+...
+286 |     GetTerm,
+    |     ^^^^^^^
+...
+291 |     GetHalfLife,
+    |     ^^^^^^^^^^^
+...
+296 |     GetLevelBips,
+    |     ^^^^^^^^^^^^
+...
+301 |     GetVirtualInputReserves,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^
+...
+306 |     GetVirtualOutputReserves,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+311 |     GetLastUpdate,
+    |     ^^^^^^^^^^^^^
+...
+316 |     GetTotalDebt,
+    |     ^^^^^^^^^^^^
+...
+321 |     GetPaused,
+    |     ^^^^^^^^^
+
+warning: multiple methods are never used
+   --> contracts/bonding-contract/src/lib.rs:436:8
+    |
+342 | impl BondingContractAlkane {
+    | -------------------------- methods in this implementation
+...
+436 |     fn balance_of(&self, address: u128) -> u128 {
+    |        ^^^^^^^^^^
+...
+443 |     fn set_balance(&self, address: u128, balance: u128) {
+    |        ^^^^^^^^^^^
+...
+468 |     fn owner(&self) -> u128 {
+    |        ^^^^^
+...
+478 |     fn ensure_owner(&self) -> Result<()> {
+    |        ^^^^^^^^^^^^
+...
+603 |     fn last_update(&self) -> u64 {
+    |        ^^^^^^^^^^^
+...
+628 |     fn get_bonds(&self, address: u128) -> Vec<Bond> {
+    |        ^^^^^^^^^
+...
+776 |     fn get_buy_amount(&self, diesel_amount: u128) -> Result<CallResponse> {
+    |        ^^^^^^^^^^^^^^
+...
+790 |     fn get_sell_amount(&self, alkane_amount: u128) -> Result<CallResponse> {
+    |        ^^^^^^^^^^^^^^^
+
+warning: `bonding-contract` (lib test) generated 12 warnings (run `cargo fix --lib -p bonding-contract --tests` to apply 8 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.46s
+     Running unittests src/lib.rs (/Users/erickdelgado/Documents/GitHub/boiler/target/debug/deps/bonding_contract-e512909764192af3)
+
+running 4 tests
+Initializing contract with name: TestToken       , symbol: TT              , k_factor: 1000, n_exponent: 2, initial_diesel_reserve: 1000000
+thread 'isolated_tests::test_init_contract' panicked at core/src/panicking.rs:221:5:
+unsafe precondition(s) violated: slice::from_raw_parts requires the pointer to be aligned and non-null, and the total size of the slice not to exceed `isize::MAX`
+thread caused non-unwinding panic. aborting.
+error: test failed, to rerun pass `--lib`
+
+Caused by:
+  process didn't exit successfully: `/Users/erickdelgado/Documents/GitHub/boiler/target/debug/deps/bonding_contract-e512909764192af3 isolated_tests` (signal: 6, SIGABRT: process abort signal)

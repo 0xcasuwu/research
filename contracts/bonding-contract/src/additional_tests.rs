@@ -3,11 +3,10 @@
 use super::*;
 use alkanes_support::id::AlkaneId;
 use alkanes_support::parcel::{AlkaneTransfer, AlkaneTransferParcel};
-use std::cell::RefCell;
 
 // Import the mock context functions
-use crate::mock_context::{set_mock_context, get_mock_context, clear_mock_context};
-use crate::mock_runtime::{clear_mock_storage, get_mock_storage, set_mock_storage};
+use crate::mock_context::{set_mock_context};
+use crate::reset_mock_environment::reset_mock_environment;
 
 // Helper function to create a context with incoming alkanes
 fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
@@ -58,8 +57,8 @@ fn init_test_contract() -> BondingContractAlkane {
 
 #[test]
 fn test_double_initialization() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract
     let contract = init_test_contract();
@@ -98,8 +97,8 @@ fn test_double_initialization() {
 
 #[test]
 fn test_buy_alkane_no_diesel() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract
     let contract = init_test_contract();
@@ -117,8 +116,8 @@ fn test_buy_alkane_no_diesel() {
 
 #[test]
 fn test_sell_alkane_no_alkane() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
 
     // Create and initialize a contract
     let contract = init_test_contract();
@@ -139,8 +138,8 @@ fn test_sell_alkane_no_alkane() {
 
 #[test]
 fn test_sell_alkane_insufficient_reserve() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract with a small diesel reserve
     let contract = BondingContractAlkane::default();
@@ -207,8 +206,8 @@ fn test_sell_alkane_insufficient_reserve() {
 
 #[test]
 fn test_get_buy_amount_response() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract
     let contract = init_test_contract();
@@ -248,8 +247,8 @@ fn test_get_buy_amount_response() {
 
 #[test]
 fn test_get_sell_amount_response() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract
     let contract = init_test_contract();
@@ -311,8 +310,8 @@ fn test_get_sell_amount_response() {
 
 #[test]
 fn test_balance_of_and_set_balance() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract
     let contract = init_test_contract();
@@ -390,8 +389,8 @@ fn test_trim_function() {
 
 #[test]
 fn test_buy_alkane_zero_output() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with special parameters that would result in zero output
     let contract = BondingContractAlkane::default();
@@ -444,8 +443,8 @@ fn test_buy_alkane_zero_output() {
 
 #[test]
 fn test_sell_alkane_zero_output() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with special parameters that would result in zero output
     let contract = BondingContractAlkane::default();
@@ -511,8 +510,8 @@ fn test_sell_alkane_zero_output() {
 
 #[test]
 fn test_trait_implementation() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create and initialize a contract
     let mut contract = init_test_contract();
@@ -564,8 +563,8 @@ fn test_trait_implementation() {
 
 #[test]
 fn test_execute_direct_call() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = BondingContractAlkane::default();

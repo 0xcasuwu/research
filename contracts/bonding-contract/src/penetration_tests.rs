@@ -9,7 +9,7 @@ use super::*;
 use alkanes_support::id::AlkaneId;
 use alkanes_support::parcel::{AlkaneTransfer, AlkaneTransferParcel};
 use crate::mock_context::set_mock_context;
-use crate::mock_runtime::clear_mock_storage;
+use crate::reset_mock_environment::reset_mock_environment;
 use std::collections::HashMap;
 
 // Helper function to create a context with incoming alkanes
@@ -57,8 +57,8 @@ fn init_test_contract(initial_diesel_reserve: u128, k_factor: u128, n_exponent: 
 
 #[test]
 fn test_edge_case_zero_diesel_reserve() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with a small initial diesel reserve
     // Using 1 instead of 0 to avoid potential division by zero issues
@@ -93,8 +93,8 @@ fn test_edge_case_zero_diesel_reserve() {
 
 #[test]
 fn test_edge_case_max_values() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with large but not extreme values
     let large_reserve = 1_000_000_000_000_000; // 10^15, large but not extreme
@@ -128,8 +128,8 @@ fn test_edge_case_max_values() {
 
 #[test]
 fn test_invariant_price_increases_with_reserve() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -168,8 +168,8 @@ fn test_invariant_price_increases_with_reserve() {
 
 #[test]
 fn test_invariant_price_decreases_with_sell() {
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -251,8 +251,8 @@ fn test_invariant_buy_sell_symmetry() {
     // This test verifies that buying and then selling the same amount of alkane
     // results in less diesel than started with, due to the price impact
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -308,8 +308,8 @@ fn test_invariant_buy_sell_symmetry() {
 fn test_invariant_price_impact() {
     // This test verifies that larger trades have more price impact
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -343,8 +343,8 @@ fn test_invariant_price_impact() {
 fn test_invariant_formula_correctness_linear() {
     // This test verifies that the linear bonding curve formula is implemented correctly
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with linear bonding curve (n=1)
     let initial_reserve = 1_000_000;
@@ -379,8 +379,8 @@ fn test_invariant_formula_correctness_linear() {
 fn test_invariant_formula_correctness_quadratic() {
     // This test verifies that the quadratic bonding curve formula is implemented correctly
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with quadratic bonding curve (n=2)
     let initial_reserve = 1_000_000;
@@ -419,8 +419,8 @@ fn test_invariant_reserve_ratio() {
     // This test verifies that the ratio of diesel reserve to alkane supply
     // changes in a predictable way during buys and sells
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let initial_reserve = 1_000_000;
@@ -474,8 +474,8 @@ fn test_invariant_reserve_ratio() {
 fn test_penetration_overflow_protection() {
     // This test verifies that the contract handles potential overflows correctly
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract with large but reasonable values
     let large_reserve = 1_000_000_000_000_000; // 10^15, large but not extreme
@@ -520,8 +520,8 @@ fn test_penetration_multiple_users() {
     // This test simulates multiple users interacting with the contract
     // to verify that the contract behaves correctly in a multi-user scenario
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = init_test_contract(1_000_000, 1, 1);
@@ -589,8 +589,8 @@ fn test_penetration_front_running() {
     // observes a large buy transaction and tries to profit by buying
     // before and selling after the large buy
     
-    // Clear any previous state
-    clear_mock_storage();
+    // Reset the mock environment
+    reset_mock_environment();
     
     // Create a contract
     let contract = init_test_contract(1_000_000, 1, 1);
