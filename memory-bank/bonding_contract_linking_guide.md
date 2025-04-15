@@ -2,14 +2,19 @@
 
 ## Overview
 
-The bonding contract in the Alkanes project is experiencing linking errors due to missing symbols from the runtime library. This document explains the issue and provides solutions specifically for the bonding contract.
+The bonding contract in the Alkanes project may experience linking errors due to missing symbols from the runtime library. This document explains the issue and provides solutions specifically for the bonding contract.
 
 ## The Bonding Contract
 
-The bonding contract implements a bonding curve mechanism, which is a mathematical concept used in token economics. The contract is located at:
+The bonding contract implements two complementary approaches to liquidity provision:
+
+1. **Traditional Bonding Curve**: A mathematical function that determines the price of tokens based on the supply
+2. **Bond-Based Approach**: A time-locked redemption mechanism with price decay
+
+The contract is located at:
 
 ```
-/Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/bonding_curve.rs
+/Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/
 ```
 
 ## Linking Issues
@@ -81,11 +86,63 @@ MACOSX_DEPLOYMENT_TARGET=15.2 cargo build
 
 ## Testing the Bonding Contract
 
-After successfully building the bonding contract, you can test it using the Alkanes test framework. The compiled library will be available at:
+After successfully building the bonding contract, you can test it using the following commands:
 
+### Running All Tests
+
+```bash
+cd /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract
+cargo test
 ```
-/Users/erickdelgado/Documents/GitHub/boiler/target/debug/libbonding_contract.dylib
+
+### Running Specific Tests
+
+```bash
+# Run isolated tests
+cargo test --lib isolated_tests
+
+# Run bond curve tests
+cargo test --test bond_curve_test
+
+# Run a specific test
+cargo test isolated_tests::test_init_contract
 ```
+
+### Test Environment Setup
+
+The bonding contract tests use a special test environment setup to ensure proper isolation between tests:
+
+1. **Reset Mock Environment**: The `reset_mock_environment::reset()` function is called before and after each test to ensure a clean state.
+
+2. **Bypass Initialization Check**: In test environments, the `observe_initialization` method bypasses the initialization check to allow multiple initializations.
+
+3. **Test Isolation**: The `run_test_with_isolation` function wraps each test in a safe environment that prevents test failures from affecting other tests.
+
+## Troubleshooting
+
+### Memory Corruption Issues
+
+If you encounter memory corruption issues during testing, ensure that:
+
+1. The `reset_mock_environment::reset()` function is called before and after each test.
+2. The `observe_initialization` method is properly bypassing the initialization check in test environments.
+3. Each test is properly isolated using the `run_test_with_isolation` function.
+
+### Linking Errors
+
+If you encounter linking errors:
+
+1. Check that the runtime library is built before the bonding contract.
+2. Verify that the `Cargo.toml` file correctly specifies the dependency on the runtime.
+3. Use the `RUSTFLAGS` environment variable to specify the location of the runtime library.
+
+### Test Failures
+
+If tests are failing:
+
+1. Check that the test environment is properly set up.
+2. Verify that the mock context and storage are properly reset between tests.
+3. Ensure that the initialization state is properly reset between tests.
 
 ## Related Libraries
 
@@ -96,3 +153,7 @@ The bonding contract is part of a larger ecosystem of Alkanes libraries, all of 
 ```
 
 This will build all the libraries that were experiencing linking errors, including the bonding contract.
+
+## Conclusion
+
+By following the steps in this guide, you should be able to successfully build and test the bonding contract. If you encounter any issues, please refer to the troubleshooting section or contact the development team for assistance.

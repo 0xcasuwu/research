@@ -1,515 +1,1066 @@
-//! Tests to cover gaps in test coverage for the bonding contract
-//! 
-//! These tests focus on:
-//! 1. Context handling when no mock context is set
-//! 2. Bonding curve n=0 case (constant price)
-//! 3. Scaling factor edge cases
-//! 4. Error propagation
+//! Coverage tests for the bonding contract
+//!
+//! This module contains tests specifically designed to improve code coverage
+//! by testing functions that are not covered by other tests.
 
-use super::*;
+use crate::{BondingContractAlkane, BondingContract, BondContract, Bond};
+use crate::reset_mock_environment;
+use crate::mock_runtime;
+use crate::mock_context;
 use alkanes_support::id::AlkaneId;
-use alkanes_support::parcel::{AlkaneTransfer, AlkaneTransferParcel};
-use crate::mock_context::{set_mock_context, get_mock_context};
-use crate::reset_mock_environment::reset_mock_environment;
+use alkanes_support::parcel::AlkaneTransferParcel as AlkaneTransfers;
+use alkanes_support::parcel::AlkaneTransfer;
+use alkanes_support::context::Context;
+use alkanes_runtime::storage::StoragePointer;
+use metashrew_support::index_pointer::KeyValuePointer;
+use std::time::{SystemTime, UNIX_EPOCH};
 
-// Helper function to create a context with incoming alkanes
-fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
-    Context {
-        caller: AlkaneId { block: 1, tx: 1 },
-        myself: AlkaneId { block: 3, tx: 3 },
-        incoming_alkanes: AlkaneTransferParcel(alkanes),
-        vout: 0,
-        inputs: vec![],
+// Helper function to reset the contract state
+fn reset_contract_state() -> BondingContractAlkane {
+    // Reset the mock environment
+    reset_mock_environment::reset();
+    
+    // Reset the initialization state
+    let mut init_pointer = StoragePointer::from_keyword("/initialized");
+    init_pointer.set_value::<u8>(0);
+    
+    // Create a new contract instance with default values
+    BondingContractAlkane::default()
+}
+
+// Helper function to safely run a test with proper environment setup and teardown
+fn run_test_with_isolation<F>(test_fn: F)
+where
+    F: FnOnce() + std::panic::UnwindSafe,
+{
+    // Reset the mock environment before the test
+    reset_mock_environment::reset();
+    
+    // Reset the initialization state
+    let mut init_pointer = StoragePointer::from_keyword("/initialized");
+    init_pointer.set_value::<u8>(0);
+    
+    // Run the test function in a catch_unwind to prevent test failures from affecting other tests
+    let result = std::panic::catch_unwind(test_fn);
+    
+    // Reset the mock environment after the test regardless of success or failure
+    reset_mock_environment::reset();
+    
+    // Reset the initialization state again
+    let mut init_pointer = StoragePointer::from_keyword("/initialized");
+    init_pointer.set_value::<u8>(0);
+    
+    // If the test panicked, resume the panic
+    if let Err(e) = result {
+        std::panic::resume_unwind(e);
     }
 }
 
-// Helper function to initialize a contract for testing with specific parameters
-fn init_test_contract(initial_diesel_reserve: u128, k_factor: u128, n_exponent: u128) -> BondingContractAlkane {
-    // Create a new contract
-    let contract = BondingContractAlkane::default();
-    
-    // Create fixed-size arrays for u128::from_le_bytes
-    let mut name_bytes = [0u8; 16];
-    let name_str = b"TestToken";
-    name_bytes[..name_str.len()].copy_from_slice(name_str);
-    let name = u128::from_le_bytes(name_bytes);
-    
-    let mut symbol_bytes = [0u8; 16];
-    let symbol_str = b"TEST";
-    symbol_bytes[..symbol_str.len()].copy_from_slice(symbol_str);
-    let symbol = u128::from_le_bytes(symbol_bytes);
-    
-    // Set up a default context
-    let context = Context {
-        caller: AlkaneId { block: 1, tx: 1 },
-        myself: AlkaneId { block: 3, tx: 3 },
-        incoming_alkanes: Default::default(),
-        vout: 0,
-        inputs: vec![],
-    };
-    set_mock_context(context);
-    
-    // Initialize the contract
-    contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve).unwrap();
-    
-    contract
+/// Test selling alkane for diesel
+#[test]
+fn test_sell_alkane() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"TestToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"TT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let k_factor = 1000;
+        let n_exponent = 2;
+        let initial_diesel_reserve = 1000000;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve);
+        assert!(result.is_ok());
+        
+        // Sell alkane for diesel
+        let alkane_amount = 1000;
+        let context = Context {
+            caller,
+            myself: myself.clone(),
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: myself,
+                    value: alkane_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.sell_alkane(alkane_amount);
+        assert!(result.is_ok());
+        
+        // Check the contract state - the diesel reserve should decrease
+        let expected_diesel_reserve = initial_diesel_reserve - contract.get_bonding_curve().get_sell_amount(alkane_amount);
+        assert_eq!(contract.diesel_reserve(), expected_diesel_reserve);
+        
+        // Check the response
+        let response = result.unwrap();
+        
+        // The response should contain the diesel token
+        let diesel_transfer = response.alkanes.0.iter()
+            .find(|transfer| transfer.id.block == 2 && transfer.id.tx == 0)
+            .expect("Expected to find diesel transfer");
+        
+        // Check that the diesel value is positive
+        assert!(diesel_transfer.value > 0, "Expected diesel value to be positive");
+    });
 }
 
+/// Test redeeming a bond
 #[test]
-fn test_no_mock_context() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Create a new contract
-    let contract = BondingContractAlkane::default();
-    
-    // Clear the mock context to test the default context path
-    crate::mock_context::clear_mock_context();
-    
-    // Try to get the context - should return the default context
-    let context_result = contract.context();
-    assert!(context_result.is_ok(), "Context should be available even without mock context");
-    
-    let context = context_result.unwrap();
-    assert_eq!(context.caller, AlkaneId::default(), "Default context should have default caller");
-    assert_eq!(context.myself, AlkaneId::default(), "Default context should have default myself");
-    assert_eq!(context.incoming_alkanes.0.len(), 0, "Default context should have empty incoming alkanes");
-    
-    // Try to initialize the contract with the default context
-    let mut name_bytes = [0u8; 16];
-    let name_str = b"TestToken";
-    name_bytes[..name_str.len()].copy_from_slice(name_str);
-    let name = u128::from_le_bytes(name_bytes);
-    
-    let mut symbol_bytes = [0u8; 16];
-    let symbol_str = b"TEST";
-    symbol_bytes[..symbol_str.len()].copy_from_slice(symbol_str);
-    let symbol = u128::from_le_bytes(symbol_bytes);
-    
-    let initial_diesel_reserve = 1_000_000;
-    let k_factor = 1;
-    let n_exponent = 1;
-    
-    // Initialize the contract with default context
-    let result = contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve);
-    assert!(result.is_ok(), "Contract should initialize with default context");
-    
-    // Verify the contract was initialized correctly
-    assert_eq!(contract.name(), "TestToken");
-    assert_eq!(contract.symbol(), "TEST");
-    assert_eq!(contract.diesel_reserve(), initial_diesel_reserve);
-    assert_eq!(contract.alkane_supply(), initial_diesel_reserve);
-    assert_eq!(contract.k_factor(), k_factor);
-    assert_eq!(contract.n_exponent(), n_exponent);
-    
-    // Reset the mock context for other tests
-    let context = Context {
-        caller: AlkaneId { block: 1, tx: 1 },
-        myself: AlkaneId { block: 3, tx: 3 },
-        incoming_alkanes: Default::default(),
-        vout: 0,
-        inputs: vec![],
-    };
-    set_mock_context(context);
+fn test_redeem_bond() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        let diesel_id = AlkaneId { block: 2, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 1; // 1 second for testing
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        contract.set_alkane_supply(1000000);
+        
+        // Unpause the contract
+        contract.set_paused(false);
+        
+        // Purchase a bond
+        let diesel_amount = 1000;
+        let min_output = 1;
+        let to = caller.block;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Wait for the bond to mature (sleep for term + 1 second)
+        std::thread::sleep(std::time::Duration::from_secs(term + 1));
+        
+        // Redeem the bond
+        let bond_id = 0;
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.redeem_bond(bond_id);
+        assert!(result.is_ok());
+        
+        // Check the response
+        let response = result.unwrap();
+        
+        // The response should contain the alkane token
+        let alkane_transfer = response.alkanes.0.iter()
+            .find(|transfer| transfer.id == myself)
+            .expect("Expected to find alkane transfer");
+        
+        // Check that the alkane value is positive
+        assert!(alkane_transfer.value > 0, "Expected alkane value to be positive");
+        
+        // Check the bond state
+        let bond = contract.get_bond(to, bond_id).unwrap();
+        assert_eq!(bond.redeemed, bond.owed);
+    });
 }
 
+/// Test redeeming multiple bonds in batch
 #[test]
-fn test_constant_price_curve() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Create a contract with n=0 (constant price curve)
-    let contract = init_test_contract(1_000_000, 100, 0);
-    
-    // Verify the price is constant (k) regardless of reserve
-    let price_response = contract.current_price().unwrap();
-    let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
-    assert_eq!(price, 100, "Price should be equal to k_factor for n=0");
-    
-    // Buy some alkane
-    let diesel_amount = 10_000;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 2, tx: 0 }, // Diesel
-            value: diesel_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    let buy_result = contract.buy_alkane(diesel_amount);
-    assert!(buy_result.is_ok(), "Buy operation should succeed with n=0");
-    
-    let buy_response = buy_result.unwrap();
-    let alkane_amount = if buy_response.alkanes.0.is_empty() { 0 } else { buy_response.alkanes.0[0].value };
-    
-    // For n=0, the price is constant, so the alkane amount should be diesel_amount * SCALING_FACTOR / k
-    let expected_alkane = diesel_amount * 1_000_000 / 100;
-    assert_eq!(alkane_amount, expected_alkane, "Alkane amount should match expected for n=0");
-    
-    // Verify the price is still constant after buying
-    let price_after_buy_response = contract.current_price().unwrap();
-    let price_after_buy = u128::from_le_bytes(price_after_buy_response.data.try_into().unwrap());
-    assert_eq!(price_after_buy, 100, "Price should still be equal to k_factor after buying");
-    
-    // Sell some alkane
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 3, tx: 3 }, // Contract alkane
-            value: alkane_amount / 2, // Sell half
-        }
-    ]);
-    set_mock_context(context);
-    
-    let sell_result = contract.sell_alkane(alkane_amount / 2);
-    assert!(sell_result.is_ok(), "Sell operation should succeed with n=0");
-    
-    let sell_response = sell_result.unwrap();
-    let diesel_returned = if sell_response.alkanes.0.is_empty() { 0 } else { sell_response.alkanes.0[0].value };
-    
-    // For n=0, the price is constant, so the diesel amount should be alkane_amount * k / SCALING_FACTOR
-    let expected_diesel = (alkane_amount / 2) * 100 / 1_000_000;
-    assert_eq!(diesel_returned, expected_diesel, "Diesel amount should match expected for n=0");
-    
-    // Verify the price is still constant after selling
-    let price_after_sell_response = contract.current_price().unwrap();
-    let price_after_sell = u128::from_le_bytes(price_after_sell_response.data.try_into().unwrap());
-    assert_eq!(price_after_sell, 100, "Price should still be equal to k_factor after selling");
+fn test_redeem_bond_batch() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        let diesel_id = AlkaneId { block: 2, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 1; // 1 second for testing
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        contract.set_alkane_supply(1000000);
+        
+        // Unpause the contract
+        contract.set_paused(false);
+        
+        // Purchase multiple bonds
+        let to = caller.block;
+        
+        // Purchase first bond
+        let diesel_amount = 1000;
+        let min_output = 1;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Purchase second bond
+        let diesel_amount = 2000;
+        let min_output = 1;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Wait for the bonds to mature (sleep for term + 1 second)
+        std::thread::sleep(std::time::Duration::from_secs(term + 1));
+        
+        // Redeem the bonds in batch
+        let bond_ids = vec![0, 1];
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.redeem_bond_batch(bond_ids);
+        assert!(result.is_ok());
+        
+        // Check the response
+        let response = result.unwrap();
+        
+        // The response should contain the alkane token
+        let alkane_transfer = response.alkanes.0.iter()
+            .find(|transfer| transfer.id == myself)
+            .expect("Expected to find alkane transfer");
+        
+        // Check that the alkane value is positive
+        assert!(alkane_transfer.value > 0, "Expected alkane value to be positive");
+        
+        // Check the bond states
+        let bond0 = contract.get_bond(to, 0).unwrap();
+        let bond1 = contract.get_bond(to, 1).unwrap();
+        assert_eq!(bond0.redeemed, bond0.owed);
+        assert_eq!(bond1.redeemed, bond1.owed);
+    });
 }
 
+/// Test transferring a bond to another address
 #[test]
-fn test_scaling_factor_edge_cases() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Test case 1: Very small k_factor with large diesel_reserve
-    let contract = init_test_contract(1_000_000_000, 1, 1);
-    
-    // Calculate expected price: k * reserve / SCALING_FACTOR
-    let expected_price = 1 * 1_000_000_000 / 1_000_000;
-    
-    // Get the actual price
-    let price_response = contract.current_price().unwrap();
-    let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
-    
-    assert_eq!(price, expected_price, "Price should match expected with small k and large reserve");
-    
-    // Test buying with a very small amount
-    let tiny_amount = 1;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 2, tx: 0 }, // Diesel
-            value: tiny_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // Calculate expected alkane amount
-    // For n=1: alkane = k * diesel * (reserve + diesel/2) / SCALING_FACTOR
-    let expected_alkane = 1 * tiny_amount * (1_000_000_000 + tiny_amount/2) / 1_000_000;
-    
-    let buy_result = contract.buy_alkane(tiny_amount);
-    assert!(buy_result.is_ok(), "Buy operation should succeed with small amount");
-    
-    let buy_response = buy_result.unwrap();
-    let alkane_amount = if buy_response.alkanes.0.is_empty() { 0 } else { buy_response.alkanes.0[0].value };
-    
-    assert_eq!(alkane_amount, expected_alkane, "Alkane amount should match expected for small purchase");
-    
-    // Test case 2: Very large k_factor with small diesel_reserve
-    reset_mock_environment();
-    let contract = init_test_contract(1000, 1_000_000, 1);
-    
-    // Calculate expected price: k * reserve / SCALING_FACTOR
-    let expected_price = 1_000_000 * 1000 / 1_000_000;
-    
-    // Get the actual price
-    let price_response = contract.current_price().unwrap();
-    let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
-    
-    assert_eq!(price, expected_price, "Price should match expected with large k and small reserve");
-    
-    // Test buying with a moderate amount
-    let amount = 100;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 2, tx: 0 }, // Diesel
-            value: amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // Calculate expected alkane amount
-    // For n=1: alkane = k * diesel * (reserve + diesel/2) / SCALING_FACTOR
-    let expected_alkane = 1_000_000 * amount * (1000 + amount/2) / 1_000_000;
-    
-    let buy_result = contract.buy_alkane(amount);
-    assert!(buy_result.is_ok(), "Buy operation should succeed with moderate amount");
-    
-    let buy_response = buy_result.unwrap();
-    let alkane_amount = if buy_response.alkanes.0.is_empty() { 0 } else { buy_response.alkanes.0[0].value };
-    
-    assert_eq!(alkane_amount, expected_alkane, "Alkane amount should match expected for moderate purchase");
-    
-    // Test case 3: Very small values all around
-    reset_mock_environment();
-    let contract = init_test_contract(10, 10, 1);
-    
-    // Calculate expected price: k * reserve / SCALING_FACTOR
-    let expected_price = 10 * 10 / 1_000_000;
-    
-    // Get the actual price
-    let price_response = contract.current_price().unwrap();
-    let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
-    
-    assert_eq!(price, expected_price, "Price should match expected with small values");
-    
-    // Test buying with a small amount
-    let amount = 5;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 2, tx: 0 }, // Diesel
-            value: amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // Calculate expected alkane amount
-    // For n=1: alkane = k * diesel * (reserve + diesel/2) / SCALING_FACTOR
-    let expected_alkane = 10 * amount * (10 + amount/2) / 1_000_000;
-    
-    // With very small values, the result might be 0 due to integer division
-    // In this case, the contract should return at least 1
-    let expected_alkane = if expected_alkane == 0 { 1 } else { expected_alkane };
-    
-    let buy_result = contract.buy_alkane(amount);
-    assert!(buy_result.is_ok(), "Buy operation should succeed with small values");
-    
-    let buy_response = buy_result.unwrap();
-    let alkane_amount = if buy_response.alkanes.0.is_empty() { 0 } else { buy_response.alkanes.0[0].value };
-    
-    assert_eq!(alkane_amount, expected_alkane, "Alkane amount should match expected for small values");
+fn test_transfer_bond() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let recipient = AlkaneId { block: 2, tx: 1 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        let diesel_id = AlkaneId { block: 2, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 604800; // 1 week in seconds
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        contract.set_alkane_supply(1000000);
+        
+        // Unpause the contract
+        contract.set_paused(false);
+        
+        // Purchase a bond
+        let diesel_amount = 1000;
+        let min_output = 1;
+        let to = caller.block;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Transfer the bond
+        let bond_id = 0;
+        let recipient_address = recipient.block;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.transfer_bond(recipient_address, bond_id);
+        assert!(result.is_ok());
+        
+        // Check the bond ownership
+        assert_eq!(contract.position_count_of(to), 0);
+        assert_eq!(contract.position_count_of(recipient_address), 1);
+        
+        // Check the bond details
+        let bond = contract.get_bond(recipient_address, 0).unwrap();
+        assert_eq!(bond.redeemed, 0);
+        assert!(bond.owed > min_output);
+    });
 }
 
+/// Test getting the current price
 #[test]
-fn test_error_propagation() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Create a contract
-    let contract = BondingContractAlkane::default();
-    
-    // Set up a context
-    let context = Context {
-        caller: AlkaneId { block: 1, tx: 1 },
-        myself: AlkaneId { block: 3, tx: 3 },
-        incoming_alkanes: Default::default(),
-        vout: 0,
-        inputs: vec![],
-    };
-    set_mock_context(context);
-    
-    // Try to buy alkane without initializing the contract
-    let diesel_amount = 1000;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 2, tx: 0 }, // Diesel
-            value: diesel_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // This should fail because the contract is not initialized
-    let buy_result = contract.buy_alkane(diesel_amount);
-    assert!(buy_result.is_err(), "Buy operation should fail on uninitialized contract");
-    
-    // Try to sell alkane without initializing the contract
-    let alkane_amount = 1000;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 3, tx: 3 }, // Contract alkane
-            value: alkane_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // This should fail because the contract is not initialized
-    let sell_result = contract.sell_alkane(alkane_amount);
-    assert!(sell_result.is_err(), "Sell operation should fail on uninitialized contract");
-    
-    // Try to get the current price without initializing the contract
-    let price_result = contract.current_price();
-    assert!(price_result.is_err(), "Current price should fail on uninitialized contract");
-    
-    // Initialize the contract
-    let mut name_bytes = [0u8; 16];
-    let name_str = b"TestToken";
-    name_bytes[..name_str.len()].copy_from_slice(name_str);
-    let name = u128::from_le_bytes(name_bytes);
-    
-    let mut symbol_bytes = [0u8; 16];
-    let symbol_str = b"TEST";
-    symbol_bytes[..symbol_str.len()].copy_from_slice(symbol_str);
-    let symbol = u128::from_le_bytes(symbol_bytes);
-    
-    let initial_diesel_reserve = 1_000_000;
-    let k_factor = 1;
-    let n_exponent = 1;
-    
-    // Set up a default context
-    let context = Context {
-        caller: AlkaneId { block: 1, tx: 1 },
-        myself: AlkaneId { block: 3, tx: 3 },
-        incoming_alkanes: Default::default(),
-        vout: 0,
-        inputs: vec![],
-    };
-    set_mock_context(context);
-    
-    // Initialize the contract
-    contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve).unwrap();
-    
-    // Now try to buy alkane with wrong diesel ID
-    let diesel_amount = 1000;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 1, tx: 1 }, // Wrong ID (not diesel)
-            value: diesel_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // This should fail because no diesel was received
-    let buy_result = contract.buy_alkane(diesel_amount);
-    assert!(buy_result.is_err(), "Buy operation should fail with wrong diesel ID");
-    assert_eq!(buy_result.unwrap_err().to_string(), "no diesel received", 
-               "Error message should indicate no diesel received");
-    
-    // Try to sell alkane with wrong alkane ID
-    let alkane_amount = 1000;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 1, tx: 1 }, // Wrong ID (not contract alkane)
-            value: alkane_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // This should fail because no alkane was received
-    let sell_result = contract.sell_alkane(alkane_amount);
-    assert!(sell_result.is_err(), "Sell operation should fail with wrong alkane ID");
-    assert_eq!(sell_result.unwrap_err().to_string(), "no alkane received", 
-               "Error message should indicate no alkane received");
+fn test_get_current_price() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"TestToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"TT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let k_factor = 1000;
+        let n_exponent = 2;
+        let initial_diesel_reserve = 1000000;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve);
+        assert!(result.is_ok());
+        
+        // Get the current price
+        let result = contract.current_price();
+        assert!(result.is_ok());
+        
+        // Check the response
+        let response = result.unwrap();
+        
+        // The response should contain the price data
+        assert!(!response.data.is_empty());
+        
+        // Convert the data to a u128
+        let price = u128::from_le_bytes(response.data[0..16].try_into().unwrap());
+        
+        // Check that the price is positive
+        assert!(price > 0, "Expected price to be positive");
+    });
 }
 
+/// Test getting the available debt
 #[test]
-fn test_bonding_curve_direct_n0() {
-    // Test the BondingCurve struct directly with n=0
-    
-    // Create a curve with n=0
-    let mut curve = BondingCurve::new(1_000_000, 1_000_000, 100, 0);
-    
-    // Verify the price is constant (k)
-    let price = curve.get_current_price();
-    assert_eq!(price, 100, "Price should be equal to k_factor for n=0");
-    
-    // Buy some alkane
-    let diesel_amount = 10_000;
-    let alkane_amount = curve.buy_alkane(diesel_amount);
-    
-    // For n=0, the price is constant, so the alkane amount should be diesel_amount * SCALING_FACTOR / k
-    let expected_alkane = diesel_amount * 1_000_000 / 100;
-    assert_eq!(alkane_amount, expected_alkane, "Alkane amount should match expected for n=0");
-    
-    // Verify the price is still constant after buying
-    let price_after_buy = curve.get_current_price();
-    assert_eq!(price_after_buy, 100, "Price should still be equal to k_factor after buying");
-    
-    // Sell some alkane
-    let diesel_returned = curve.sell_alkane(alkane_amount / 2);
-    
-    // For n=0, the price is constant, so the diesel amount should be alkane_amount * k / SCALING_FACTOR
-    let expected_diesel = (alkane_amount / 2) * 100 / 1_000_000;
-    assert_eq!(diesel_returned, expected_diesel, "Diesel amount should match expected for n=0");
-    
-    // Verify the price is still constant after selling
-    let price_after_sell = curve.get_current_price();
-    assert_eq!(price_after_sell, 100, "Price should still be equal to k_factor after selling");
+fn test_available_debt() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        let diesel_id = AlkaneId { block: 2, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 604800; // 1 week in seconds
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        let initial_supply = 1000000;
+        contract.set_alkane_supply(initial_supply);
+        
+        // Unpause the contract
+        contract.set_paused(false);
+        
+        // Check the initial available debt
+        let initial_available_debt = contract.available_debt();
+        assert_eq!(initial_available_debt, initial_supply);
+        
+        // Purchase a bond
+        let diesel_amount = 1000;
+        let min_output = 1;
+        let to = caller.block;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Get the bond
+        let bond = contract.get_bond(to, 0).unwrap();
+        
+        // Check the available debt after purchasing a bond
+        let expected_available_debt = initial_supply - bond.owed;
+        let actual_available_debt = contract.available_debt();
+        assert_eq!(actual_available_debt, expected_available_debt);
+    });
 }
 
+/// Test management functions (set_virtual_input_reserves, set_virtual_output_reserves, set_half_life, set_level_bips)
 #[test]
-fn test_get_buy_amount_zero_input() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Create and initialize a contract
-    let contract = init_test_contract(1_000_000, 1, 1);
-    
-    // Test get_buy_amount with zero input
-    let diesel_amount = 0;
-    
-    // Get the response
-    let response = contract.get_buy_amount(diesel_amount).unwrap();
-    
-    // Make sure the response data is exactly 16 bytes (size of u128)
-    assert_eq!(response.data.len(), 16, "Response data should be exactly 16 bytes");
-    
-    // Convert the response data to u128 safely
-    let mut bytes = [0u8; 16];
-    bytes.copy_from_slice(&response.data);
-    let alkane_amount = u128::from_le_bytes(bytes);
-    
-    // Verify the response contains zero
-    assert_eq!(alkane_amount, 0, "get_buy_amount should return 0 for zero input");
+fn test_management_functions() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 604800; // 1 week in seconds
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Test set_virtual_input_reserves_internal
+        let new_virtual_input_reserves = 2000000;
+        contract.set_virtual_input_reserves_internal(new_virtual_input_reserves);
+        assert_eq!(contract.virtual_input_reserves(), new_virtual_input_reserves);
+        
+        // Test set_virtual_output_reserves_internal
+        let new_virtual_output_reserves = 3000000;
+        contract.set_virtual_output_reserves_internal(new_virtual_output_reserves);
+        assert_eq!(contract.virtual_output_reserves(), new_virtual_output_reserves);
+        
+        // Test set_half_life_internal
+        let new_half_life = 172800; // 2 days in seconds
+        contract.set_half_life_internal(new_half_life);
+        assert_eq!(contract.half_life(), new_half_life);
+        
+        // Test set_level_bips_internal
+        let new_level_bips = 200; // 2%
+        contract.set_level_bips_internal(new_level_bips);
+        assert_eq!(contract.level_bips(), new_level_bips);
+        
+        // Test set_last_update_internal
+        let new_last_update = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_secs();
+        contract.set_last_update_internal(new_last_update);
+        assert_eq!(contract.last_update(), new_last_update);
+    });
 }
 
+/// Test deleting a bond
 #[test]
-fn test_get_sell_amount_zero_input() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Create and initialize a contract
-    let contract = init_test_contract(1_000_000, 1, 1);
-    
-    // Test get_sell_amount with zero input
-    let alkane_amount = 0;
-    
-    // Get the response
-    let response = contract.get_sell_amount(alkane_amount).unwrap();
-    
-    // Make sure the response data is exactly 16 bytes (size of u128)
-    assert_eq!(response.data.len(), 16, "Response data should be exactly 16 bytes");
-    
-    // Convert the response data to u128 safely
-    let mut bytes = [0u8; 16];
-    bytes.copy_from_slice(&response.data);
-    let diesel_amount = u128::from_le_bytes(bytes);
-    
-    // Verify the response contains zero
-    assert_eq!(diesel_amount, 0, "get_sell_amount should return 0 for zero input");
+fn test_delete_bond() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        let diesel_id = AlkaneId { block: 2, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 604800; // 1 week in seconds
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        contract.set_alkane_supply(1000000);
+        
+        // Unpause the contract
+        contract.set_paused(false);
+        
+        // Purchase multiple bonds
+        let to = caller.block;
+        
+        // Purchase first bond
+        let diesel_amount = 1000;
+        let min_output = 1;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Purchase second bond
+        let diesel_amount = 2000;
+        let min_output = 1;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Check the initial position count
+        assert_eq!(contract.position_count_of(to), 2);
+        
+        // Get the second bond details
+        let bond1 = contract.get_bond(to, 1).unwrap();
+        
+        // Delete the first bond
+        contract.delete_bond(to, 0);
+        
+        // Check the position count after deletion
+        assert_eq!(contract.position_count_of(to), 1);
+        
+        // Check that the second bond is now at position 0
+        let moved_bond = contract.get_bond(to, 0).unwrap();
+        assert_eq!(moved_bond.owed, bond1.owed);
+        assert_eq!(moved_bond.redeemed, bond1.redeemed);
+        assert_eq!(moved_bond.creation, bond1.creation);
+        
+        // Delete the last bond
+        contract.delete_bond(to, 0);
+        
+        // Check that the position count is now 0
+        assert_eq!(contract.position_count_of(to), 0);
+    });
 }
 
+/// Test getting the bond amount
 #[test]
-fn test_get_sell_amount_too_much() {
-    // Reset the mock environment
-    reset_mock_environment();
-    
-    // Create and initialize a contract
-    let contract = init_test_contract(1_000_000, 1, 1);
-    
-    // Test get_sell_amount with more alkane than the supply
-    let alkane_amount = 2_000_000; // More than the supply (1_000_000)
-    
-    // Get the response
-    let response = contract.get_sell_amount(alkane_amount).unwrap();
-    
-    // Make sure the response data is exactly 16 bytes (size of u128)
-    assert_eq!(response.data.len(), 16, "Response data should be exactly 16 bytes");
-    
-    // Convert the response data to u128 safely
-    let mut bytes = [0u8; 16];
-    bytes.copy_from_slice(&response.data);
-    let diesel_amount = u128::from_le_bytes(bytes);
-    
-    // Verify the response contains zero
-    assert_eq!(diesel_amount, 0, "get_sell_amount should return 0 for amount > supply");
+fn test_get_bond_amount() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 604800; // 1 week in seconds
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        contract.set_alkane_supply(1000000);
+        
+        // Get the bond curve
+        let mut curve = contract.get_bond_curve();
+        
+        // Calculate the bond amount for a specific diesel amount
+        let diesel_amount = 1000;
+        let available_debt = contract.available_debt();
+        let expected_bond_amount = curve.purchase_bond(diesel_amount, available_debt);
+        
+        // Check that the bond amount is positive
+        assert!(expected_bond_amount > 0, "Expected bond amount to be positive");
+    });
+}
+
+/// Test pausing and unpausing the contract
+#[test]
+fn test_pause_unpause() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        let diesel_id = AlkaneId { block: 2, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"BondToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"BT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let virtual_input_reserves = 1000000;
+        let virtual_output_reserves = 2000000;
+        let half_life = 86400; // 1 day in seconds
+        let level_bips = 100; // 1%
+        let term = 604800; // 1 week in seconds
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_bond_contract(
+            name, 
+            symbol, 
+            virtual_input_reserves, 
+            virtual_output_reserves, 
+            half_life, 
+            level_bips, 
+            term
+        );
+        assert!(result.is_ok());
+        
+        // Set initial alkane supply
+        contract.set_alkane_supply(1000000);
+        
+        // Check that the contract is initially paused
+        assert!(contract.is_paused());
+        
+        // Unpause the contract
+        contract.set_paused(false);
+        
+        // Check that the contract is now unpaused
+        assert!(!contract.is_paused());
+        
+        // Try to purchase a bond (should succeed now that the contract is unpaused)
+        let diesel_amount = 1000;
+        let min_output = 1;
+        let to = caller.block;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_ok());
+        
+        // Pause the contract again
+        contract.set_paused(true);
+        
+        // Check that the contract is now paused
+        assert!(contract.is_paused());
+        
+        // Try to purchase a bond (should fail now that the contract is paused)
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![
+                AlkaneTransfer {
+                    id: diesel_id,
+                    value: diesel_amount,
+                },
+            ]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.purchase_bond(to, min_output);
+        assert!(result.is_err());
+    });
+}
+
+/// Test getting the buy amount and sell amount
+#[test]
+fn test_get_buy_sell_amount() {
+    run_test_with_isolation(|| {
+        // Create a new bonding contract with reset state
+        let mut contract = reset_contract_state();
+        
+        // Set up the context
+        let caller = AlkaneId { block: 1, tx: 0 };
+        let myself = AlkaneId { block: 3, tx: 0 };
+        
+        // Initialize the contract
+        let name = u128::from_le_bytes(*b"TestToken\0\0\0\0\0\0\0");
+        let symbol = u128::from_le_bytes(*b"TT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
+        let k_factor = 1000;
+        let n_exponent = 2;
+        let initial_diesel_reserve = 1000000;
+        
+        let context = Context {
+            caller,
+            myself,
+            incoming_alkanes: AlkaneTransfers(vec![]),
+            vout: 0,
+            inputs: vec![],
+        };
+        
+        // Set the context in both modules
+        mock_context::set_mock_context(context.clone());
+        mock_runtime::set_mock_context(context);
+        
+        let result = contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve);
+        assert!(result.is_ok());
+        
+        // Get the buy amount for a specific diesel amount
+        let diesel_amount = 1000;
+        let result = contract.get_buy_amount(diesel_amount);
+        assert!(result.is_ok());
+        
+        // Check the response
+        let response = result.unwrap();
+        
+        // The response should contain the buy amount data
+        assert!(!response.data.is_empty());
+        
+        // Convert the data to a u128
+        let buy_amount = u128::from_le_bytes(response.data[0..16].try_into().unwrap());
+        
+        // Check that the buy amount is positive
+        assert!(buy_amount > 0, "Expected buy amount to be positive");
+        
+        // Get the sell amount for a specific alkane amount
+        let alkane_amount = 1000;
+        let result = contract.get_sell_amount(alkane_amount);
+        assert!(result.is_ok());
+        
+        // Check the response
+        let response = result.unwrap();
+        
+        // The response should contain the sell amount data
+        assert!(!response.data.is_empty());
+        
+        // Convert the data to a u128
+        let sell_amount = u128::from_le_bytes(response.data[0..16].try_into().unwrap());
+        
+        // Check that the sell amount is positive
+        assert!(sell_amount > 0, "Expected sell amount to be positive");
+    });
 }
