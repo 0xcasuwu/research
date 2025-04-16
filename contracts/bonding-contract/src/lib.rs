@@ -380,7 +380,7 @@ impl BondingContractAlkane {
     }
     
     /// Get the bond orbital ID for a specific bond ID
-    fn get_bond_orbital_id(&self, bond_id: u128) -> Option<AlkaneId> {
+    pub fn get_bond_orbital_id(&self, bond_id: u128) -> Option<AlkaneId> {
         println!("Looking up bond orbital ID for bond_id: {}", bond_id);
         
         let pointer = self.bond_orbitals_pointer().select(&bond_id.to_le_bytes().to_vec());
@@ -420,10 +420,11 @@ impl BondingContractAlkane {
         if crate::reset_mock_environment::is_test_environment() {
             println!("Using mock bond orbital creation in test environment");
             
-            // In test environment, create a mock orbital ID
+            // In test environment, create a mock orbital ID using the global bond ID counter
+            let bond_id = crate::reset_mock_environment::get_next_bond_id();
             let orbital_id = AlkaneId {
                 block: 2, // Simplified for testing
-                tx: 1000 + self.position_count_of_internal(self.context()?.caller.into_u128()), // Unique ID based on position count
+                tx: 1000 + bond_id, // Unique ID based on global counter
             };
             
             // Important: Register the orbital ID in the bond orbitals registry

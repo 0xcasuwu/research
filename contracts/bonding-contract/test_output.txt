@@ -1,8 +1,11 @@
 warning: both `/Users/erickdelgado/.cargo/config` and `/Users/erickdelgado/.cargo/config.toml` exist. Using `/Users/erickdelgado/.cargo/config`
 warning: both `/Users/erickdelgado/.cargo/config` and `/Users/erickdelgado/.cargo/config.toml` exist. Using `/Users/erickdelgado/.cargo/config`
+warning: patch for `protorune` uses the features mechanism. default-features and features will not take effect because the patch dependency does not support this mechanism
    Compiling metashrew-support v8.4.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/metashrew-support)
+   Compiling metashrew v8.4.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/metashrew)
    Compiling protorune-support v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/protorune-support)
-   Compiling alkanes-support v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/alkanes-support)
+   Compiling alkanes-support v0.2.3 (/Users/erickdelgado/Documents/GitHub/boiler/crates/alkanes-support)
+   Compiling protorune v0.2.3 (/Users/erickdelgado/Documents/GitHub/boiler/crates/protorune)
    Compiling alkanes-runtime v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/crates/alkanes-runtime)
 warning: unused import: `wasm_bindgen::prelude::*`
  --> crates/alkanes-runtime/src/imports.rs:4:5
@@ -269,6 +272,132 @@ warning: unnecessary `unsafe` block
    |         ^^^^^^ unnecessary `unsafe` block
 
 warning: `alkanes-runtime` (lib) generated 43 warnings (run `cargo fix --lib -p alkanes-runtime` to apply 2 suggestions)
+   Compiling alkanes v0.2.3 (/Users/erickdelgado/Documents/GitHub/boiler/alkanes)
+warning: unused import: `IndexPointer`
+  --> alkanes/src/lib.rs:19:47
+   |
+19 | use metashrew::index_pointer::{AtomicPointer, IndexPointer};
+   |                                               ^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `metashrew_support::index_pointer::KeyValuePointer`
+  --> alkanes/src/lib.rs:20:5
+   |
+20 | use metashrew_support::index_pointer::KeyValuePointer;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `BalanceSheetOperations` and `BalanceSheet`
+  --> alkanes/src/lib.rs:23:40
+   |
+23 | use protorune_support::balance_sheet::{BalanceSheet, BalanceSheetOperations};
+   |                                        ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `MintableDebit` and `PersistentRecord`
+  --> alkanes/src/lib.rs:24:44
+   |
+24 | use protorune_support::balance_sheet_ext::{MintableDebit, PersistentRecord};
+   |                                            ^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^
+
+warning: unused import: `protorune_support::rune_transfer::RuneTransfer`
+  --> alkanes/src/lib.rs:25:5
+   |
+25 | use protorune_support::rune_transfer::RuneTransfer;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `anyhow`
+  --> alkanes/src/lib.rs:37:18
+   |
+37 |     use anyhow::{anyhow, Result};
+   |                  ^^^^^^
+
+warning: unused import: `PersistentRecord`
+  --> alkanes/src/lib.rs:41:63
+   |
+41 |     use protorune_support::balance_sheet_ext::{MintableDebit, PersistentRecord};
+   |                                                               ^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::io::Cursor`
+  --> alkanes/src/lib.rs:46:9
+   |
+46 |     use std::io::Cursor;
+   |         ^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::storage::StorageMap`
+   --> alkanes/src/lib.rs:113:5
+    |
+113 | use alkanes_support::storage::StorageMap;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `atomic`
+  --> alkanes/src/lib.rs:49:28
+   |
+49 |     pub fn credit_balances(atomic: &mut AtomicPointer, to: &AlkaneId, runes: &alkanes_support::parcel::AlkaneTransferParcel) {
+   |                            ^^^^^^ help: if this is intentional, prefix it with an underscore: `_atomic`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `to`
+  --> alkanes/src/lib.rs:49:56
+   |
+49 |     pub fn credit_balances(atomic: &mut AtomicPointer, to: &AlkaneId, runes: &alkanes_support::parcel::AlkaneTransferParcel) {
+   |                                                        ^^ help: if this is intentional, prefix it with an underscore: `_to`
+
+warning: unused variable: `runes`
+  --> alkanes/src/lib.rs:49:71
+   |
+49 |     pub fn credit_balances(atomic: &mut AtomicPointer, to: &AlkaneId, runes: &alkanes_support::parcel::AlkaneTransferParcel) {
+   |                                                                       ^^^^^ help: if this is intentional, prefix it with an underscore: `_runes`
+
+warning: unused variable: `atomic`
+  --> alkanes/src/lib.rs:53:27
+   |
+53 |     pub fn debit_balances(atomic: &mut AtomicPointer, to: &AlkaneId, runes: &alkanes_support::parcel::AlkaneTransferParcel) -> Result<()> {
+   |                           ^^^^^^ help: if this is intentional, prefix it with an underscore: `_atomic`
+
+warning: unused variable: `to`
+  --> alkanes/src/lib.rs:53:55
+   |
+53 |     pub fn debit_balances(atomic: &mut AtomicPointer, to: &AlkaneId, runes: &alkanes_support::parcel::AlkaneTransferParcel) -> Result<()> {
+   |                                                       ^^ help: if this is intentional, prefix it with an underscore: `_to`
+
+warning: unused variable: `runes`
+  --> alkanes/src/lib.rs:53:70
+   |
+53 |     pub fn debit_balances(atomic: &mut AtomicPointer, to: &AlkaneId, runes: &alkanes_support::parcel::AlkaneTransferParcel) -> Result<()> {
+   |                                                                      ^^^^^ help: if this is intentional, prefix it with an underscore: `_runes`
+
+warning: unused variable: `map`
+  --> alkanes/src/lib.rs:58:51
+   |
+58 |     pub fn pipe_storagemap_to<T: KeyValuePointer>(map: &alkanes_support::storage::StorageMap, pointer: &mut T) {
+   |                                                   ^^^ help: if this is intentional, prefix it with an underscore: `_map`
+
+warning: unused variable: `pointer`
+  --> alkanes/src/lib.rs:58:95
+   |
+58 |     pub fn pipe_storagemap_to<T: KeyValuePointer>(map: &alkanes_support::storage::StorageMap, pointer: &mut T) {
+   |                                                                                               ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_pointer`
+
+warning: unused variable: `data`
+  --> alkanes/src/lib.rs:62:29
+   |
+62 |     pub fn runes_by_address(data: &[u8]) -> Result<protorune_support::proto::protorune::WalletResponse> {
+   |                             ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+
+warning: unused variable: `data`
+  --> alkanes/src/lib.rs:67:30
+   |
+67 |     pub fn runes_by_outpoint(data: &[u8]) -> Result<protorune_support::proto::protorune::OutpointResponse> {
+   |                              ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+
+warning: unused variable: `data`
+  --> alkanes/src/lib.rs:72:28
+   |
+72 |     pub fn runes_by_height(data: &[u8]) -> Result<protorune_support::proto::protorune::RunesResponse> {
+   |                            ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+
+warning: `alkanes` (lib) generated 20 warnings (run `cargo fix --lib -p alkanes` to apply 9 suggestions)
    Compiling bonding-contract v0.1.0 (/Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract)
 warning: unused import: `declare_alkane`
  --> contracts/bonding-contract/src/lib.rs:1:23
@@ -279,22 +408,10 @@ warning: unused import: `declare_alkane`
   = note: `#[warn(unused_imports)]` on by default
 
 warning: unused import: `metashrew_support::compat::to_arraybuffer_layout`
- --> contracts/bonding-contract/src/lib.rs:7:5
+ --> contracts/bonding-contract/src/lib.rs:9:5
   |
-7 | use metashrew_support::compat::to_arraybuffer_layout;
+9 | use metashrew_support::compat::to_arraybuffer_layout;
   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-warning: unused import: `alkanes_support::prelude::*`
-  --> contracts/bonding-contract/src/bonding_curve.rs:11:5
-   |
-11 | use alkanes_support::prelude::*;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-warning: unused import: `alkanes_support::prelude::*`
-  --> contracts/bonding-contract/src/bond_curve.rs:11:5
-   |
-11 | use alkanes_support::prelude::*;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused imports: `BondContract` and `BondingContract`
   --> contracts/bonding-contract/src/isolated_tests.rs:5:36
@@ -303,9 +420,9 @@ warning: unused imports: `BondContract` and `BondingContract`
    |                                    ^^^^^^^^^^^^^^^  ^^^^^^^^^^^^
    |
 help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
-  --> contracts/bonding-contract/src/lib.rs:48:1
+  --> contracts/bonding-contract/src/lib.rs:63:1
    |
-48 | pub mod isolated_tests;
+63 | pub mod isolated_tests;
    | ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused import: `crate::mock_runtime`
@@ -315,9 +432,9 @@ warning: unused import: `crate::mock_runtime`
    |     ^^^^^^^^^^^^^^^^^^^
    |
 help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
-  --> contracts/bonding-contract/src/lib.rs:48:1
+  --> contracts/bonding-contract/src/lib.rs:63:1
    |
-48 | pub mod isolated_tests;
+63 | pub mod isolated_tests;
    | ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused import: `crate::mock_context`
@@ -327,9 +444,9 @@ warning: unused import: `crate::mock_context`
    |     ^^^^^^^^^^^^^^^^^^^
    |
 help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
-  --> contracts/bonding-contract/src/lib.rs:48:1
+  --> contracts/bonding-contract/src/lib.rs:63:1
    |
-48 | pub mod isolated_tests;
+63 | pub mod isolated_tests;
    | ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused import: `alkanes_support::id::AlkaneId`
@@ -339,9 +456,9 @@ warning: unused import: `alkanes_support::id::AlkaneId`
    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
 help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
-  --> contracts/bonding-contract/src/lib.rs:48:1
+  --> contracts/bonding-contract/src/lib.rs:63:1
    |
-48 | pub mod isolated_tests;
+63 | pub mod isolated_tests;
    | ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused import: `alkanes_support::parcel::AlkaneTransferParcel as AlkaneTransfers`
@@ -351,9 +468,9 @@ warning: unused import: `alkanes_support::parcel::AlkaneTransferParcel as Alkane
    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
 help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
-  --> contracts/bonding-contract/src/lib.rs:48:1
+  --> contracts/bonding-contract/src/lib.rs:63:1
    |
-48 | pub mod isolated_tests;
+63 | pub mod isolated_tests;
    | ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused import: `alkanes_support::context::Context`
@@ -363,245 +480,465 @@ warning: unused import: `alkanes_support::context::Context`
    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
 help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
-  --> contracts/bonding-contract/src/lib.rs:48:1
+  --> contracts/bonding-contract/src/lib.rs:63:1
    |
-48 | pub mod isolated_tests;
+63 | pub mod isolated_tests;
    | ^^^^^^^^^^^^^^^^^^^^^^^
 
-warning: variable does not need to be mutable
-  --> contracts/bonding-contract/src/isolated_tests.rs:61:13
+warning: unused imports: `BondContract`, `Bond`, and `BondingContract`
+  --> contracts/bonding-contract/src/coverage_tests.rs:6:36
    |
-61 |         let mut contract = reset_contract_state();
-   |             ----^^^^^^^^
-   |             |
-   |             help: remove this `mut`
+6  | use crate::{BondingContractAlkane, BondingContract, BondContract, Bond};
+   |                                    ^^^^^^^^^^^^^^^  ^^^^^^^^^^^^  ^^^^
    |
-   = note: `#[warn(unused_mut)]` on by default
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
 
-warning: variable does not need to be mutable
-   --> contracts/bonding-contract/src/isolated_tests.rs:110:13
-    |
-110 |         let mut contract = reset_contract_state();
-    |             ----^^^^^^^^
-    |             |
-    |             help: remove this `mut`
+warning: unused import: `crate::mock_runtime`
+  --> contracts/bonding-contract/src/coverage_tests.rs:8:5
+   |
+8  | use crate::mock_runtime;
+   |     ^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
 
-warning: unused variable: `diesel_amount`
-   --> contracts/bonding-contract/src/lib.rs:895:39
-    |
-895 |     fn buy_alkane_internal(&mut self, diesel_amount: u128) -> Result<CallResponse> {
-    |                                       ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_diesel_amount`
-    |
-    = note: `#[warn(unused_variables)]` on by default
+warning: unused import: `crate::mock_context`
+  --> contracts/bonding-contract/src/coverage_tests.rs:9:5
+   |
+9  | use crate::mock_context;
+   |     ^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
 
-warning: variable does not need to be mutable
-   --> contracts/bonding-contract/src/lib.rs:992:13
-    |
-992 |         let mut response = CallResponse::forward(&context.incoming_alkanes);
-    |             ----^^^^^^^^
-    |             |
-    |             help: remove this `mut`
+warning: unused import: `alkanes_support::id::AlkaneId`
+  --> contracts/bonding-contract/src/coverage_tests.rs:10:5
+   |
+10 | use alkanes_support::id::AlkaneId;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::parcel::AlkaneTransferParcel as AlkaneTransfers`
+  --> contracts/bonding-contract/src/coverage_tests.rs:11:5
+   |
+11 | use alkanes_support::parcel::AlkaneTransferParcel as AlkaneTransfers;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::parcel::AlkaneTransfer`
+  --> contracts/bonding-contract/src/coverage_tests.rs:12:5
+   |
+12 | use alkanes_support::parcel::AlkaneTransfer;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::context::Context`
+  --> contracts/bonding-contract/src/coverage_tests.rs:13:5
+   |
+13 | use alkanes_support::context::Context;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `SystemTime` and `UNIX_EPOCH`
+  --> contracts/bonding-contract/src/coverage_tests.rs:16:17
+   |
+16 | use std::time::{SystemTime, UNIX_EPOCH};
+   |                 ^^^^^^^^^^  ^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:64:1
+   |
+64 | pub mod coverage_tests;
+   | ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::cellpack::Cellpack`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:17:5
+   |
+17 | use alkanes_support::cellpack::Cellpack;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::id::AlkaneId`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:18:5
+   |
+18 | use alkanes_support::id::AlkaneId;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::response::ExtendedCallResponse`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:19:5
+   |
+19 | use alkanes_support::response::ExtendedCallResponse;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `TraceEvent` and `Trace`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:20:30
+   |
+20 | use alkanes_support::trace::{Trace, TraceEvent};
+   |                              ^^^^^  ^^^^^^^^^^
+
+warning: unused import: `anyhow::Result`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:21:5
+   |
+21 | use anyhow::Result;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `bitcoin::blockdata::transaction::OutPoint`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:22:5
+   |
+22 | use bitcoin::blockdata::transaction::OutPoint;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `bitcoin::Witness`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:23:5
+   |
+23 | use bitcoin::Witness;
+   |     ^^^^^^^^^^^^^^^^
+
+warning: unused imports: `index_pointer::IndexPointer`, `println`, and `stdio::stdout`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:27:17
+   |
+27 | use metashrew::{index_pointer::IndexPointer, println, stdio::stdout};
+   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^  ^^^^^^^^^^^^^
+
+warning: unused import: `metashrew_support::index_pointer::KeyValuePointer`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:28:5
+   |
+28 | use metashrew_support::index_pointer::KeyValuePointer;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `metashrew_support::utils::consensus_encode`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:29:5
+   |
+29 | use metashrew_support::utils::consensus_encode;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `protorune_support::load_sheet`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:30:5
+   |
+30 | use protorune_support::load_sheet;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `protorune::message::MessageContext`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:31:5
+   |
+31 | use protorune::message::MessageContext;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `protorune::tables::RuneTable`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:32:5
+   |
+32 | use protorune::tables::RuneTable;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `protorune::test_helpers::create_block_with_txs`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:34:5
+   |
+34 | use protorune::test_helpers::create_block_with_txs;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `BalanceSheetOperations` and `BalanceSheet`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:35:40
+   |
+35 | use protorune_support::balance_sheet::{BalanceSheet, BalanceSheetOperations};
+   |                                        ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::fmt::Write`
+  --> contracts/bonding-contract/src/block_test_helpers.rs:36:5
+   |
+36 | use std::fmt::Write;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unused import: `alkanes_support::cellpack::Cellpack`
+ --> contracts/bonding-contract/src/local_test_helpers.rs:6:5
+  |
+6 | use alkanes_support::cellpack::Cellpack;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `bitcoin::hashes::Hash`
+  --> contracts/bonding-contract/src/local_test_helpers.rs:12:5
+   |
+12 | use bitcoin::hashes::Hash;
+   |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unexpected `cfg` condition value: `alkanes-indexer`
+  --> contracts/bonding-contract/src/local_test_helpers.rs:32:11
+   |
+32 |     #[cfg(feature = "alkanes-indexer")]
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: expected values for `feature` are: `default`, `gc`, `mainnet`, and `test`
+   = help: consider adding `alkanes-indexer` as a feature in `Cargo.toml`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+
+warning: unexpected `cfg` condition value: `alkanes-indexer`
+  --> contracts/bonding-contract/src/local_test_helpers.rs:35:15
+   |
+35 |     #[cfg(not(feature = "alkanes-indexer"))]
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: expected values for `feature` are: `default`, `gc`, `mainnet`, and `test`
+   = help: consider adding `alkanes-indexer` as a feature in `Cargo.toml`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unused import: `metashrew::println`
+  --> contracts/bonding-contract/src/test_helpers_imported.rs:15:5
+   |
+15 | use metashrew::println; // Keep println for debugging purposes
+   |     ^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding a `#[cfg(test)]` to the containing module
+  --> contracts/bonding-contract/src/lib.rs:68:1
+   |
+68 | pub mod test_helpers_imported;
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `BalanceSheetOperations`
+  --> contracts/bonding-contract/src/local_test_helpers.rs:19:54
+   |
+19 | use protorune_support::balance_sheet::{BalanceSheet, BalanceSheetOperations};
+   |                                                      ^^^^^^^^^^^^^^^^^^^^^^
 
 warning: field `paused` is never read
-  --> contracts/bonding-contract/src/lib.rs:97:5
-   |
-91 | pub struct BondingContractAlkane {
-   |            --------------------- field in this struct
+   --> contracts/bonding-contract/src/lib.rs:114:5
+    |
+108 | pub struct BondingContractAlkane {
+    |            --------------------- field in this struct
 ...
-97 |     paused: bool,
-   |     ^^^^^^
-   |
-   = note: `#[warn(dead_code)]` on by default
+114 |     paused: bool,
+    |     ^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
 
 warning: multiple variants are never constructed
-   --> contracts/bonding-contract/src/lib.rs:106:5
+   --> contracts/bonding-contract/src/lib.rs:123:5
     |
-103 | enum BondingContractAlkaneMessage {
+120 | enum BondingContractAlkaneMessage {
     |      ---------------------------- variants in this enum
 ...
-106 |     InitContract {
+123 |     InitContract {
     |     ^^^^^^^^^^^^
 ...
-116 |     InitBondContract {
+133 |     InitBondContract {
     |     ^^^^^^^^^^^^^^^^
 ...
-128 |     BuyAlkane {
+145 |     BuyAlkane {
     |     ^^^^^^^^^
 ...
-134 |     SellAlkane {
+152 |     PurchaseBond {
+    |     ^^^^^^^^^^^^
+...
+159 |     RedeemBond {
     |     ^^^^^^^^^^
 ...
-140 |     PurchaseBond {
-    |     ^^^^^^^^^^^^
-...
-147 |     RedeemBond {
-    |     ^^^^^^^^^^
-...
-153 |     RedeemBondBatch {
+165 |     RedeemBondBatch {
     |     ^^^^^^^^^^^^^^^
 ...
-159 |     TransferBond {
+171 |     TransferBond {
     |     ^^^^^^^^^^^^
 ...
-167 |     GetCurrentPrice,
+179 |     GetCurrentPrice,
     |     ^^^^^^^^^^^^^^^
 ...
-172 |     GetBuyAmount {
+184 |     GetBuyAmount {
     |     ^^^^^^^^^^^^
 ...
-179 |     GetSellAmount {
+193 |     GetBondAmount {
     |     ^^^^^^^^^^^^^
 ...
-186 |     GetBondAmount {
-    |     ^^^^^^^^^^^^^
-...
-193 |     GetPositionCount {
+200 |     GetPositionCount {
     |     ^^^^^^^^^^^^^^^^
 ...
-200 |     GetAvailableDebt,
+207 |     GetAvailableDebt,
     |     ^^^^^^^^^^^^^^^^
 ...
-205 |     GetBond {
+212 |     GetBond {
     |     ^^^^^^^
 ...
-212 |     SetVirtualInputReserves {
+219 |     SetVirtualInputReserves {
     |     ^^^^^^^^^^^^^^^^^^^^^^^
 ...
-218 |     SetVirtualOutputReserves {
+225 |     SetVirtualOutputReserves {
     |     ^^^^^^^^^^^^^^^^^^^^^^^^
 ...
-224 |     SetHalfLife {
+231 |     SetHalfLife {
     |     ^^^^^^^^^^^
 ...
-230 |     SetLevelBips {
+237 |     SetLevelBips {
     |     ^^^^^^^^^^^^
 ...
-236 |     SetLastUpdate,
+243 |     SetLastUpdate,
     |     ^^^^^^^^^^^^^
 ...
-240 |     SetPause,
+247 |     SetPause,
     |     ^^^^^^^^
 ...
-244 |     UpdatePricing {
+251 |     UpdatePricing {
     |     ^^^^^^^^^^^^^
 ...
-256 |     GetName,
+263 |     GetName,
     |     ^^^^^^^
 ...
-261 |     GetSymbol,
+268 |     GetSymbol,
     |     ^^^^^^^^^
 ...
-266 |     GetDieselReserve,
+273 |     GetDieselReserve,
     |     ^^^^^^^^^^^^^^^^
 ...
-271 |     GetAlkaneSupply,
+278 |     GetAlkaneSupply,
     |     ^^^^^^^^^^^^^^^
 ...
-276 |     GetKFactor,
+283 |     GetKFactor,
     |     ^^^^^^^^^^
 ...
-281 |     GetNExponent,
+288 |     GetNExponent,
     |     ^^^^^^^^^^^^
 ...
-286 |     GetTerm,
+293 |     GetTerm,
     |     ^^^^^^^
 ...
-291 |     GetHalfLife,
+298 |     GetHalfLife,
     |     ^^^^^^^^^^^
 ...
-296 |     GetLevelBips,
+303 |     GetLevelBips,
     |     ^^^^^^^^^^^^
 ...
-301 |     GetVirtualInputReserves,
+308 |     GetVirtualInputReserves,
     |     ^^^^^^^^^^^^^^^^^^^^^^^
 ...
-306 |     GetVirtualOutputReserves,
+313 |     GetVirtualOutputReserves,
     |     ^^^^^^^^^^^^^^^^^^^^^^^^
 ...
-311 |     GetLastUpdate,
+318 |     GetLastUpdate,
     |     ^^^^^^^^^^^^^
 ...
-316 |     GetTotalDebt,
+323 |     GetTotalDebt,
     |     ^^^^^^^^^^^^
 ...
-321 |     GetPaused,
+328 |     GetPaused,
     |     ^^^^^^^^^
 
 warning: multiple methods are never used
-   --> contracts/bonding-contract/src/lib.rs:436:8
-    |
-342 | impl BondingContractAlkane {
-    | -------------------------- methods in this implementation
+    --> contracts/bonding-contract/src/lib.rs:676:8
+     |
+349  | impl BondingContractAlkane {
+     | -------------------------- methods in this implementation
 ...
-436 |     fn balance_of(&self, address: u128) -> u128 {
-    |        ^^^^^^^^^^
+676  |     fn balance_of(&self, address: u128) -> u128 {
+     |        ^^^^^^^^^^
 ...
-443 |     fn set_balance(&self, address: u128, balance: u128) {
-    |        ^^^^^^^^^^^
+683  |     fn set_balance(&self, address: u128, balance: u128) {
+     |        ^^^^^^^^^^^
 ...
-474 |     fn owner(&self) -> u128 {
-    |        ^^^^^
+724  |     fn ensure_owner(&self) -> Result<()> {
+     |        ^^^^^^^^^^^^
 ...
-484 |     fn ensure_owner(&self) -> Result<()> {
-    |        ^^^^^^^^^^^^
+849  |     fn last_update(&self) -> u64 {
+     |        ^^^^^^^^^^^
 ...
-609 |     fn last_update(&self) -> u64 {
-    |        ^^^^^^^^^^^
+874  |     fn get_bonds(&self, address: u128) -> Vec<Bond> {
+     |        ^^^^^^^^^
 ...
-634 |     fn get_bonds(&self, address: u128) -> Vec<Bond> {
-    |        ^^^^^^^^^
+926  |     fn add_bond(&self, address: u128, bond: Bond) {
+     |        ^^^^^^^^
 ...
-782 |     fn get_buy_amount(&self, diesel_amount: u128) -> Result<CallResponse> {
-    |        ^^^^^^^^^^^^^^
+968  |     fn delete_bond(&self, address: u128, bond_id: u128) {
+     |        ^^^^^^^^^^^
 ...
-796 |     fn get_sell_amount(&self, alkane_amount: u128) -> Result<CallResponse> {
-    |        ^^^^^^^^^^^^^^^
+1064 |     fn get_buy_amount(&self, diesel_amount: u128) -> Result<CallResponse> {
+     |        ^^^^^^^^^^^^^^
 
-warning: variable does not need to be mutable
-   --> contracts/bonding-contract/src/lib.rs:992:13
-    |
-992 |         let mut response = CallResponse::forward(&context.incoming_alkanes);
-    |             ----^^^^^^^^
-    |             |
-    |             help: remove this `mut`
-    |
-    = note: `#[warn(unused_mut)]` on by default
+warning: fields `owed`, `redeemed`, `creation`, `term`, and `bonding_contract_id` are never read
+  --> contracts/bonding-contract/src/bond_orbital.rs:14:5
+   |
+12 | pub struct BondOrbital {
+   |            ----------- fields in this struct
+13 |     /// The amount owed to the bond holder
+14 |     owed: u128,
+   |     ^^^^
+15 |     /// The amount already redeemed
+16 |     redeemed: u128,
+   |     ^^^^^^^^
+17 |     /// The creation block number
+18 |     creation: u64,
+   |     ^^^^^^^^
+19 |     /// The term in blocks
+20 |     term: u64,
+   |     ^^^^
+21 |     /// The bonding contract ID
+22 |     bonding_contract_id: AlkaneId,
+   |     ^^^^^^^^^^^^^^^^^^^
 
-warning: multiple methods are never used
-   --> contracts/bonding-contract/src/lib.rs:351:8
-    |
-342 | impl BondingContractAlkane {
-    | -------------------------- methods in this implementation
+warning: multiple variants are never constructed
+  --> contracts/bonding-contract/src/bond_orbital.rs:30:5
+   |
+27 | enum BondOrbitalMessage {
+   |      ------------------ variants in this enum
 ...
-351 |     fn name(&self) -> String {
-    |        ^^^^
+30 |     Initialize {
+   |     ^^^^^^^^^^
 ...
-366 |     fn symbol(&self) -> String {
-    |        ^^^^^^
+38 |     Redeem,
+   |     ^^^^^^
 ...
-436 |     fn balance_of(&self, address: u128) -> u128 {
-    |        ^^^^^^^^^^
+43 |     GetBondDetails,
+   |     ^^^^^^^^^^^^^^
 ...
-443 |     fn set_balance(&self, address: u128, balance: u128) {
-    |        ^^^^^^^^^^^
+48 |     GetOwed,
+   |     ^^^^^^^
 ...
-474 |     fn owner(&self) -> u128 {
-    |        ^^^^^
+53 |     GetRedeemed,
+   |     ^^^^^^^^^^^
 ...
-484 |     fn ensure_owner(&self) -> Result<()> {
-    |        ^^^^^^^^^^^^
+58 |     GetCreation,
+   |     ^^^^^^^^^^^
 ...
-609 |     fn last_update(&self) -> u64 {
-    |        ^^^^^^^^^^^
+63 |     GetTerm,
+   |     ^^^^^^^
 ...
-634 |     fn get_bonds(&self, address: u128) -> Vec<Bond> {
-    |        ^^^^^^^^^
+68 |     GetMaturity,
+   |     ^^^^^^^^^^^
 ...
-782 |     fn get_buy_amount(&self, diesel_amount: u128) -> Result<CallResponse> {
-    |        ^^^^^^^^^^^^^^
+73 |     GetBondingContractId,
+   |     ^^^^^^^^^^^^^^^^^^^^
 ...
-796 |     fn get_sell_amount(&self, alkane_amount: u128) -> Result<CallResponse> {
-    |        ^^^^^^^^^^^^^^^
+78 |     GetName,
+   |     ^^^^^^^
+...
+83 |     GetSymbol,
+   |     ^^^^^^^^^
+...
+88 |     GetTotalSupply,
+   |     ^^^^^^^^^^^^^^
 
 warning: function `reset_contract_state` is never used
   --> contracts/bonding-contract/src/isolated_tests.rs:16:4
@@ -615,29 +952,26 @@ warning: function `run_test_with_isolation` is never used
 29 | fn run_test_with_isolation<F>(test_fn: F)
    |    ^^^^^^^^^^^^^^^^^^^^^^^
 
-warning: `bonding-contract` (lib test) generated 11 warnings (4 duplicates) (run `cargo fix --lib -p bonding-contract --tests` to apply 3 suggestions)
-warning: `bonding-contract` (lib) generated 17 warnings (3 duplicates) (run `cargo fix --lib -p bonding-contract` to apply 11 suggestions)
-warning: constant `SCALING_FACTOR` is never used
- --> contracts/bonding-contract/tests/curve_test.rs:4:7
-  |
-4 | const SCALING_FACTOR: u128 = 1_000_000;
-  |       ^^^^^^^^^^^^^^
-  |
-  = note: `#[warn(dead_code)]` on by default
+warning: function `reset_contract_state` is never used
+  --> contracts/bonding-contract/src/coverage_tests.rs:19:4
+   |
+19 | fn reset_contract_state() -> BondingContractAlkane {
+   |    ^^^^^^^^^^^^^^^^^^^^
 
+warning: function `run_test_with_isolation` is never used
+  --> contracts/bonding-contract/src/coverage_tests.rs:32:4
+   |
+32 | fn run_test_with_isolation<F>(test_fn: F)
+   |    ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `bonding-contract` (lib) generated 47 warnings (run `cargo fix --lib -p bonding-contract` to apply 35 suggestions)
 warning: unused import: `bonding_contract::BondingCurve`
- --> contracts/bonding-contract/tests/basic_test.rs:2:5
+ --> contracts/bonding-contract/src/bin/test_bonding_contract.rs:5:5
   |
-2 | use bonding_contract::BondingCurve;
+5 | use bonding_contract::BondingCurve;
   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   |
   = note: `#[warn(unused_imports)]` on by default
-
-warning: unused import: `anyhow::Result`
- --> contracts/bonding-contract/tests/basic_test.rs:3:5
-  |
-3 | use anyhow::Result;
-  |     ^^^^^^^^^^^^^^
 
 warning: unused import: `bonding_contract::BondingCurve`
  --> contracts/bonding-contract/src/bin/e2e_test.rs:5:5
@@ -647,13 +981,13 @@ warning: unused import: `bonding_contract::BondingCurve`
   |
   = note: `#[warn(unused_imports)]` on by default
 
-warning: unused import: `bonding_contract::BondingCurve`
- --> contracts/bonding-contract/src/bin/test_bonding_contract.rs:5:5
-  |
-5 | use bonding_contract::BondingCurve;
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |
-  = note: `#[warn(unused_imports)]` on by default
+warning: unused variable: `alkane_amount`
+   --> contracts/bonding-contract/src/bin/test_bonding_contract.rs:182:17
+    |
+182 |             let alkane_amount = response.alkanes.0[0].value;
+    |                 ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_alkane_amount`
+    |
+    = note: `#[warn(unused_variables)]` on by default
 
 warning: function `clear_mock_storage` is never used
   --> contracts/bonding-contract/src/bin/e2e_test.rs:93:4
@@ -663,14 +997,11 @@ warning: function `clear_mock_storage` is never used
    |
    = note: `#[warn(dead_code)]` on by default
 
-error[E0432]: unresolved import `alkanes_support::parcel::AlkaneTransfers`
- --> contracts/bonding-contract/tests/bond_curve_test.rs:4:5
-  |
-4 | use alkanes_support::parcel::AlkaneTransfers;
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^---------------
-  |     |                        |
-  |     |                        help: a similar name exists in the module: `AlkaneTransfer`
-  |     no `AlkaneTransfers` in `parcel`
+warning: function `create_context_with_alkanes` is never used
+   --> contracts/bonding-contract/src/bin/e2e_test.rs:112:4
+    |
+112 | fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `clear_mock_storage` is never used
   --> contracts/bonding-contract/src/bin/test_bonding_contract.rs:93:4
@@ -680,544 +1011,124 @@ warning: function `clear_mock_storage` is never used
    |
    = note: `#[warn(dead_code)]` on by default
 
-warning: unused variable: `initial_supply`
-  --> contracts/bonding-contract/tests/integration_test.rs:55:9
-   |
-55 |     let initial_supply = 1_000_000;
-   |         ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_initial_supply`
-   |
-   = note: `#[warn(unused_variables)]` on by default
-
-warning: unused import: `alkanes_runtime::runtime::AlkaneResponder`
- --> contracts/bonding-contract/tests/bond_curve_test.rs:1:5
+warning: unused imports: `SystemTime` and `UNIX_EPOCH`
+ --> contracts/bonding-contract/tests/simple_flow_test.rs:5:17
   |
-1 | use alkanes_runtime::runtime::AlkaneResponder;
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5 | use std::time::{SystemTime, UNIX_EPOCH};
+  |                 ^^^^^^^^^^  ^^^^^^^^^^
   |
   = note: `#[warn(unused_imports)]` on by default
 
-warning: static `INIT` is never used
-  --> contracts/bonding-contract/tests/integration_test.rs:16:8
+warning: unused import: `BondingContract`
+ --> contracts/bonding-contract/tests/simple_flow_test.rs:7:61
+  |
+7 | use bonding_contract::{BondingContractAlkane, BondContract, BondingContract, AlkaneIdExt};
+  |                                                             ^^^^^^^^^^^^^^^
+
+warning: function `get_mock_time` is never used
+  --> contracts/bonding-contract/tests/simple_flow_test.rs:22:4
    |
-16 | static INIT: Once = Once::new();
-   |        ^^^^
+22 | fn get_mock_time() -> u64 {
+   |    ^^^^^^^^^^^^^
    |
    = note: `#[warn(dead_code)]` on by default
 
-warning: unused import: `anyhow::Result`
- --> contracts/bonding-contract/tests/bond_curve_test.rs:6:5
-  |
-6 | use anyhow::Result;
-  |     ^^^^^^^^^^^^^^
+warning: `bonding-contract` (test "simple_flow_test") generated 3 warnings (run `cargo fix --test "simple_flow_test"` to apply 2 suggestions)
+warning: `bonding-contract` (bin "e2e_test") generated 3 warnings (run `cargo fix --bin "e2e_test"` to apply 1 suggestion)
+warning: `bonding-contract` (bin "test_bonding_contract") generated 3 warnings (run `cargo fix --bin "test_bonding_contract"` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.73s
+     Running tests/simple_flow_test.rs (/Users/erickdelgado/Documents/GitHub/boiler/target/debug/deps/simple_flow_test-c73bcf310afbd93e)
 
-warning: unused import: `bonding_contract::mock_storage`
-  --> contracts/bonding-contract/tests/bond_curve_test.rs:10:5
-   |
-10 | use bonding_contract::mock_storage;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+running 2 tests
+Setting mock time to: 1000000 (block number: 100000)
+STEP 1: Purchasing bond
+Purchasing bond with 100000 diesel for address 1
+Available debt: 1000000
+Calculated alkane amount: 136363
+Updating total debt: 0 -> 136363
+Creating bond orbital with owed: 136363, term: 86400
+Using mock bond orbital creation in test environment
+Created bond orbital with ID: AlkaneId { block: 2, tx: 1000 }
+Current position count for 1: 0
+Updated position count for 1: 0 -> 1
+Successfully purchased bond with 100000 diesel for 136363 alkane
+Bond created with owed: 136363, redeemed: 0
 
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-  --> contracts/bonding-contract/tests/bond_curve_test.rs:25:19
-   |
-25 |     let context = Context {
-   |                   ^^^^^^^ missing `inputs` and `vout`
+STEP 2: Simulating time passing to full maturity
+Setting mock time to: 1864000 (block number: 186400)
+Time elapsed: 864000 seconds (100% of term)
 
-error[E0624]: method `name` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:55:25
-    |
-55  |     assert_eq!(contract.name(), "BondToken", "Name should be set correctly");
-    |                         ^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:351:5
-    |
-351 |     fn name(&self) -> String {
-    |     ------------------------ private method defined here
+STEP 3: Redeeming the bond
+Looking up bond orbital ID for bond_id: 0
+Found bond orbital ID for bond_id 0: AlkaneId { block: 2, tx: 1000 }
+Attempting to redeem bond_id 0 for caller 1
+Found bond: owed=136363, redeemed=0, creation=100000
+Maturity check: current_block=186400, creation=100000, term=86400, maturity=186400
+Redeeming amount: 136363
+Updated bond: redeemed=136363
+Added 136363 alkane to response
+Actual redeemed amount: 136363
 
-error[E0624]: method `symbol` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:56:25
-    |
-56  |     assert_eq!(contract.symbol(), "BOND", "Symbol should be set correctly");
-    |                         ^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:366:5
-    |
-366 |     fn symbol(&self) -> String {
-    |     -------------------------- private method defined here
+Simple bond lifecycle test completed successfully!
+test test_simple_bond_lifecycle ... ok
+Setting mock time to: 1000000 (block number: 100000)
+STEP 1: Purchasing first bond
+Purchasing bond with 100000 diesel for address 1
+Available debt: 1000000
+Calculated alkane amount: 136363
+Updating total debt: 0 -> 136363
+Creating bond orbital with owed: 136363, term: 86400
+Using mock bond orbital creation in test environment
+Created bond orbital with ID: AlkaneId { block: 2, tx: 1001 }
+Current position count for 1: 1
+Updated position count for 1: 1 -> 2
+Successfully purchased bond with 100000 diesel for 136363 alkane
+First bond created with owed: 136363
 
-error[E0624]: method `virtual_input_reserves` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:57:25
-    |
-57  |     assert_eq!(contract.virtual_input_reserves(), virtual_input_reserves, "Virtual input reserves should be set correctly");
-    |                         ^^^^^^^^^^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:549:6
-    |
-549 |      fn virtual_input_reserves(&self) -> u128 {
-    |      ---------------------------------------- private method defined here
+STEP 2: Purchasing second bond
+Purchasing bond with 100000 diesel for address 1
+Available debt: 863637
+Calculated alkane amount: 113636
+Updating total debt: 136363 -> 249999
+Creating bond orbital with owed: 113636, term: 86400
+Using mock bond orbital creation in test environment
+Created bond orbital with ID: AlkaneId { block: 2, tx: 1002 }
+Current position count for 1: 2
+Updated position count for 1: 2 -> 3
+Successfully purchased bond with 100000 diesel for 113636 alkane
+Second bond created with owed: 136363
 
-error[E0624]: method `virtual_output_reserves` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:58:25
-    |
-58  |     assert_eq!(contract.virtual_output_reserves(), virtual_output_reserves, "Virtual output reserves should be set correctly");
-    |                         ^^^^^^^^^^^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:564:5
-    |
-564 |     fn virtual_output_reserves(&self) -> u128 {
-    |     ----------------------------------------- private method defined here
+STEP 3: Simulating time passing to full maturity
+Setting mock time to: 1864000 (block number: 186400)
+Time elapsed: 864000 seconds (100% of term)
 
-error[E0624]: method `half_life` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:59:25
-    |
-59  |     assert_eq!(contract.half_life(), half_life, "Half life should be set correctly");
-    |                         ^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:579:5
-    |
-579 |     fn half_life(&self) -> u64 {
-    |     -------------------------- private method defined here
+STEP 4: Redeeming both bonds
+Looking up bond orbital ID for bond_id: 0
+Found bond orbital ID for bond_id 0: AlkaneId { block: 2, tx: 1000 }
+Bond orbital ID for position 0: Some(AlkaneId { block: 2, tx: 1000 })
+Looking up bond orbital ID for bond_id: 1
+Found bond orbital ID for bond_id 1: AlkaneId { block: 2, tx: 1001 }
+Bond orbital ID for position 1: Some(AlkaneId { block: 2, tx: 1001 })
+Looking up bond orbital ID for bond_id: 1
+Found bond orbital ID for bond_id 1: AlkaneId { block: 2, tx: 1001 }
+Attempting to redeem bond_id 1 for caller 1
+Found bond: owed=136363, redeemed=0, creation=100000
+Maturity check: current_block=186400, creation=100000, term=86400, maturity=186400
+Redeeming amount: 136363
+Updated bond: redeemed=136363
+Added 136363 alkane to response
+Looking up bond orbital ID for bond_id: 2
+Found bond orbital ID for bond_id 2: AlkaneId { block: 2, tx: 1002 }
+Attempting to redeem bond_id 2 for caller 1
+Found bond: owed=113636, redeemed=0, creation=100000
+Maturity check: current_block=186400, creation=100000, term=86400, maturity=186400
+Redeeming amount: 113636
+Updated bond: redeemed=113636
+Added 113636 alkane to response
+Total redeemed amount: 249999
 
-error[E0624]: method `level_bips` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:60:25
-    |
-60  |     assert_eq!(contract.level_bips(), level_bips, "Level bips should be set correctly");
-    |                         ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:594:5
-    |
-594 |     fn level_bips(&self) -> u64 {
-    |     --------------------------- private method defined here
+Simple multiple bonds test completed successfully!
+test test_simple_multiple_bonds ... ok
 
-error[E0624]: method `term` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:61:25
-    |
-61  |     assert_eq!(contract.term(), term, "Term should be set correctly");
-    |                         ^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:519:5
-    |
-519 |     fn term(&self) -> u64 {
-    |     --------------------- private method defined here
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
 
-error[E0624]: method `total_debt` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:62:25
-    |
-62  |     assert_eq!(contract.total_debt(), 0, "Total debt should be initialized to 0");
-    |                         ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:534:5
-    |
-534 |     fn total_debt(&self) -> u128 {
-    |     ---------------------------- private method defined here
-
-error[E0624]: method `owner` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:63:25
-    |
-63  |     assert_eq!(contract.owner(), caller.into_u128(), "Owner should be set to the caller");
-    |                         ^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:474:5
-    |
-474 |     fn owner(&self) -> u128 {
-    |     ----------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-  --> contracts/bonding-contract/tests/bond_curve_test.rs:63:41
-   |
-63 |     assert_eq!(contract.owner(), caller.into_u128(), "Owner should be set to the caller");
-   |                                         ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `is_paused` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:64:22
-    |
-64  |     assert!(contract.is_paused(), "Contract should be paused initially");
-    |                      ^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:504:5
-    |
-504 |     fn is_paused(&self) -> bool {
-    |     --------------------------- private method defined here
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-  --> contracts/bonding-contract/tests/bond_curve_test.rs:80:19
-   |
-80 |     let context = Context {
-   |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0624]: method `set_alkane_supply` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:110:14
-    |
-110 |     contract.set_alkane_supply(1_000_000);
-    |              ^^^^^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:401:5
-    |
-401 |     fn set_alkane_supply(&self, supply: u128) {
-    |     ----------------------------------------- private method defined here
-
-error[E0624]: method `set_paused` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:113:14
-    |
-113 |     contract.set_paused(false);
-    |              ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:509:5
-    |
-509 |     fn set_paused(&self, paused: bool) {
-    |     ---------------------------------- private method defined here
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:117:19
-    |
-117 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:132:48
-    |
-132 |     let result = contract.purchase_bond(caller.into_u128(), min_output);
-    |                                                ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:137:60
-    |
-137 |     let position_count = contract.position_count_of(caller.into_u128());
-    |                                                            ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `get_bond` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:141:25
-    |
-141 |     let bond = contract.get_bond(caller.into_u128(), 0).unwrap();
-    |                         ^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:658:5
-    |
-658 |     fn get_bond(&self, address: u128, bond_id: u128) -> Option<Bond> {
-    |     ---------------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:141:41
-    |
-141 |     let bond = contract.get_bond(caller.into_u128(), 0).unwrap();
-    |                                         ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `total_debt` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:148:25
-    |
-148 |     assert_eq!(contract.total_debt(), bond.owed, "Total debt should match bond owed");
-    |                         ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:534:5
-    |
-534 |     fn total_debt(&self) -> u128 {
-    |     ---------------------------- private method defined here
-
-error[E0624]: method `virtual_input_reserves` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:151:25
-    |
-151 |     assert_eq!(contract.virtual_input_reserves(), virtual_input_reserves + diesel_amount, "Virtual input reserves should be updated");
-    |                         ^^^^^^^^^^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:549:6
-    |
-549 |      fn virtual_input_reserves(&self) -> u128 {
-    |      ---------------------------------------- private method defined here
-
-error[E0624]: method `bonds_pointer` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:156:33
-    |
-156 |     let bond_pointer = contract.bonds_pointer(caller.into_u128()).select(&0u128.to_le_bytes().to_vec());
-    |                                 ^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:628:5
-    |
-628 |     fn bonds_pointer(&self, address: u128) -> StoragePointer {
-    |     -------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:156:54
-    |
-156 |     let bond_pointer = contract.bonds_pointer(caller.into_u128()).select(&0u128.to_le_bytes().to_vec());
-    |                                                      ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:159:19
-    |
-159 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0624]: method `get_bond` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:179:33
-    |
-179 |     let updated_bond = contract.get_bond(caller.into_u128(), 0).unwrap();
-    |                                 ^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:658:5
-    |
-658 |     fn get_bond(&self, address: u128, bond_id: u128) -> Option<Bond> {
-    |     ---------------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:179:49
-    |
-179 |     let updated_bond = contract.get_bond(caller.into_u128(), 0).unwrap();
-    |                                                 ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `total_debt` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:183:25
-    |
-183 |     assert_eq!(contract.total_debt(), 0, "Total debt should be 0");
-    |                         ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:534:5
-    |
-534 |     fn total_debt(&self) -> u128 {
-    |     ---------------------------- private method defined here
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:200:19
-    |
-200 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0624]: method `set_alkane_supply` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:230:14
-    |
-230 |     contract.set_alkane_supply(1_000_000);
-    |              ^^^^^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:401:5
-    |
-401 |     fn set_alkane_supply(&self, supply: u128) {
-    |     ----------------------------------------- private method defined here
-
-error[E0624]: method `set_paused` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:233:14
-    |
-233 |     contract.set_paused(false);
-    |              ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:509:5
-    |
-509 |     fn set_paused(&self, paused: bool) {
-    |     ---------------------------------- private method defined here
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:237:19
-    |
-237 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:252:48
-    |
-252 |     let result = contract.purchase_bond(caller.into_u128(), min_output);
-    |                                                ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:257:60
-    |
-257 |     let position_count = contract.position_count_of(caller.into_u128());
-    |                                                            ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `get_bond` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:261:25
-    |
-261 |     let bond = contract.get_bond(caller.into_u128(), 0).unwrap();
-    |                         ^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:658:5
-    |
-658 |     fn get_bond(&self, address: u128, bond_id: u128) -> Option<Bond> {
-    |     ---------------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:261:41
-    |
-261 |     let bond = contract.get_bond(caller.into_u128(), 0).unwrap();
-    |                                         ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:264:19
-    |
-264 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:273:51
-    |
-273 |     let result = contract.transfer_bond(recipient.into_u128(), 0);
-    |                                                   ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:278:67
-    |
-278 |     let caller_position_count = contract.position_count_of(caller.into_u128());
-    |                                                                   ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:281:73
-    |
-281 |     let recipient_position_count = contract.position_count_of(recipient.into_u128());
-    |                                                                         ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `get_bond` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:285:37
-    |
-285 |     let transferred_bond = contract.get_bond(recipient.into_u128(), 0).unwrap();
-    |                                     ^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:658:5
-    |
-658 |     fn get_bond(&self, address: u128, bond_id: u128) -> Option<Bond> {
-    |     ---------------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:285:56
-    |
-285 |     let transferred_bond = contract.get_bond(recipient.into_u128(), 0).unwrap();
-    |                                                        ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:306:19
-    |
-306 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0624]: method `set_alkane_supply` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:336:14
-    |
-336 |     contract.set_alkane_supply(1_000_000);
-    |              ^^^^^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:401:5
-    |
-401 |     fn set_alkane_supply(&self, supply: u128) {
-    |     ----------------------------------------- private method defined here
-
-error[E0624]: method `set_paused` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:339:14
-    |
-339 |     contract.set_paused(false);
-    |              ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:509:5
-    |
-509 |     fn set_paused(&self, paused: bool) {
-    |     ---------------------------------- private method defined here
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:347:23
-    |
-347 |         let context = Context {
-    |                       ^^^^^^^ missing `inputs` and `vout`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:362:52
-    |
-362 |         let result = contract.purchase_bond(caller.into_u128(), min_output);
-    |                                                    ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:367:57
-    |
-367 |         let bond_id = contract.position_count_of(caller.into_u128()) - 1;
-    |                                                         ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `get_bond` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:368:29
-    |
-368 |         let bond = contract.get_bond(caller.into_u128(), bond_id).unwrap();
-    |                             ^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:658:5
-    |
-658 |     fn get_bond(&self, address: u128, bond_id: u128) -> Option<Bond> {
-    |     ---------------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:368:45
-    |
-368 |         let bond = contract.get_bond(caller.into_u128(), bond_id).unwrap();
-    |                                             ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:374:60
-    |
-374 |     let position_count = contract.position_count_of(caller.into_u128());
-    |                                                            ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `total_debt` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:378:25
-    |
-378 |     assert_eq!(contract.total_debt(), total_owed, "Total debt should match sum of all bonds");
-    |                         ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:534:5
-    |
-534 |     fn total_debt(&self) -> u128 {
-    |     ---------------------------- private method defined here
-
-error[E0624]: method `bonds_pointer` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:382:37
-    |
-382 |         let bond_pointer = contract.bonds_pointer(caller.into_u128()).select(&(i as u128).to_le_bytes().to_vec());
-    |                                     ^^^^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:628:5
-    |
-628 |     fn bonds_pointer(&self, address: u128) -> StoragePointer {
-    |     -------------------------------------------------------- private method defined here
-
-warning: `bonding-contract` (test "curve_test") generated 1 warning
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:382:58
-    |
-382 |         let bond_pointer = contract.bonds_pointer(caller.into_u128()).select(&(i as u128).to_le_bytes().to_vec());
-    |                                                          ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0063]: missing fields `inputs` and `vout` in initializer of `alkanes_support::context::Context`
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:387:19
-    |
-387 |     let context = Context {
-    |                   ^^^^^^^ missing `inputs` and `vout`
-
-error[E0624]: method `get_bond` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:409:29
-    |
-409 |         let bond = contract.get_bond(caller.into_u128(), i as u128).unwrap();
-    |                             ^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:658:5
-    |
-658 |     fn get_bond(&self, address: u128, bond_id: u128) -> Option<Bond> {
-    |     ---------------------------------------------------------------- private method defined here
-
-error[E0599]: no method named `into_u128` found for struct `alkanes_support::id::AlkaneId` in the current scope
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:409:45
-    |
-409 |         let bond = contract.get_bond(caller.into_u128(), i as u128).unwrap();
-    |                                             ^^^^^^^^^ method not found in `AlkaneId`
-
-error[E0624]: method `total_debt` is private
-   --> contracts/bonding-contract/tests/bond_curve_test.rs:414:25
-    |
-414 |     assert_eq!(contract.total_debt(), 0, "Total debt should be 0");
-    |                         ^^^^^^^^^^ private method
-    |
-   ::: /Users/erickdelgado/Documents/GitHub/boiler/contracts/bonding-contract/src/lib.rs:534:5
-    |
-534 |     fn total_debt(&self) -> u128 {
-    |     ---------------------------- private method defined here
-
-Some errors have detailed explanations: E0063, E0432, E0599, E0624.
-For more information about an error, try `rustc --explain E0063`.
-warning: `bonding-contract` (test "bond_curve_test") generated 3 warnings
-error: could not compile `bonding-contract` (test "bond_curve_test") due to 59 previous errors; 3 warnings emitted
-warning: build failed, waiting for other jobs to finish...
-warning: `bonding-contract` (test "basic_test") generated 2 warnings (run `cargo fix --test "basic_test"` to apply 2 suggestions)
-warning: `bonding-contract` (bin "e2e_test") generated 2 warnings (2 duplicates)
-warning: `bonding-contract` (bin "test_bonding_contract") generated 2 warnings (2 duplicates)
-warning: `bonding-contract` (bin "test_bonding_contract" test) generated 2 warnings (run `cargo fix --bin "test_bonding_contract" --tests` to apply 1 suggestion)
-warning: `bonding-contract` (bin "e2e_test" test) generated 2 warnings (run `cargo fix --bin "e2e_test" --tests` to apply 1 suggestion)
-warning: `bonding-contract` (test "integration_test") generated 2 warnings

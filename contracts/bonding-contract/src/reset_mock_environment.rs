@@ -21,6 +21,9 @@ pub static TEST_RUN_COUNTER: AtomicU64 = AtomicU64::new(0);
 // Mock block number for testing
 static MOCK_BLOCK_NUMBER: AtomicU64 = AtomicU64::new(0);
 
+// Global bond ID counter
+static GLOBAL_BOND_ID_COUNTER: AtomicU64 = AtomicU64::new(0);
+
 // Mock bond registry for testing
 lazy_static::lazy_static! {
     static ref MOCK_BOND_REGISTRY: Mutex<HashMap<u128, HashMap<u128, Bond>>> = Mutex::new(HashMap::new());
@@ -102,6 +105,9 @@ pub fn reset() {
         counts.clear();
     }
     
+    // Reset the global bond ID counter
+    reset_bond_id_counter();
+    
     // Force a garbage collection cycle if possible
     #[cfg(feature = "gc")]
     unsafe {
@@ -125,4 +131,14 @@ pub fn set_mock_block_number(block_number: u64) {
 /// Get the mock block number
 pub fn get_mock_block_number() -> u64 {
     MOCK_BLOCK_NUMBER.load(Ordering::SeqCst)
+}
+
+/// Get the next global bond ID and increment the counter
+pub fn get_next_bond_id() -> u128 {
+    GLOBAL_BOND_ID_COUNTER.fetch_add(1, Ordering::SeqCst) as u128
+}
+
+/// Reset the global bond ID counter
+pub fn reset_bond_id_counter() {
+    GLOBAL_BOND_ID_COUNTER.store(0, Ordering::SeqCst);
 }
