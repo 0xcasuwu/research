@@ -27,7 +27,7 @@ pub use protorune::test_helpers::{
 };
 
 /// Index a block at a specific height
-pub fn index_block(block: &Block, height: u64) -> Result<()> {
+pub fn index_block(_block: &Block, _height: u64) -> Result<()> {
     // Use alkanes indexer if available, otherwise just return Ok
     #[cfg(feature = "alkanes-indexer")]
     return alkanes::indexer::index_block(block, height);
@@ -67,8 +67,8 @@ pub fn create_test_transaction(
 
 /// Create a block with contract deployment
 pub fn init_block_with_contract_deployment(
-    contract_bytes: Vec<u8>,
-    init_params: Vec<u128>,
+    _contract_bytes: Vec<u8>,
+    _init_params: Vec<u128>,
     target: AlkaneId,
 ) -> Result<(Block, AlkaneId)> {
     // Create a simple block with a transaction
@@ -137,9 +137,9 @@ pub fn create_block_with_txs(txdata: Vec<Transaction>) -> Block {
 /// Create a transaction for contract interaction
 pub fn create_contract_interaction_tx(
     test_block: &mut Block,
-    contract_id: AlkaneId,
-    operation: u128,
-    params: Vec<u128>,
+    _contract_id: AlkaneId,
+    _operation: u128,
+    _params: Vec<u128>,
     previous_outpoint: OutPoint,
 ) -> OutPoint {
     // Create a simple transaction

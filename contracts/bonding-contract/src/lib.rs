@@ -351,6 +351,12 @@ impl BondingContractAlkane {
     
     /// Get the current block number
     fn get_current_block_number(&self) -> u64 {
+        // Check if we're in a test environment
+        if crate::reset_mock_environment::is_test_environment() {
+            // Use the mock block number in test environment
+            return crate::reset_mock_environment::get_mock_block_number();
+        }
+        
         // Get the current block number from the context
         match self.context() {
             Ok(context) => context.myself.block as u64,
@@ -375,19 +381,25 @@ impl BondingContractAlkane {
     
     /// Get the bond orbital ID for a specific bond ID
     fn get_bond_orbital_id(&self, bond_id: u128) -> Option<AlkaneId> {
+        println!("Looking up bond orbital ID for bond_id: {}", bond_id);
+        
         let pointer = self.bond_orbitals_pointer().select(&bond_id.to_le_bytes().to_vec());
         let data = pointer.get();
         
         if data.len() == 0 {
+            println!("No bond orbital ID found for bond_id: {}", bond_id);
             return None;
         }
         
         // Deserialize the AlkaneId from storage
         let bytes = data.as_ref();
-        Some(AlkaneId {
+        let orbital_id = AlkaneId {
             block: u128::from_le_bytes(bytes[0..16].try_into().unwrap()),
             tx: u128::from_le_bytes(bytes[16..32].try_into().unwrap()),
-        })
+        };
+        
+        println!("Found bond orbital ID for bond_id {}: {:?}", bond_id, orbital_id);
+        Some(orbital_id)
     }
     
     /// Set the bond orbital ID for a specific bond ID
@@ -414,11 +426,18 @@ impl BondingContractAlkane {
                 tx: 1000 + self.position_count_of_internal(self.context()?.caller.into_u128()), // Unique ID based on position count
             };
             
+            // Important: Register the orbital ID in the bond orbitals registry
+            // This ensures that get_bond_orbital_id can find it later during redemption
+            let context = self.context()?;
+            let caller = context.caller.into_u128();
+            let position_count = self.position_count_of_internal(caller);
+            self.set_bond_orbital_id(position_count, &orbital_id);
+            
             return Ok(orbital_id);
         }
         
         // Production implementation
-        let context = self.context()?;
+        let _context = self.context()?;
         
         // Get the current block number
         let creation = self.get_current_block_number();
@@ -433,12 +452,13 @@ impl BondingContractAlkane {
         };
         
         // Call the orbital template with improved error handling
-        let orbital_response = match self.call(
+        // Call the orbital template with improved error handling
+        match self.call(
             &orbital_cellpack,
             &AlkaneTransferParcel::default(),
             <Self as AlkaneResponder>::fuel(&self)
         ) {
-            Ok(response) => response,
+            Ok(_) => {}, // Success, but we don't need the response
             Err(e) => {
                 println!("Error creating bond orbital: {}", e);
                 return Err(anyhow!("Failed to create bond orbital: {}", e));
@@ -1141,7 +1161,7 @@ impl BondingContractAlkane {
     // Implement BondingContract trait methods
     
     /// Buy alkane with diesel
-    fn buy_alkane_internal(&mut self, diesel_amount: u128) -> Result<CallResponse> {
+    fn buy_alkane_internal(&mut self, _diesel_amount: u128) -> Result<CallResponse> {
         let context = self.context()?;
         let mut response = CallResponse::forward(&context.incoming_alkanes);
         
@@ -1331,32 +1351,52 @@ impl BondingContractAlkane {
         if crate::reset_mock_environment::is_test_environment() {
             // Get the bond from the mock registry
             let caller = context.caller.into_u128();
-            let bond = self.get_bond(caller, bond_id).ok_or_else(|| anyhow!("bond not found"))?;
+            println!("Attempting to redeem bond_id {} for caller {}", bond_id, caller);
+            
+            let bond = match self.get_bond(caller, bond_id) {
+                Some(bond) => {
+                    println!("Found bond: owed={}, redeemed={}, creation={}", bond.owed, bond.redeemed, bond.creation);
+                    bond
+                },
+                None => {
+                    println!("Bond not found for caller {} and bond_id {}", caller, bond_id);
+                    return Err(anyhow!("bond not found"));
+                }
+            };
             
             // Check if the bond is fully redeemed
             if bond.owed <= bond.redeemed {
+                println!("Bond already fully redeemed: owed={}, redeemed={}", bond.owed, bond.redeemed);
                 return Err(anyhow!("bond already fully redeemed"));
             }
             
             // Check if the bond is mature
             let current_block = self.get_current_block_number();
+            println!("Maturity check: current_block={}, creation={}, term={}, maturity={}", 
+                     current_block, bond.creation, self.term(), bond.creation + self.term());
+            
             if current_block < bond.creation + self.term() {
+                println!("Bond not yet mature: current_block={}, maturity={}", current_block, bond.creation + self.term());
                 return Err(anyhow!("bond not yet mature"));
             }
             
             // Calculate the amount to redeem
             let remaining = bond.owed - bond.redeemed;
+            println!("Redeeming amount: {}", remaining);
             
             // Update the bond
             let mut updated_bond = bond.clone();
             updated_bond.redeemed = bond.owed; // Fully redeem the bond
+            let redeemed_amount = updated_bond.redeemed; // Store the value before moving updated_bond
             self.update_bond(caller, bond_id, updated_bond);
+            println!("Updated bond: redeemed={}", redeemed_amount);
             
             // Add the alkane to the response
             response.alkanes.0.push(alkanes_support::parcel::AlkaneTransfer {
                 id: context.myself,
                 value: remaining,
             });
+            println!("Added {} alkane to response", remaining);
             
             return Ok(response);
         } else {

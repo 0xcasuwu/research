@@ -12,9 +12,9 @@ use bitcoin::{Address, Amount, BlockHash, Network, OutPoint, Script, Sequence, W
 use byteorder::{ByteOrder, LittleEndian};
 use core::str::FromStr;
 use hex::decode;
-use metashrew::{println, stdio::stdout};
+use metashrew::println; // Keep println for debugging purposes
 use metashrew_support::index_pointer::KeyValuePointer;
-use metashrew_support::utils::format_key;
+// Removed unused imports: stdio::stdout and format_key
 use ordinals::{Edict, Etching, Rune, RuneId, Runestone};
 use protorune_support::load_sheet;
 use protorune::protostone::Protostones;

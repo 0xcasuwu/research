@@ -18,6 +18,9 @@ static INIT: Once = Once::new();
 // Counter to track test runs and ensure unique environments
 pub static TEST_RUN_COUNTER: AtomicU64 = AtomicU64::new(0);
 
+// Mock block number for testing
+static MOCK_BLOCK_NUMBER: AtomicU64 = AtomicU64::new(0);
+
 // Mock bond registry for testing
 lazy_static::lazy_static! {
     static ref MOCK_BOND_REGISTRY: Mutex<HashMap<u128, HashMap<u128, Bond>>> = Mutex::new(HashMap::new());
@@ -112,4 +115,14 @@ pub fn reset() {
 /// Check if we're in a test environment
 pub fn is_test_environment() -> bool {
     IS_TEST_ENVIRONMENT.load(Ordering::SeqCst)
+}
+
+/// Set the mock block number
+pub fn set_mock_block_number(block_number: u64) {
+    MOCK_BLOCK_NUMBER.store(block_number, Ordering::SeqCst);
+}
+
+/// Get the mock block number
+pub fn get_mock_block_number() -> u64 {
+    MOCK_BLOCK_NUMBER.load(Ordering::SeqCst)
 }

@@ -5,23 +5,24 @@
 
 #[cfg(test)]
 mod tests {
-    use alkanes::indexer::index_block;
     use alkanes_support::id::AlkaneId;
     use bitcoin::blockdata::transaction::OutPoint;
-    use bonding_contract::block_test_helpers::{
-        clear_environment,
-        init_block_with_contract_deployment,
+    use bonding_contract::local_test_helpers::{
+        index_block,
+        create_block_with_txs,
+        create_test_transaction,
         create_contract_interaction_tx,
         get_token_balance,
+        clear_environment,
+        init_block_with_contract_deployment,
     };
     use anyhow::Result;
-    use wasm_bindgen_test::wasm_bindgen_test;
 
     // Constants for the test
     const ALKANE_FACTORY_BONDING_CONTRACT_ID: u128 = 0x1234; // Example ID
     const BUY_OPCODE: u128 = 1; // Opcode for buying alkane
 
-    #[wasm_bindgen_test]
+    #[test]
     fn test_bonding_contract_block_based() -> Result<()> {
         // Clear environment
         clear_environment();
@@ -87,7 +88,7 @@ mod tests {
     // This test is commented out because it requires the actual bonding contract implementation
     // with bond functionality
     /*
-    #[wasm_bindgen_test]
+    #[test]
     fn test_bond_functionality_block_based() -> Result<()> {
         // Clear environment
         clear_environment();

@@ -10,18 +10,19 @@ use bonding_contract::reset_mock_environment;
 
 // Mock time function to control time in tests
 fn set_mock_time(time: u64) {
-    // This is just a placeholder - in a real implementation, we would need to
-    // modify the contract to use this time instead of the system time
-    println!("Setting mock time to: {}", time);
+    // Convert time to block number (assuming 1 block per 10 seconds)
+    let block_number = time / 10;
+    println!("Setting mock time to: {} (block number: {})", time, block_number);
+    
+    // Set the mock block number in the reset_mock_environment module
+    reset_mock_environment::set_mock_block_number(block_number);
 }
 
 // Get the current mock time
 fn get_mock_time() -> u64 {
-    // For now, just return the current system time
-    SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap_or_default()
-        .as_secs()
+    // Convert block number to time (assuming 1 block per 10 seconds)
+    let block_number = reset_mock_environment::get_mock_block_number();
+    block_number * 10
 }
 
 #[test]
@@ -116,8 +117,10 @@ fn test_simple_bond_lifecycle() {
     
     // STEP 2: Simulate time passing to full maturity
     println!("\nSTEP 2: Simulating time passing to full maturity");
-    set_mock_time(initial_time + term);
-    println!("Time elapsed: {} seconds (100% of term)", term);
+    // The bond's creation block is 100000, and term is 86400
+    // So we need to set the time to at least (100000 + 86400) * 10 = 1864000
+    set_mock_time(1864000); // This will set the block number to 186400
+    println!("Time elapsed: {} seconds (100% of term)", 1864000 - initial_time);
     
     // STEP 3: Redeem the bond
     println!("\nSTEP 3: Redeeming the bond");
@@ -270,8 +273,10 @@ fn test_simple_multiple_bonds() {
     
     // STEP 3: Simulate time passing to full maturity
     println!("\nSTEP 3: Simulating time passing to full maturity");
-    set_mock_time(initial_time + term);
-    println!("Time elapsed: {} seconds (100% of term)", term);
+    // The bond's creation block is 100000, and term is 86400
+    // So we need to set the time to at least (100000 + 86400) * 10 = 1864000
+    set_mock_time(1864000); // This will set the block number to 186400
+    println!("Time elapsed: {} seconds (100% of term)", 1864000 - initial_time);
     
     // STEP 4: Redeem both bonds
     println!("\nSTEP 4: Redeeming both bonds");

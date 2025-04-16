@@ -36,3 +36,4 @@ hex_lit = "0.1.1"
 default = []
 gc = []  # Feature flag for garbage collection
 test = []
+mainnet = []  # Feature flag for mainnet configuration

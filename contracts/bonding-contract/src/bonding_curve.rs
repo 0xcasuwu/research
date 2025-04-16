@@ -235,7 +235,7 @@ mod tests {
         let diesel_amount = 100;
         // Calculate expected alkane amount using our formula
         let avg_price = curve.diesel_reserve + diesel_amount / 2;
-        let expected_alkane = curve.k_factor * diesel_amount * avg_price / SCALING_FACTOR;
+        let _expected_alkane = curve.k_factor * diesel_amount * avg_price / SCALING_FACTOR;
         
         let alkane_amount = curve.buy_alkane(diesel_amount);
         
