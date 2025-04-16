@@ -3,7 +3,7 @@ mod tests {
     use crate::balance_sheet::load_sheet;
     use crate::message::MessageContext;
     use metashrew::index_pointer::{AtomicPointer, IndexPointer};
-    use metashrew::proto;
+    use metashrew_support::proto;
     use protorune_support::balance_sheet::{BalanceSheet, ProtoruneRuneId};
     use protorune_support::protostone::Protostone;
 
@@ -11,7 +11,7 @@ mod tests {
     use crate::Protorune;
     use crate::{message::MessageContextParcel, tables};
     use anyhow::Result;
-    use protorune_support::rune_transfer::RuneTransfer;
+    use crate::rune_transfer::RuneTransfer;
     use protorune_support::utils::consensus_encode;
 
     use bitcoin::{OutPoint, Transaction};

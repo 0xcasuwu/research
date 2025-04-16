@@ -8,7 +8,7 @@ mod tests {
     use crate::Protorune;
     use anyhow::Result;
     use metashrew::index_pointer::AtomicPointer;
-    use protorune_support::rune_transfer::RuneTransfer;
+    use crate::rune_transfer::RuneTransfer;
 
     use bitcoin::OutPoint;
 

@@ -3,7 +3,7 @@
 #[cfg(feature = "native")]
 use anyhow::Result;
 #[cfg(feature = "native")]
-use metashrew_core::{
+use metashrew::{
     indexer::{Indexer, KeyValueStore, NativeIndexer, ProtoViewFunctionWrapper, ViewFunctionWrapper},
     native_binary,
     view::ProtoViewFunction,

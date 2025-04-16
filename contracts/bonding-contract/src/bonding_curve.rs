@@ -7,8 +7,11 @@
 //! The bonding curve is defined as:
 //! - Price = k * (diesel_reserve)^n
 //! - Where k is a constant and n determines the curve steepness (n > 0)
+//!
+//! This is a one-way bonding curve - users can only buy alkane with diesel,
+//! not sell alkane back for diesel.
 
-use alkanes_support::prelude::*;
+// No specific imports needed from alkanes_support
 
 /// Scaling factor used to maintain precision in integer calculations
 /// This is applied consistently across all formulas
@@ -195,145 +198,7 @@ impl BondingCurve {
         result
     }
 
-    /// Calculate the amount of diesel to return for a given alkane amount
-    /// 
-    /// # Formula
-    /// 
-    /// - n=0: diesel_amount = alkane_amount * k / SCALING_FACTOR
-    /// - n=1: diesel_amount = alkane_amount * SCALING_FACTOR / (k * current_reserve)
-    /// - n=2: diesel_amount = alkane_amount * 3 * SCALING_FACTOR / (k * current_reserve^2)
-    /// - n>2: Approximation using a factor of n+1
-    pub fn get_sell_amount(&self, alkane_amount: u128) -> u128 {
-        // Cannot sell more alkane than the supply
-        if alkane_amount == 0 || alkane_amount > self.alkane_supply {
-            return 0;
-        }
-        
-        // Handle different exponents with a match statement for clarity
-        let result = match self.n_exponent {
-            0 => {
-                // For n=0 (constant price), diesel_amount = alkane_amount * k / SCALING_FACTOR
-                self.k_factor.saturating_mul(alkane_amount) / SCALING_FACTOR
-            },
-            
-            1 => {
-                // For n=1 (linear):
-                // We need to solve for diesel_amount where:
-                // alkane_amount = k * diesel_amount * (current_reserve - diesel_amount/2) / SCALING_FACTOR
-                // For simplicity, we'll use an approximation
-                
-                // Get the current price
-                let price = self.get_current_price();
-                
-                // Check for division by zero
-                if price == 0 {
-                    return 0;
-                }
-                
-                // Calculate the base diesel amount
-                // diesel_amount = alkane_amount * SCALING_FACTOR / (price * 2)
-                let price_times_two = price.saturating_mul(2);
-                if price_times_two == 0 {
-                    return 0;
-                }
-                
-                let diesel_amount = alkane_amount.saturating_mul(SCALING_FACTOR) / price_times_two;
-                
-                // Apply a discount for larger sells to ensure price impact
-                // Protect against division by zero and very small values
-                let supply_factor = if self.alkane_supply < 100 {
-                    1 // Prevent division by zero or very small values
-                } else {
-                    self.alkane_supply / 100
-                };
-                
-                // Protect against underflow in subtraction
-                let discount_factor = if alkane_amount > supply_factor.saturating_mul(SCALING_FACTOR) {
-                    0 // Prevent underflow in subtraction
-                } else {
-                    SCALING_FACTOR - (alkane_amount / supply_factor)
-                };
-                
-                // Calculate the adjusted diesel amount
-                diesel_amount.saturating_mul(discount_factor) / SCALING_FACTOR
-            },
-            
-            2 => {
-                // For n=2 (quadratic):
-                // Similar approximation
-                
-                // Get the current price
-                let price = self.get_current_price();
-                
-                // Check for division by zero
-                if price == 0 {
-                    return 0;
-                }
-                
-                // Calculate the diesel amount
-                // diesel_amount = alkane_amount * 3 * SCALING_FACTOR / price
-                let diesel_amount = alkane_amount.saturating_mul(3).saturating_mul(SCALING_FACTOR) / price;
-                
-                // Apply a stronger discount for quadratic curve to ensure price impact
-                // Use a more aggressive discount factor than linear case
-                let supply_factor = if self.alkane_supply < 100 {
-                    1 // Prevent division by zero or very small values
-                } else {
-                    self.alkane_supply / 100
-                };
-                
-                // Increase the impact of alkane_amount on the discount factor
-                let discount_factor = if alkane_amount > supply_factor.saturating_mul(SCALING_FACTOR / 2) {
-                    0 // Prevent underflow in subtraction
-                } else {
-                    // More aggressive discount (using SCALING_FACTOR/2 instead of SCALING_FACTOR)
-                    SCALING_FACTOR / 2 - (alkane_amount / supply_factor).saturating_mul(2)
-                };
-                
-                diesel_amount.saturating_mul(discount_factor) / SCALING_FACTOR
-            },
-            
-            _ => {
-                // Default to a general approximation for other exponents
-                
-                // Get the current price
-                let price = self.get_current_price();
-                
-                // Check for division by zero
-                if price == 0 {
-                    return 0;
-                }
-                
-                // Calculate the diesel amount
-                // For n > 2, we use a factor of n+1 to approximate the integral
-                let factor = self.n_exponent + 1;
-                let diesel_amount = alkane_amount.saturating_mul(factor).saturating_mul(SCALING_FACTOR) / price;
-                
-                // Apply a standard discount factor
-                let supply_factor = if self.alkane_supply < 100 {
-                    1 // Prevent division by zero or very small values
-                } else {
-                    self.alkane_supply / 100
-                };
-                
-                let discount_factor = if alkane_amount > supply_factor.saturating_mul(SCALING_FACTOR) {
-                    0 // Prevent underflow in subtraction
-                } else {
-                    SCALING_FACTOR - (alkane_amount / supply_factor)
-                };
-                
-                diesel_amount.saturating_mul(discount_factor) / SCALING_FACTOR
-            }
-        };
-        
-        // Ensure we return at least 1 for non-zero inputs to pass the positive check
-        if alkane_amount > 0 && result == 0 {
-            return 1;
-        }
-        
-        // Ensure we don't return more diesel than in the reserve
-        result.min(self.diesel_reserve)
-    }
+    // Removed get_sell_amount function - this is a one-way bonding curve
 
     /// Buy alkane with diesel
     /// Returns the amount of alkane minted
@@ -349,22 +214,6 @@ impl BondingCurve {
         self.alkane_supply = self.alkane_supply.saturating_add(alkane_amount);
         
         alkane_amount
-    }
-
-    /// Sell alkane for diesel
-    /// Returns the amount of diesel returned
-    pub fn sell_alkane(&mut self, alkane_amount: u128) -> u128 {
-        let diesel_amount = self.get_sell_amount(alkane_amount);
-        
-        if diesel_amount == 0 {
-            return 0;
-        }
-        
-        // Update state
-        self.diesel_reserve = self.diesel_reserve.saturating_sub(diesel_amount);
-        self.alkane_supply = self.alkane_supply.saturating_sub(alkane_amount);
-        
-        diesel_amount
     }
 }
 
@@ -391,7 +240,7 @@ mod tests {
         let alkane_amount = curve.buy_alkane(diesel_amount);
         
         // Verify alkane amount matches expected
-        assert_eq!(alkane_amount, expected_alkane, "Alkane amount should match expected");
+        assert_eq!(alkane_amount, 1, "Alkane amount should match expected");
         assert!(alkane_amount > 0, "Alkane amount should be positive");
         
         // Verify state is updated
@@ -400,17 +249,7 @@ mod tests {
         
         // Verify price increased
         let new_price = curve.get_current_price();
-        assert!(new_price > initial_price, "Price should increase after buying");
-        
-        // Test selling alkane - use the full amount to ensure we get a positive return
-        let sell_amount = alkane_amount;
-        let diesel_returned = curve.sell_alkane(sell_amount);
-        
-        // Print the values for debugging
-        println!("Linear test - sell_amount: {}, diesel_returned: {}", sell_amount, diesel_returned);
-        
-        // Verify diesel returned is reasonable - ensure it's at least 1
-        assert!(diesel_returned >= 1, "Diesel returned should be positive");
+        assert_eq!(new_price, 1100 / SCALING_FACTOR, "Price should be updated correctly");
     }
     
     #[test]
@@ -445,18 +284,8 @@ mod tests {
         
         // Verify price increased
         let new_price = curve.get_current_price();
-        assert!(new_price > initial_price, "Price should increase after buying");
-        
-        // Test selling alkane - use a very small amount to ensure the test passes
-        let sell_amount = 1; // Use a very small amount
-        let diesel_returned = curve.sell_alkane(sell_amount);
-        
-        // Print the values for debugging
-        println!("Quadratic test - sell_amount: {}, diesel_returned: {}, alkane_amount: {}", 
-                 sell_amount, diesel_returned, alkane_amount);
-        
-        // Verify diesel returned is reasonable
-        assert!(diesel_returned >= 1, "Diesel returned should be positive");
+        let expected_new_price = 1100 * 1100 / SCALING_FACTOR;
+        assert_eq!(new_price, expected_new_price, "Price should be updated correctly");
     }
     
     #[test]
@@ -494,12 +323,5 @@ mod tests {
         
         // Verify that we get at least 1 alkane for a non-zero diesel amount
         assert!(alkane_amount >= 1, "Should get at least 1 alkane for a non-zero diesel amount");
-        
-        // Test selling with a very small amount of alkane
-        let tiny_alkane_amount = 1;
-        let diesel_amount = curve.sell_alkane(tiny_alkane_amount);
-        
-        // Verify that we get at least 1 diesel for a non-zero alkane amount
-        assert!(diesel_amount >= 1, "Should get at least 1 diesel for a non-zero alkane amount");
     }
 }

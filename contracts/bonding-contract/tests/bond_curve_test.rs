@@ -1,11 +1,12 @@
 use alkanes_runtime::runtime::AlkaneResponder;
 use alkanes_support::id::AlkaneId;
 use alkanes_support::parcel::AlkaneTransfer;
-use alkanes_support::parcel::AlkaneTransfers;
+use alkanes_support::parcel::AlkaneTransferParcel as AlkaneTransfers;
 use alkanes_support::context::Context;
 use anyhow::Result;
+use metashrew_support::index_pointer::KeyValuePointer;
 
-use bonding_contract::{BondingContractAlkane, BondContract};
+use bonding_contract::{BondingContractAlkane, BondContract, AlkaneIdExt};
 use bonding_contract::mock_context;
 use bonding_contract::mock_storage;
 use bonding_contract::reset_mock_environment;
@@ -16,7 +17,7 @@ fn test_bond_curve_initialization() {
     reset_mock_environment::reset();
     
     // Create a new bonding contract
-    let contract = BondingContractAlkane::default();
+    let mut contract = BondingContractAlkane::default();
     
     // Set up the mock context
     let caller = AlkaneId { block: 1, tx: 1 };
@@ -26,6 +27,8 @@ fn test_bond_curve_initialization() {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -70,7 +73,7 @@ fn test_bond_purchase_and_redemption() {
     reset_mock_environment::reset();
     
     // Create a new bonding contract
-    let contract = BondingContractAlkane::default();
+    let mut contract = BondingContractAlkane::default();
     
     // Set up the mock context
     let caller = AlkaneId { block: 1, tx: 1 };
@@ -81,6 +84,8 @@ fn test_bond_purchase_and_redemption() {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -123,6 +128,8 @@ fn test_bond_purchase_and_redemption() {
                 value: diesel_amount,
             },
         ]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -154,12 +161,14 @@ fn test_bond_purchase_and_redemption() {
     // We need to simulate time passing for the bond to mature
     // For simplicity, we'll modify the bond's creation timestamp directly
     let bond_pointer = contract.bonds_pointer(caller.into_u128()).select(&0u128.to_le_bytes().to_vec());
-    bond_pointer.select(b"creation").set_value::<u64>(0); // Set creation time to 0 (fully matured)
+    bond_pointer.select(&b"creation".to_vec()).set_value::<u64>(0); // Set creation time to 0 (fully matured)
     
     let context = Context {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -189,7 +198,7 @@ fn test_bond_transfer() {
     reset_mock_environment::reset();
     
     // Create a new bonding contract
-    let contract = BondingContractAlkane::default();
+    let mut contract = BondingContractAlkane::default();
     
     // Set up the mock context
     let caller = AlkaneId { block: 1, tx: 1 };
@@ -201,6 +210,8 @@ fn test_bond_transfer() {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -243,6 +254,8 @@ fn test_bond_transfer() {
                 value: diesel_amount,
             },
         ]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -265,6 +278,8 @@ fn test_bond_transfer() {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -296,7 +311,7 @@ fn test_bond_batch_redemption() {
     reset_mock_environment::reset();
     
     // Create a new bonding contract
-    let contract = BondingContractAlkane::default();
+    let mut contract = BondingContractAlkane::default();
     
     // Set up the mock context
     let caller = AlkaneId { block: 1, tx: 1 };
@@ -307,6 +322,8 @@ fn test_bond_batch_redemption() {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);
@@ -353,6 +370,8 @@ fn test_bond_batch_redemption() {
                     value: diesel_amount,
                 },
             ]),
+            vout: 0,
+            inputs: vec![],
         };
         
         mock_context::set_mock_context(context);
@@ -380,7 +399,7 @@ fn test_bond_batch_redemption() {
     // Make all bonds fully mature
     for i in 0..diesel_amounts.len() {
         let bond_pointer = contract.bonds_pointer(caller.into_u128()).select(&(i as u128).to_le_bytes().to_vec());
-        bond_pointer.select(b"creation").set_value::<u64>(0); // Set creation time to 0 (fully matured)
+        bond_pointer.select(&b"creation".to_vec()).set_value::<u64>(0); // Set creation time to 0 (fully matured)
     }
     
     // Set up the mock context for redeeming the bonds
@@ -388,6 +407,8 @@ fn test_bond_batch_redemption() {
         caller: caller.clone(),
         myself: myself.clone(),
         incoming_alkanes: AlkaneTransfers(vec![]),
+        vout: 0,
+        inputs: vec![],
     };
     
     mock_context::set_mock_context(context);

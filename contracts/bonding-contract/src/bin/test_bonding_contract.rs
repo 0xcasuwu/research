@@ -181,32 +181,16 @@ fn main() {
             // Save the alkane amount for the next test
             let alkane_amount = response.alkanes.0[0].value;
             
-            // Test selling alkanes for diesel
-            let context = create_context_with_alkanes(vec![
-                AlkaneTransfer {
-                    id: AlkaneId { block: 3, tx: 3 }, // Contract alkane
-                    value: alkane_amount / 2, // Sell half of the alkanes
-                }
-            ]);
-            set_mock_context(context);
+            // Removed sell_alkane test - this is a one-way bonding curve
             
-            // Use sell_alkane instead of redeem
-            match contract.sell_alkane(alkane_amount / 2) {
-                Ok(response) => {
-                    println!("Sold {} alkanes", alkane_amount / 2);
-                    println!("Received {} diesel", response.alkanes.0[0].value);
-                    
-                    // Test getting the current price using the BondingContract trait
-                    match BondingContract::current_price(&contract) {
-                        Ok(price_response) => {
-                            // Convert the response data to u128
-                            let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
-                            println!("Current price: {} diesel per alkane", price);
-                        },
-                        Err(e) => println!("Failed to get current price: {}", e),
-                    }
+            // Test getting the current price using the BondingContract trait
+            match BondingContract::current_price(&contract) {
+                Ok(price_response) => {
+                    // Convert the response data to u128
+                    let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
+                    println!("Current price: {} diesel per alkane", price);
                 },
-                Err(e) => println!("Failed to sell alkanes: {}", e),
+                Err(e) => println!("Failed to get current price: {}", e),
             }
         },
         Err(e) => println!("Failed to buy alkane: {}", e),

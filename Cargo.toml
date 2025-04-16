@@ -23,7 +23,8 @@ members = [
     "crates/metashrew-support",
     "crates/ordinals",
     "crates/protorune",
-    "crates/protorune-support"
+    "crates/protorune-support",
+    "alkanes"
 ]
 
 [workspace.dependencies]
@@ -31,6 +32,31 @@ alkanes-runtime = { path = "crates/alkanes-runtime" }
 alkanes-support = { path = "crates/alkanes-support" }
 alkanes-macros = { path = "crates/alkanes-macros" }
 alkanes-common = { path = "crates/alkanes-common" }
+metashrew = { path = "crates/metashrew", features = ["test-utils"] }
 metashrew-support = { path = "crates/metashrew-support" }
 protorune-support = { path = "crates/protorune-support" }
 anyhow = { version = "1.0", features = ["backtrace"] }
+bitcoin = { version = "0.32.4", features = ["rand"] }
+byteorder = "1.5"
+hex = "0.4.3"
+ruint = "1.11.1"
+wasm-bindgen = "0.2.89"
+wasm-bindgen-test = "0.3.39"
+serde_json = "1.0.114"
+protobuf = "3.3.0"
+
+[patch."https://github.com/kungfuflex/alkanes-rs"]
+protorune = { path = "crates/protorune", features = ["test-utils"] }
+metashrew = { path = "crates/metashrew" }
+metashrew-support = { path = "crates/metashrew-support" }
+protorune-support = { path = "crates/protorune-support" }
+alkanes-support = { path = "crates/alkanes-support" }
+alkanes = { path = "alkanes" }
+
+[patch."https://github.com/kungfuflex/metashrew"]
+metashrew = { path = "crates/metashrew" }
+metashrew-support = { path = "crates/metashrew-support" }
+
+[patch."https://github.com/kungfuflex/protorune-rs"]
+protorune = { path = "crates/protorune" }
+protorune-support = { path = "crates/protorune-support" }

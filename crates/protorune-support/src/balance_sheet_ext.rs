@@ -1,16 +1,12 @@
 use anyhow::{anyhow, Result};
 use metashrew::index_pointer::{AtomicPointer, IndexPointer};
 use metashrew_support::index_pointer::KeyValuePointer;
-use protorune_support::balance_sheet::{BalanceSheet, BalanceSheetOperations, ProtoruneRuneId};
-use protorune_support::rune_transfer::{increase_balances_using_sheet, RuneTransfer};
+use crate::balance_sheet::{BalanceSheet, BalanceSheetOperations, ProtoruneRuneId};
+use crate::rune_transfer::{increase_balances_using_sheet, RuneTransfer};
 use std::collections::HashMap;
 
-use metashrew::{println, stdio::stdout};
+#[allow(unused_imports)]
 use std::fmt::Write;
-
-// use metashrew::{println, stdio::stdout};
-// use std::fmt::Write;
-//
 
 pub trait PersistentRecord: BalanceSheetOperations {
     fn save<T: KeyValuePointer>(&self, ptr: &T, is_cenotaph: bool) {
@@ -110,6 +106,7 @@ impl<P: KeyValuePointer + Clone> MintableDebit<P> for BalanceSheet<P> {
         Ok(())
     }
 }
+
 impl<P: KeyValuePointer + Clone> OutgoingRunes<P> for (Vec<RuneTransfer>, BalanceSheet<P>) {
     fn reconcile(
         &self,

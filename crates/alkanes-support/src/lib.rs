@@ -11,7 +11,6 @@ pub mod storage;
 pub mod trace;
 pub mod utils;
 pub mod witness;
-pub mod prelude;
 
 use crate::id::AlkaneId;
 use crate::parcel::{AlkaneTransfer, AlkaneTransferParcel};
@@ -46,7 +45,7 @@ impl Into<proto::alkanes::AlkaneId> for AlkaneId {
         proto::alkanes::AlkaneId {
             special_fields: SpecialFields::new(),
             block: MessageField::some(self.block.into()),
-            tx: MessageField::some(self.tx.into())
+            tx: MessageField::some(self.tx.into()),
         }
     }
 }
@@ -55,7 +54,7 @@ impl Into<AlkaneId> for proto::alkanes::AlkaneId {
     fn into(self) -> AlkaneId {
         AlkaneId {
             block: field_or_default(self.block),
-            tx: field_or_default(self.tx)
+            tx: field_or_default(self.tx),
         }
     }
 }
@@ -83,7 +82,7 @@ impl Into<AlkaneTransfer> for proto::alkanes::AlkaneTransfer {
                 .into_option()
                 .ok_or("")
                 .and_then(|v| Ok(v.into()))
-                .unwrap_or_else(|_| 0u128)
+                .unwrap_or_else(|_| 0u128),
         }
     }
 }
@@ -99,7 +98,7 @@ impl Into<proto::alkanes::ExtendedCallResponse> for ExtendedCallResponse {
             .map(|(key, value)| proto::alkanes::KeyValuePair {
                 key,
                 value,
-                special_fields: SpecialFields::new()
+                special_fields: SpecialFields::new(),
             })
             .collect::<Vec<proto::alkanes::KeyValuePair>>();
         result.data = self.data;
@@ -111,10 +110,10 @@ impl Into<proto::alkanes::ExtendedCallResponse> for ExtendedCallResponse {
                 id: MessageField::some(proto::alkanes::AlkaneId {
                     block: MessageField::some(v.id.block.into()),
                     tx: MessageField::some(v.id.tx.into()),
-                    special_fields: SpecialFields::new()
+                    special_fields: SpecialFields::new(),
                 }),
                 special_fields: SpecialFields::new(),
-                value: MessageField::some(v.value.into())
+                value: MessageField::some(v.value.into()),
             })
             .collect::<Vec<proto::alkanes::AlkaneTransfer>>();
 
@@ -142,10 +141,10 @@ impl From<proto::alkanes::ExtendedCallResponse> for ExtendedCallResponse {
                             .into_option()
                             .ok_or("")
                             .and_then(|v| Ok(v.into()))
-                            .unwrap_or_else(|_| 0u128)
+                            .unwrap_or_else(|_| 0u128),
                     })
-                    .collect::<Vec<AlkaneTransfer>>()
-            )
+                    .collect::<Vec<AlkaneTransfer>>(),
+            ),
         }
     }
 }
@@ -154,7 +153,7 @@ impl Into<ProtoruneRuneId> for proto::alkanes::AlkaneId {
     fn into(self) -> ProtoruneRuneId {
         ProtoruneRuneId {
             block: self.tx.as_ref().unwrap().clone().into(),
-            tx: self.block.as_ref().unwrap().clone().into()
+            tx: self.block.as_ref().unwrap().clone().into(),
         }
     }
 }
@@ -165,9 +164,9 @@ impl Into<proto::alkanes::AlkaneInventoryRequest> for AlkaneId {
             id: MessageField::some(proto::alkanes::AlkaneId {
                 block: MessageField::some(self.block.into()),
                 tx: MessageField::some(self.tx.into()),
-                special_fields: SpecialFields::new()
+                special_fields: SpecialFields::new(),
             }),
-            special_fields: SpecialFields::new()
+            special_fields: SpecialFields::new(),
         }
     }
 }

@@ -39,7 +39,7 @@ impl Into<Vec<RuneTransfer>> for AlkaneTransferParcel {
     }
 }
 
-impl<P: KeyValuePointer + Clone> Into<BalanceSheet<P>> for AlkaneTransferParcel {
+impl<P: KeyValuePointer + Clone + metashrew_support::index_pointer::KeyValuePointer> Into<BalanceSheet<P>> for AlkaneTransferParcel {
     fn into(self) -> BalanceSheet<P> {
         <AlkaneTransferParcel as Into<Vec<RuneTransfer>>>::into(self).into()
     }

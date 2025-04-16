@@ -12,7 +12,7 @@ mod tests {
     use crate::Protorune;
     use crate::{message::MessageContextParcel, tables, view};
     use anyhow::Result;
-    use protorune_support::rune_transfer::RuneTransfer;
+    use crate::rune_transfer::RuneTransfer;
     use protorune_support::utils::consensus_encode;
 
     use bitcoin::consensus::serialize;

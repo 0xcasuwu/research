@@ -96,12 +96,16 @@ fn clear_mock_storage() {
     });
 }
 
-// Import the mock context module
-use bonding_contract::mock_context;
+// Thread-local storage for mock context
+thread_local! {
+    static MOCK_CONTEXT: RefCell<Option<Context>> = RefCell::new(None);
+}
 
 // Helper function to set the mock context
 fn set_mock_context(context: Context) {
-    mock_context::set_mock_context(context);
+    MOCK_CONTEXT.with(|c| {
+        *c.borrow_mut() = Some(context);
+    });
 }
 
 // Helper function to create a context with incoming alkanes
@@ -116,7 +120,7 @@ fn create_context_with_alkanes(alkanes: Vec<AlkaneTransfer>) -> Context {
 }
 
 fn main() {
-    println!("Running end-to-end test for the bonding contract...");
+    println!("Running end-to-end test for bonding contract...");
     
     // Reset the mock environment
     bonding_contract::reset_mock_environment::reset();
@@ -139,10 +143,17 @@ fn main() {
     let k_factor = 1;
     let n_exponent = 1;
     
+    // Set up IDs for the test
+    let owner_id = AlkaneId { block: 1, tx: 1 };
+    let contract_id = AlkaneId { block: 3, tx: 3 };
+    let diesel_id = AlkaneId { block: 2, tx: 0 };
+    let user1_id = AlkaneId { block: 1, tx: 2 };
+    let user2_id = AlkaneId { block: 1, tx: 3 };
+    
     // Set up a default context for initialization
     let context = Context {
-        caller: AlkaneId { block: 1, tx: 1 },
-        myself: AlkaneId { block: 3, tx: 3 },
+        caller: owner_id.clone(),
+        myself: contract_id.clone(),
         incoming_alkanes: Default::default(),
         vout: 0,
         inputs: vec![],
@@ -158,52 +169,85 @@ fn main() {
         }
     }
     
-    // Test buying alkane with diesel
+    // Test buying alkane with diesel for user 1
     let user1_diesel_amount = 50_000;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 2, tx: 0 }, // Diesel
-            value: user1_diesel_amount,
-        }
-    ]);
+    println!("User 1 providing {} diesel", user1_diesel_amount);
+    
+    // Create a context with diesel tokens
+    let context = Context {
+        caller: user1_id.clone(),
+        myself: contract_id.clone(),
+        incoming_alkanes: AlkaneTransferParcel(vec![
+            AlkaneTransfer {
+                id: diesel_id.clone(), // Diesel
+                value: user1_diesel_amount,
+            }
+        ]),
+        vout: 0,
+        inputs: vec![],
+    };
     set_mock_context(context);
     
-    // Use buy_alkane instead of provide
-    match contract.buy_alkane(user1_diesel_amount) {
+    // Buy alkane
+    let buy_result = contract.buy_alkane(user1_diesel_amount);
+    match buy_result {
         Ok(response) => {
+            println!("User 1 bought alkane successfully");
             let user1_alkanes_received = response.alkanes.0[0].value;
-            println!("User 1 bought {} alkanes with {} diesel", user1_alkanes_received, user1_diesel_amount);
+            println!("User 1 received {} alkanes", user1_alkanes_received);
             
-            // Test selling alkanes for diesel
-            let user1_sell_amount = user1_alkanes_received / 2;
-            let context = create_context_with_alkanes(vec![
-                AlkaneTransfer {
-                    id: AlkaneId { block: 3, tx: 3 }, // Contract alkane
-                    value: user1_sell_amount,
-                }
-            ]);
+            // Test buying alkane with diesel for user 2
+            let user2_diesel_amount = 100_000;
+            println!("User 2 providing {} diesel", user2_diesel_amount);
+            
+            // Create a context with diesel tokens
+            let context = Context {
+                caller: user2_id.clone(),
+                myself: contract_id.clone(),
+                incoming_alkanes: AlkaneTransferParcel(vec![
+                    AlkaneTransfer {
+                        id: diesel_id.clone(), // Diesel
+                        value: user2_diesel_amount,
+                    }
+                ]),
+                vout: 0,
+                inputs: vec![],
+            };
             set_mock_context(context);
             
-            // Use sell_alkane instead of redeem
-            match contract.sell_alkane(user1_sell_amount) {
+            // Buy alkane
+            let buy_result = contract.buy_alkane(user2_diesel_amount);
+            match buy_result {
                 Ok(response) => {
-                    let user1_diesel_received = response.alkanes.0[0].value;
-                    println!("User 1 sold {} alkanes and received {} diesel", user1_sell_amount, user1_diesel_received);
+                    println!("User 2 bought alkane successfully");
+                    let user2_alkanes_received = response.alkanes.0[0].value;
+                    println!("User 2 received {} alkanes", user2_alkanes_received);
                     
-                    // Test getting the current price using the BondingContract trait
-                    match BondingContract::current_price(&contract) {
-                        Ok(price_response) => {
-                            // Convert the response data to u128
-                            let price = u128::from_le_bytes(price_response.data.try_into().unwrap());
+                    // Removed sell_alkane test - this is a one-way bonding curve
+                    
+                    // Test getting the current price
+                    let context = Context {
+                        caller: owner_id.clone(),
+                        myself: contract_id.clone(),
+                        incoming_alkanes: AlkaneTransferParcel(vec![]),
+                        vout: 0,
+                        inputs: vec![],
+                    };
+                    set_mock_context(context);
+                    
+                    match contract.current_price() {
+                        Ok(response) => {
+                            let price = u128::from_le_bytes(response.data.try_into().unwrap());
                             println!("Current price: {} diesel per alkane", price);
-                            println!("End-to-end test completed successfully!");
                         },
                         Err(e) => println!("Failed to get current price: {}", e),
                     }
+                    
+                    println!("End-to-end test completed successfully!");
                 },
-                Err(e) => println!("Failed to sell alkanes: {}", e),
+                Err(e) => println!("User 2 failed to buy alkane: {}", e),
             }
         },
-        Err(e) => println!("Failed to buy alkanes: {}", e),
+        Err(e) => println!("User 1 failed to buy alkane: {}", e),
     }
 }

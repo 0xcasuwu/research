@@ -56,77 +56,6 @@ where
     }
 }
 
-/// Test selling alkane for diesel
-#[test]
-fn test_sell_alkane() {
-    run_test_with_isolation(|| {
-        // Create a new bonding contract with reset state
-        let mut contract = reset_contract_state();
-        
-        // Set up the context
-        let caller = AlkaneId { block: 1, tx: 0 };
-        let myself = AlkaneId { block: 3, tx: 0 };
-        
-        // Initialize the contract
-        let name = u128::from_le_bytes(*b"TestToken\0\0\0\0\0\0\0");
-        let symbol = u128::from_le_bytes(*b"TT\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
-        let k_factor = 1000;
-        let n_exponent = 2;
-        let initial_diesel_reserve = 1000000;
-        
-        let context = Context {
-            caller,
-            myself,
-            incoming_alkanes: AlkaneTransfers(vec![]),
-            vout: 0,
-            inputs: vec![],
-        };
-        
-        // Set the context in both modules
-        mock_context::set_mock_context(context.clone());
-        mock_runtime::set_mock_context(context);
-        
-        let result = contract.init_contract(name, symbol, k_factor, n_exponent, initial_diesel_reserve);
-        assert!(result.is_ok());
-        
-        // Sell alkane for diesel
-        let alkane_amount = 1000;
-        let context = Context {
-            caller,
-            myself: myself.clone(),
-            incoming_alkanes: AlkaneTransfers(vec![
-                AlkaneTransfer {
-                    id: myself,
-                    value: alkane_amount,
-                },
-            ]),
-            vout: 0,
-            inputs: vec![],
-        };
-        
-        // Set the context in both modules
-        mock_context::set_mock_context(context.clone());
-        mock_runtime::set_mock_context(context);
-        
-        let result = contract.sell_alkane(alkane_amount);
-        assert!(result.is_ok());
-        
-        // Check the contract state - the diesel reserve should decrease
-        let expected_diesel_reserve = initial_diesel_reserve - contract.get_bonding_curve().get_sell_amount(alkane_amount);
-        assert_eq!(contract.diesel_reserve(), expected_diesel_reserve);
-        
-        // Check the response
-        let response = result.unwrap();
-        
-        // The response should contain the diesel token
-        let diesel_transfer = response.alkanes.0.iter()
-            .find(|transfer| transfer.id.block == 2 && transfer.id.tx == 0)
-            .expect("Expected to find diesel transfer");
-        
-        // Check that the diesel value is positive
-        assert!(diesel_transfer.value > 0, "Expected diesel value to be positive");
-    });
-}
 
 /// Test redeeming a bond
 #[test]
@@ -996,9 +925,9 @@ fn test_pause_unpause() {
     });
 }
 
-/// Test getting the buy amount and sell amount
+/// Test getting the buy amount
 #[test]
-fn test_get_buy_sell_amount() {
+fn test_get_buy_amount() {
     run_test_with_isolation(|| {
         // Create a new bonding contract with reset state
         let mut contract = reset_contract_state();
@@ -1045,22 +974,5 @@ fn test_get_buy_sell_amount() {
         
         // Check that the buy amount is positive
         assert!(buy_amount > 0, "Expected buy amount to be positive");
-        
-        // Get the sell amount for a specific alkane amount
-        let alkane_amount = 1000;
-        let result = contract.get_sell_amount(alkane_amount);
-        assert!(result.is_ok());
-        
-        // Check the response
-        let response = result.unwrap();
-        
-        // The response should contain the sell amount data
-        assert!(!response.data.is_empty());
-        
-        // Convert the data to a u128
-        let sell_amount = u128::from_le_bytes(response.data[0..16].try_into().unwrap());
-        
-        // Check that the sell amount is positive
-        assert!(sell_amount > 0, "Expected sell amount to be positive");
     });
 }

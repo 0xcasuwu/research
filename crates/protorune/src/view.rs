@@ -1,5 +1,6 @@
 use crate::tables::RuneTable;
-use crate::{balance_sheet::load_sheet, tables};
+use crate::tables;
+use protorune_support::load_sheet;
 use anyhow::{anyhow, Result};
 use bitcoin;
 use protorune_support::balance_sheet::{BalanceSheetOperations, ProtoruneRuneId};
@@ -18,9 +19,11 @@ use protorune_support::utils::{consensus_decode, outpoint_encode};
 use bitcoin::hashes::Hash;
 use bitcoin::OutPoint;
 //use metashrew::utils::{ consume_exact, consume_sized_int };
+#[allow(unused_imports)]
 use metashrew::{println, stdio::stdout};
 use metashrew_support::index_pointer::KeyValuePointer;
 use protobuf::{Message, MessageField, SpecialFields};
+#[allow(unused_imports)]
 use std::fmt::Write;
 use std::io::Cursor;
 

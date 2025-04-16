@@ -9,7 +9,7 @@ mod tests {
     use anyhow::Result;
     use bitcoin::{OutPoint, Transaction};
     use metashrew::index_pointer::AtomicPointer;
-    use protorune_support::rune_transfer::RuneTransfer;
+    use crate::rune_transfer::RuneTransfer;
 
     use helpers::clear;
     #[allow(unused_imports)]

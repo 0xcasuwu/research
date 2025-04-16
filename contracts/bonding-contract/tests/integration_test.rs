@@ -94,29 +94,7 @@ fn test_bonding_contract_e2e() {
     
     println!("User 1 provided {} diesel and received {} alkanes", user1_diesel_amount, user1_alkanes_received);
     
-    // Test selling alkanes for diesel
-    let user1_sell_amount = user1_alkanes_received / 2;
-    let context = create_context_with_alkanes(vec![
-        AlkaneTransfer {
-            id: AlkaneId { block: 3, tx: 3 }, // Contract alkane
-            value: user1_sell_amount,
-        }
-    ]);
-    set_mock_context(context);
-    
-    // Use sell_alkane instead of redeem
-    let sell_result = contract.sell_alkane(user1_sell_amount);
-    assert!(sell_result.is_ok(), "Sell alkane operation failed: {:?}", sell_result.err());
-    
-    let sell_response = sell_result.unwrap();
-    assert_eq!(sell_response.alkanes.0.len(), 1, "User should receive exactly one alkane transfer");
-    assert_eq!(sell_response.alkanes.0[0].id, AlkaneId { block: 2, tx: 0 }, "User should receive diesel");
-    
-    let user1_diesel_received = sell_response.alkanes.0[0].value;
-    assert!(user1_diesel_received > 0, "User should receive a positive amount of diesel");
-    assert!(user1_diesel_received < user1_diesel_amount, "User should receive less diesel than provided due to slippage");
-    
-    println!("User 1 sold {} alkanes and received {} diesel", user1_sell_amount, user1_diesel_received);
+    // Removed sell_alkane test - this is a one-way bonding curve
     
     // Test getting the current price using the BondingContract trait
     let current_price_result = BondingContract::current_price(&contract);

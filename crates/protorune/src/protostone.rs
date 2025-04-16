@@ -1,4 +1,4 @@
-use crate::balance_sheet::OutgoingRunes;
+use protorune_support::OutgoingRunes;
 use crate::{
     message::{MessageContext, MessageContextParcel},
     protoburn::{Protoburn, Protoburns},

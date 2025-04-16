@@ -6,7 +6,7 @@ use anyhow::Result;
 use bitcoin::{OutPoint, Transaction};
 use metashrew::index_pointer::{AtomicPointer, IndexPointer};
 use protorune_support::balance_sheet::{BalanceSheet, ProtoruneRuneId};
-use protorune_support::rune_transfer::RuneTransfer;
+use crate::rune_transfer::RuneTransfer;
 use protorune_support::utils::consensus_encode;
 
 #[allow(unused_imports)]

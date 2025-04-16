@@ -1,4 +1,4 @@
-use crate::balance_sheet::{load_sheet, PersistentRecord};
+use protorune_support::{load_sheet, clear_balances, PersistentRecord};
 use crate::message::MessageContext;
 use crate::protorune_init::index_unique_protorunes;
 use crate::protostone::{
@@ -6,7 +6,6 @@ use crate::protostone::{
 };
 use crate::tables::RuneTable;
 use anyhow::{anyhow, Ok, Result};
-use balance_sheet::clear_balances;
 use bitcoin::blockdata::block::Block;
 use bitcoin::hashes::Hash;
 use bitcoin::script::Instruction;
@@ -35,7 +34,8 @@ use std::collections::{HashMap, HashSet};
 use std::ops::Sub;
 use std::sync::Arc;
 
-pub mod balance_sheet;
+// Re-export balance_sheet from protorune-support
+pub use protorune_support::balance_sheet;
 pub mod message;
 pub mod protoburn;
 pub mod protorune_init;
@@ -609,7 +609,7 @@ impl Protorune {
         let mut updated_addresses: HashSet<Vec<u8>> = HashSet::new();
 
         #[cfg(not(feature = "cache"))]
-        let mut updated_addresses: HashSet<Vec<u8>> = HashSet::new();
+        let updated_addresses: HashSet<Vec<u8>> = HashSet::new();
 
         for (txindex, transaction) in txdata.iter().enumerate() {
             let tx_id = transaction.compute_txid();
@@ -617,6 +617,10 @@ impl Protorune {
                 .TXID_TO_TXINDEX
                 .select(&tx_id.as_byte_array().to_vec())
                 .set_value(txindex as u32);
+            for (_index, input) in transaction.input.iter().enumerate() {
+              tables::OUTPOINT_SPENDABLE_BY.select(&consensus_encode(&input.previous_output)?).nullify();
+              
+            }
             for (index, output) in transaction.output.iter().enumerate() {
                 let outpoint = OutPoint {
                     txid: tx_id.clone(),
@@ -651,7 +655,7 @@ impl Protorune {
         let mut updated_addresses: HashSet<Vec<u8>> = HashSet::new();
 
         #[cfg(not(feature = "cache"))]
-        let mut updated_addresses: HashSet<Vec<u8>> = HashSet::new();
+        let updated_addresses: HashSet<Vec<u8>> = HashSet::new();
 
         for (txindex, transaction) in txdata.iter().enumerate() {
             let tx_id = transaction.compute_txid();

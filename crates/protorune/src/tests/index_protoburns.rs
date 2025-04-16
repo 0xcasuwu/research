@@ -10,7 +10,7 @@ mod tests {
     use protorune_support::balance_sheet::{BalanceSheet, BalanceSheetOperations, ProtoruneRuneId};
     use protorune_support::proto::{self, protorune};
     use protorune_support::protostone::{Protostone, ProtostoneEdict};
-    use protorune_support::rune_transfer::RuneTransfer;
+    use crate::rune_transfer::RuneTransfer;
     use protorune_support::utils::consensus_encode;
 
     use helpers::clear;

@@ -2,7 +2,7 @@ mod tests {
     use crate::clear;
     use crate::index_pointer::IndexPointer;
     use anyhow::Result;
-    use metashrew_support::index_pointer::KeyValuePointer;
+    use crate::index_pointer::KeyValuePointer;
     use std::sync::Arc;
     use wasm_bindgen_test::*;
     #[wasm_bindgen_test]

@@ -8,7 +8,6 @@
 //! - Price = virtual_input / (available_debt + virtual_output)
 //! - Virtual input decays exponentially over time based on half-life
 
-use alkanes_support::prelude::*;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// Scaling factor used to maintain precision in integer calculations
@@ -274,12 +273,12 @@ mod tests {
         // Test with one half-life elapsed
         let elapsed = 3600; // 1 hour
         let result = BondCurve::exp_to_level(x, elapsed, half_life, level_bips);
-        assert_eq!(result, 500, "One half-life should reduce to 50%");
+        assert_eq!(result, 750, "One half-life should reduce to 50% plus level floor");
         
         // Test with two half-lives elapsed
         let elapsed = 7200; // 2 hours
         let result = BondCurve::exp_to_level(x, elapsed, half_life, level_bips);
-        assert_eq!(result, 250, "Two half-lives should reduce to 25%");
+        assert_eq!(result, 625, "Two half-lives should reduce to 25% plus level floor");
         
         // Test with level_bips = 0 (no floor)
         let level_bips = 0;

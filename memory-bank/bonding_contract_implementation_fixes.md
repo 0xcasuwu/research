@@ -86,7 +86,7 @@ fn redeem_bond_internal(&mut self, bond_id: u128) -> Result<CallResponse> {
 
 ## 2. Fix for `delete_bond` Function
 
-The issue with the `transfer_bond` function is likely in the `delete_bond` function. The function is not properly removing the bond from the original owner.
+The issue with the `transfer_bond` function is in the `delete_bond` function. The function is not properly removing the bond from the original owner. This is a critical issue that must be fixed in the actual implementation, as it's essential that when a bond is transferred, the original bond holder cannot hold the bond anymore.
 
 ### Current Implementation:
 
