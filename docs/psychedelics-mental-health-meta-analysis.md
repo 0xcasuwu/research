@@ -52,7 +52,7 @@ We additionally examine the neurobiological mechanisms of action, safety and adv
 
 Psilocybin is a prodrug of psilocin (4-OH-DMT), a non-selective serotonin receptor agonist with primary affinity for the 5-HT2A receptor. There is broad consensus that the subjective, behavioral, and neural effects of classic psychedelics are initiated via stimulation of cortical 5-HT2A receptors (Vollenweider & Preller, 2020). Human studies using the 5-HT2A/2C antagonist ketanserin demonstrate complete blockade of the psychedelic experience, confirming the necessary role of this receptor subtype (Preller et al., 2017).
 
-PET neuroimaging with [11C]MDL 100,907 in humans has quantified cortical 5-HT2A receptor occupancy following a standard psilocybin dose at approximately 39.5% (±10.9% SD) across all cortical regions, with preferential occupancy (63–75%) in regions of the default mode network, including the subgenual anterior cingulate cortex and bilateral angular gyri (Barrett et al., 2021).
+PET neuroimaging with [11C]MDL 100,907 in humans has quantified cortical 5-HT2A receptor occupancy following a standard psilocybin dose at approximately 39.5% (±10.9% SD) across all cortical regions, with preferential occupancy (63–75%) in regions of the default mode network, including the subgenual anterior cingulate cortex and bilateral angular gyri (Barrett et al., 2022).
 
 Downstream, 5-HT2A activation on layer V pyramidal neurons increases glutamatergic transmission in the prefrontal cortex while simultaneously enhancing GABAergic interneuron activity, producing a net desynchronization of cortical activity. This aligns with the "entropic brain hypothesis" proposed by Carhart-Harris et al. (2014), which posits that psychedelics increase the entropy (informational complexity) of spontaneous brain activity, temporarily dissolving the rigid, over-determined patterns of neural activity associated with pathological rumination.
 
@@ -99,7 +99,7 @@ Multiple systematic reviews and meta-analyses published between 2023 and 2025 ha
 | Ko et al. (2023), *J Affective Disorders* | 5 RCTs | — | MD = **-9.55** (Day 15 MADRS) | 25 mg dose SUCRA = 92.25% |
 | Metaxa & Clarke (2024), *BMJ* | 7 RCTs | 436 | g = **0.66** (I² = 0%) | Response RR = 2.17; Remission RR = 2.96 |
 | Menon et al. (2025), *Acta Psychiatrica Scandinavica* | 6 RCTs | 427 | SMD = **-0.72** (I² = 17%) | Response RR = 3.42; Remission RR = 3.66 |
-| Bogenschutz et al. (2025), *Psychopharmacology* | 9 RCTs | 602 | Significant incremental effect | High risk-of-bias noted |
+| Borgogna et al. (2025), *Psychopharmacology* | 9 RCTs | 602 | Significant incremental effect | High risk-of-bias noted |
 
 **Interpretation:** Across meta-analyses, psilocybin-assisted therapy consistently demonstrates medium-to-large effect sizes for the reduction of depressive symptoms relative to placebo (g = -0.66 to -1.49). Notably, the more conservative estimates from Metaxa & Clarke (2024) and Menon et al. (2025) — which showed minimal heterogeneity (I² = 0–17%) — converge around g = 0.66–0.72, while studies with higher heterogeneity yield larger estimates. For context, SSRIs typically achieve effect sizes of g ≈ 0.30 vs. placebo in meta-analyses (Cipriani et al., 2018; Leucht et al., 2012), meaning psilocybin's effect magnitude is approximately 2–4 times larger even by conservative estimates.
 
@@ -141,11 +141,11 @@ The network meta-analysis by Ko et al. (2023) identified 25 mg as the optimal do
 
 ### 3.7 Therapy Hours
 
-A meta-analysis by Aday et al. (2025) in *General Hospital Psychiatry* examined whether the number of therapy hours provided alongside psilocybin administration was associated with treatment outcomes. No significant association was found between therapy hours and symptom reduction. However, the authors cautioned that small sample sizes, heterogeneity, and poor reporting of the therapeutic component limit firm conclusions.
+A meta-analysis by Hultgren et al. (2025) in *General Hospital Psychiatry* examined whether the number of therapy hours provided alongside psilocybin administration was associated with treatment outcomes. No significant association was found between therapy hours and symptom reduction. However, the authors cautioned that small sample sizes, heterogeneity, and poor reporting of the therapeutic component limit firm conclusions.
 
 ### 3.8 Number Needed to Treat
 
-Bahji et al. (2024) compared psilocybin and esketamine using NNT analysis in TRD: psilocybin 25 mg achieved an NNT = **5** at 21 days, compared to esketamine 56 mg NNT = 7 and esketamine 84 mg NNT = 7, suggesting a modest advantage for psilocybin's benefit-to-harm ratio.
+Wong et al. (2024) compared psilocybin and esketamine using NNT analysis in TRD: psilocybin 25 mg achieved an NNT = **5** at 21 days, compared to esketamine 56 mg NNT = 7 and esketamine 84 mg NNT = 7, suggesting a modest advantage for psilocybin's benefit-to-harm ratio.
 
 ---
 
@@ -155,7 +155,7 @@ Bahji et al. (2024) compared psilocybin and esketamine using NNT analysis in TRD
 
 **Holze et al. (2023)** conducted a Phase II double-blind, placebo-controlled crossover trial (N=42) of LSD 200 μg for anxiety with and without life-threatening illness. At 16 weeks, LSD produced robust effect sizes: STAI-G reduction d = **-1.18** (p = 0.007); HAM-D-21 reduction d = **-1.1** (p = 0.0004); clinical response (≥30% STAI-G reduction) 65% LSD vs. 9% placebo. A 12-month follow-up (Holze et al., 2024) confirmed sustained reductions in anxiety, depression, and general psychiatric symptomatology with minimal lasting negative effects.
 
-**Holze et al. (2025)** reported a randomized, double-blind trial (N=61) of low-dose (25 μg × 2) vs. high-dose (100 + 200 μg) LSD for major depression. IDS-SR change favored the high-dose group by 7.9 points.
+**Muller et al. (2025)** reported a randomized, double-blind trial (N=61) of low-dose (25 μg × 2) vs. high-dose (100 + 200 μg) LSD for major depression. IDS-SR change favored the high-dose group by 7.9 points.
 
 **MindMed MM120** (Goodwin et al., 2025, *JAMA*) — Phase 2b, multicenter, double-blind, placebo-controlled trial (N=198) of lysergide d-tartrate for generalized anxiety disorder. The 100 μg dose showed 65% response and 48% remission at week 12, leading to FDA Breakthrough Therapy Designation (March 2024). Phase 3 trials are underway.
 
@@ -175,7 +175,7 @@ Bahji et al. (2024) compared psilocybin and esketamine using NNT analysis in TRD
 
 Ketamine represents the most clinically advanced rapid-acting antidepressant comparator. Intranasal esketamine (Spravato) received FDA approval for TRD in March 2019, for MDD with suicidal ideation in August 2020, and as the first monotherapy for TRD in January 2025.
 
-McIntyre et al. (2022) conducted a real-world meta-analysis of ketamine in TRD (79 studies, N=2,665): response rate 45%, remission rate 30%, Hedges' g = **1.44** for symptom improvement. The anti-suicidal effect of ketamine is particularly notable: Wilkinson et al. (2018) demonstrated rapid reduction in suicidal ideation within 1 day (d = 0.48–0.85), partially independent of the antidepressant effect.
+Alnefeesi et al. (2022) conducted a real-world meta-analysis of ketamine in TRD (79 studies, N=2,665): response rate 45%, remission rate 30%, Hedges' g = **1.44** for symptom improvement. The anti-suicidal effect of ketamine is particularly notable: Wilkinson et al. (2018) demonstrated rapid reduction in suicidal ideation within 1 day (d = 0.48–0.85), partially independent of the antidepressant effect.
 
 McIntyre et al. (2021) synthesized international expert opinion confirming ketamine/esketamine's rapid-acting antidepressant properties with acceptable safety, though requiring repeated administration (typically weekly to biweekly) to maintain effects — in contrast to psilocybin's potential for sustained benefit after 1–2 sessions.
 
@@ -222,7 +222,7 @@ Ot'alora G et al. (2018) conducted a blinded Phase 2 dose-response trial (N=28) 
 
 Multiple systematic reviews confirm the efficacy signal:
 
-- **Yang et al. (2024)** — 7 RCTs, phases 2 and 3, demonstrating consistent CAPS score reductions vs. placebo/active controls.
+- **Yang, J., et al. (2024)** — 7 RCTs, phases 2 and 3, demonstrating consistent CAPS score reductions vs. placebo/active controls.
 - **Shahrour et al. (2024)** — 9 studies, N=297, confirming efficacy across trials.
 - **Yong et al. (2025)** — Overview of all published systematic reviews and meta-analyses, searched 6 databases through May 2024, confirming consistent efficacy signals across methodologies.
 
@@ -274,13 +274,13 @@ Ibogaine's cardiovascular risk profile (QT prolongation) necessitates medical mo
 
 For comparison, Jonas et al. (2014) meta-analyzed pharmacotherapy for AUD across 122 RCTs (N=22,803): acamprosate NNT = **12** to prevent return to any drinking; oral naltrexone 50 mg NNT = **20** to prevent return to any drinking, NNT = **12** to prevent heavy drinking. The relative efficacy of psilocybin appears comparable or superior to existing pharmacotherapies, though direct comparison is limited by differing outcome measures.
 
-**Bogenschutz et al. (2025)** — An important null result: a separate Phase 2 RCT of psilocybin for AUD relapse prevention (post-withdrawal, single dose) found **no** significant impact on abstinence or alcohol use levels, suggesting that the intervention context (active drinking vs. post-withdrawal) matters substantially.
+**Rieser et al. (2025)** — An important null result: a separate Phase 2 RCT of psilocybin for AUD relapse prevention (post-withdrawal, single dose) found **no** significant impact on abstinence or alcohol use levels, suggesting that the intervention context (active drinking vs. post-withdrawal) matters substantially.
 
 Historical evidence from Krebs & Johansen (2012), a meta-analysis of 6 RCTs (N=536) evaluating LSD for alcoholism, found beneficial effects comparable to disulfiram.
 
 ### 7.2 Tobacco Use Disorder
 
-**Johnson et al. (2014)** — Open-label pilot (N=15) of psilocybin-assisted therapy (20 + 30 mg/70 kg) with manualized CBT-based smoking cessation protocol: 80% biologically verified abstinence at 6 months. **Johnson et al. (2017)** reported long-term follow-up: 67% abstinent at 12 months, 60% at mean 30 months post-quit date. Garcia-Romeu et al. (2015) demonstrated that mystical experience scores significantly correlated with cessation outcomes.
+**Johnson et al. (2014)** — Open-label pilot (N=15) of psilocybin-assisted therapy (20 + 30 mg/70 kg) with manualized CBT-based smoking cessation protocol: 80% biologically verified abstinence at 6 months. **Johnson et al. (2017)** reported long-term follow-up: 67% abstinent at 12 months, 60% at mean 30 months post-quit date. Garcia-Romeu et al. (2014) demonstrated that mystical experience scores significantly correlated with cessation outcomes.
 
 For comparison, Cahill et al. (2013) meta-analyzed pharmacological smoking cessation interventions across 267 studies (N=101,804): varenicline vs. placebo OR = **2.88** (~35% quit rates); NRT vs. placebo OR = **1.84** (~25% quit rates); bupropion vs. placebo OR = **1.82** (~25% quit rates). Psilocybin's 60–80% abstinence rates in open-label studies substantially exceed all conventional pharmacotherapies, though randomized confirmation is needed.
 
@@ -306,7 +306,7 @@ Beyond the foundational Moreno et al. (2006) open-label study (N=9, 23–100% Y-
 
 **Goodman et al. (Yale, NCT03356483)** — Completed November 2024. Randomized, double-blind, niacin placebo-controlled trial of single moderate dose (0.25 mg/kg) psilocybin for treatment-refractory OCD. Results indicated clinically significant mean reductions in OCD symptoms in psilocybin vs. placebo at 48-hour primary endpoint. Full peer-reviewed publication pending.
 
-**Rodriguez et al. (2024)** — Protocol published for a randomized, waitlist-controlled trial of repeated psilocybin dosing combined with non-directive support for OCD (N=30 target).
+**Ching et al. (2024)** — Protocol published for a randomized, waitlist-controlled trial of repeated psilocybin dosing combined with non-directive support for OCD (N=30 target).
 
 ### 8.2 Eating Disorders
 
@@ -357,7 +357,7 @@ The critical distinction is that psilocybin's adverse effects are acute and tran
 
 ### 9.5 Cardiovascular Safety
 
-Classic psychedelics produce modest, transient increases in heart rate and blood pressure. Szabo (2024) reviewed cardiovascular effects across clinical trials: tachycardia (>100 bpm) in ~7% of psilocybin administrations; hypertension (systolic BP >140 mmHg) in ~50% — all transient and without requiring medical intervention. Rouaud et al. (2024) noted that both LSD and psilocybin bind 5-HT2B with potency comparable to known cardiotoxins, but no clinical reports of valvular heart disease from psychedelic use exist. The intermittent dosing schedule (1–3 sessions vs. chronic daily administration) markedly reduces this theoretical risk. The authors recommended echocardiographic monitoring for prolonged microdosing regimens.
+Classic psychedelics produce modest, transient increases in heart rate and blood pressure. Wsol (2023) reviewed cardiovascular effects across clinical trials: tachycardia (>100 bpm) in ~7% of psilocybin administrations; hypertension (systolic BP >140 mmHg) in ~50% — all transient and without requiring medical intervention. Rouaud et al. (2024) noted that both LSD and psilocybin bind 5-HT2B with potency comparable to known cardiotoxins, but no clinical reports of valvular heart disease from psychedelic use exist. The intermittent dosing schedule (1–3 sessions vs. chronic daily administration) markedly reduces this theoretical risk. The authors recommended echocardiographic monitoring for prolonged microdosing regimens.
 
 Ibogaine represents an exception, with documented QT prolongation and cardiac arrhythmia risk requiring continuous cardiac monitoring during treatment.
 
@@ -379,7 +379,7 @@ Johnson et al. (2008) published foundational safety guidelines for hallucinogen 
 
 ### 10.1 Risk of Bias
 
-The incremental efficacy meta-analysis by Bogenschutz et al. (2025) found that most psilocybin RCTs demonstrated **high risk of bias**, particularly regarding:
+The incremental efficacy meta-analysis by Borgogna et al. (2025) found that most psilocybin RCTs demonstrated **high risk of bias**, particularly regarding:
 
 - **Functional unblinding:** Psychoactive substances produce obvious subjective effects, making true double-blinding impossible. In MAPP1, over 90% of participants correctly guessed their treatment assignment.
 - **Small sample sizes:** The largest psilocybin depression RCTs include fewer than 260 participants
@@ -394,7 +394,7 @@ Proposed solutions include active placebo controls (low-dose psychedelic or niac
 
 ### 10.3 Incremental vs. Net Effect Sizes
 
-Bogenschutz et al. (2025) raised an important distinction: most meta-analyses report **net** therapeutic effects, but the clinically relevant quantity is the **incremental** effect (treatment minus control). Since placebo groups in psychedelic trials often show substantial improvement (due to intensive therapeutic contact, expectancy, and attention), the incremental benefit of the psychedelic itself may be smaller than headline effect sizes suggest.
+Borgogna et al. (2025) raised an important distinction: most meta-analyses report **net** therapeutic effects, but the clinically relevant quantity is the **incremental** effect (treatment minus control). Since placebo groups in psychedelic trials often show substantial improvement (due to intensive therapeutic contact, expectancy, and attention), the incremental benefit of the psychedelic itself may be smaller than headline effect sizes suggest.
 
 This concern is partially validated by the Phase 3 COMP360 results: MADRS deltas of -3.6 to -3.8 points are notably smaller than the Phase 2 estimates, suggesting that as trial methodology improves, effect sizes moderate — a pattern entirely consistent with psychiatric drug development more broadly (Turner et al., 2008).
 
@@ -462,7 +462,7 @@ The economic implications of psychedelic-assisted therapy are potentially transf
 
 **McCrone et al. (2023)** modeled psilocybin-assisted therapy for severe depression in the UK: psilocybin generated more QALYs (0.310) than CBT alone (0.283), medication alone (0.278), or combination (0.287). Cost-effectiveness depends critically on therapist support costs and drug pricing.
 
-**Chowdhury et al. (2025)** modeled psilocybin for TRD in the US over 12 months: total PAT cost assumed at $5,000, producing 0.031 additional QALYs vs. standard of care. ICER: $117,517/QALY — potentially cost-effective at the $150,000/QALY threshold.
+**Avanceña et al. (2025)** modeled psilocybin for TRD in the US over 12 months: total PAT cost assumed at $5,000, producing 0.031 additional QALYs vs. standard of care. ICER: $117,517/QALY — potentially cost-effective at the $150,000/QALY threshold.
 
 Marseille et al. (2022b) outlined the broader research agenda for psychedelic therapy economics, noting unique methodological challenges: extended therapist labor costs (6–8 hour accompanied sessions), therapist training requirements, and facility costs for dedicated treatment spaces.
 
@@ -508,7 +508,7 @@ The microdosing literature provides an important counterpoint to the high-dose t
 
 **Cavanna et al. (2022)** — Double-blind, placebo-controlled RCT (N=34) of 0.5g dried psilocybin mushrooms found no significant effects on divergent or convergent thinking vs. placebo. **Polito & Liknaitzky (2024)** systematically reviewed 19 placebo-controlled microdosing studies and found changes in neurobiology and physiology relative to placebo but no lasting effects on mood, cognition, or creativity from repeated administration.
 
-**Hutten et al. (2022)** — First double-blind RCT of LSD microdosing for ADHD found the intervention was safe but failed to demonstrate efficacy vs. placebo.
+**Hutten et al. (2025)** — A randomized clinical trial of repeated low-dose LSD for ADHD treatment in adults found the intervention was safe but failed to demonstrate efficacy vs. placebo.
 
 The contrast between null microdosing results and robust high-dose therapeutic effects supports the hypothesis that a full psychedelic experience — with its associated neuroplasticity, psychological insight, and mystical/peak experiences — is necessary for therapeutic benefit, rather than subtle pharmacological modulation.
 
@@ -625,14 +625,14 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 ## References
 
 1. Aday, J. S., Mitzkovitz, C. M., Bloesch, E. K., Davoli, C. C., & Davis, A. K. (2020). Long-term effects of psychedelic drugs: A systematic review. *Neuroscience & Biobehavioral Reviews*, 113, 179–189.
-2. Aday, J. S., et al. (2025). Therapy hours and psilocybin outcomes: A meta-analysis. *General Hospital Psychiatry*.
+2. Hultgren, J., Hafsteinsson, M. H., & Gruneau Brulin, J. (2025). A dose of therapy with psilocybin—A meta-analysis of the relationship between the amount of therapy hours and treatment outcomes in psychedelic-assisted therapy. *General Hospital Psychiatry*, 96, 234–243.
 3. Agin-Liebes, G. I., et al. (2020). Long-term follow-up of psilocybin-assisted psychotherapy for psychiatric and existential distress in patients with life-threatening cancer. *Journal of Psychopharmacology*, 34(2), 155–166.
 4. Alnahari, N., et al. (2025). A systematic review and meta-analysis investigating the efficacy of various psychedelic drugs for the treatment of substance use disorder. *Healthcare*, 13(21), 2668.
-5. Bahji, A., et al. (2024). A comparison between psilocybin and esketamine in treatment-resistant depression using number needed to treat (NNT). *Journal of Affective Disorders*, 349, 474–483.
+5. Wong, S., Kwan, A. T. H., Teopiz, K. M., et al. (2024). A comparison between psilocybin and esketamine in treatment-resistant depression using number needed to treat (NNT): A systematic review. *Journal of Affective Disorders*, 350, 698–705.
 6. Barrett, F. S., Bradstreet, M. P., Leoutsakos, J.-M. S., Johnson, M. W., & Griffiths, R. R. (2016). The Challenging Experience Questionnaire: Characterization of challenging experiences with psilocybin mushrooms. *Journal of Psychopharmacology*, 30(12), 1279–1295.
 7. Bogenschutz, M. P., et al. (2022). Percentage of heavy drinking days following psilocybin-assisted psychotherapy vs placebo in the treatment of adult patients with alcohol use disorder. *JAMA Psychiatry*, 79(10), 953–962.
-8. Bogenschutz, M. P., et al. (2025a). Incremental efficacy systematic review and meta-analysis of psilocybin-for-depression RCTs. *Psychopharmacology*.
-9. Bogenschutz, M. P., et al. (2025b). Psilocybin-assisted therapy for relapse prevention in alcohol use disorder: A phase 2 randomized clinical trial. *eClinicalMedicine*.
+8. Borgogna, N. C., et al. (2025). Incremental efficacy systematic review and meta-analysis of psilocybin-for-depression RCTs. *Psychopharmacology*, 242, 2139–2157.
+9. Rieser, N. M., et al. (2025). Psilocybin-assisted therapy for relapse prevention in alcohol use disorder: A phase 2 randomized clinical trial. *eClinicalMedicine*.
 10. Bradley, R., Greene, J., Russ, E., Dutra, L., & Westen, D. (2005). A multidimensional meta-analysis of psychotherapy for PTSD. *American Journal of Psychiatry*, 162(2), 214–227.
 11. Breeksema, J. J., et al. (2022). Adverse events in clinical treatments with serotonergic psychedelics and MDMA: A mixed-methods systematic review. *Journal of Psychopharmacology*, 36(10), 1100–1117.
 12. Brennan, W., & Belser, A. B. (2022). Models of psychedelic-assisted psychotherapy: A contemporary assessment and an introduction to EMBARK. *Frontiers in Psychology*, 13, 866018.
@@ -643,7 +643,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 17. Carhart-Harris, R. L., et al. (2017). Psilocybin for treatment-resistant depression: fMRI-measured brain mechanisms. *Scientific Reports*, 7, 13187.
 18. Carhart-Harris, R. L., et al. (2021). Trial of psilocybin versus escitalopram for depression. *New England Journal of Medicine*, 384(15), 1402–1411.
 19. Cavanna, F., et al. (2022). Microdosing with psilocybin mushrooms: A double-blind placebo-controlled study. *Translational Psychiatry*, 12, 307.
-20. Chowdhury, N. I., et al. (2025). Psilocybin-assisted therapy for treatment-resistant depression in the US: A model-based cost-effectiveness analysis. *Translational Psychiatry*, 15, 156.
+20. Avanceña, A. L. V., Vuong, L., Kahn, J. G., & Marseille, E. (2025). Psilocybin-assisted therapy for treatment-resistant depression in the US: A model-based cost-effectiveness analysis. *Translational Psychiatry*, 15, 330.
 21. Cipriani, A., et al. (2018). Comparative efficacy and acceptability of 21 antidepressant drugs for the acute treatment of adults with major depressive disorder. *The Lancet*, 391(10128), 1357–1366.
 22. Cuijpers, P., et al. (2013). A meta-analysis of cognitive-behavioural therapy for adult depression, alone and in comparison with other treatments. *Canadian Journal of Psychiatry*, 58(7), 376–385.
 23. Cuijpers, P., et al. (2023). Cognitive behavior therapy vs. control conditions, other psychotherapies, pharmacotherapies and combined treatment for depression. *World Psychiatry*, 22(1), 105–115.
@@ -654,7 +654,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 28. Dyck, E. (2005). Flashback: Psychiatric experimentation with LSD in historical perspective. *Canadian Journal of Psychiatry*, 50(7), 381–388.
 29. Erritzoe, D., et al. (2024). Effect of psilocybin versus escitalopram on depression symptom severity: Observational 6-month follow-up of a phase 2 trial. *eClinicalMedicine*, 76, 102799.
 30. Erritzoe, D., et al. (2026). A short-acting psychedelic intervention for major depressive disorder: A phase IIa randomized placebo-controlled trial. *Nature Medicine*.
-31. Garcia-Romeu, A., Griffiths, R. R., & Johnson, M. W. (2015). Psilocybin-occasioned mystical experiences in the treatment of tobacco addiction. *Current Drug Abuse Reviews*, 7(3), 157–164.
+31. Garcia-Romeu, A., Griffiths, R. R., & Johnson, M. W. (2014). Psilocybin-occasioned mystical experiences in the treatment of tobacco addiction. *Current Drug Abuse Reviews*, 7(3), 157–164.
 32. Gattuso, J. J., et al. (2023). Default mode network modulation by psychedelics: A systematic review. *International Journal of Neuropsychopharmacology*, 26(3), 155–188.
 33. George, J. R., Michaels, T. I., Sevelius, J., & Williams, M. T. (2020). The psychedelic renaissance and the limitations of a White-dominant medical framework. *Journal of Psychedelic Studies*, 4(1), 4–15.
 34. Goodwin, G. M., et al. (2022). Single-dose psilocybin for a treatment-resistant episode of major depression. *New England Journal of Medicine*, 387(18), 1637–1648.
@@ -665,38 +665,38 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 39. Griffiths, R. R., et al. (2016). Psilocybin produces substantial and sustained decreases in depression and anxiety in patients with life-threatening cancer. *Journal of Psychopharmacology*, 30(12), 1181–1197.
 40. Gukasyan, N., et al. (2022). Efficacy and safety of psilocybin-assisted treatment for major depressive disorder: Prospective 12-month follow-up. *Journal of Psychopharmacology*, 36(2), 151–158.
 41. Halpern, J. H., Lerner, A. G., & Passie, T. (2018). A review of hallucinogen persisting perception disorder (HPPD). *Current Topics in Behavioral Neurosciences*, 36, 333–360.
-42. Hamilton, J. P., et al. (2015). Default-mode and task-positive network activity in major depressive disorder. *Biological Psychiatry*, 78(10), 702–711.
+42. Hamilton, J. P., et al. (2015). Depressive rumination, the default-mode network, and the dark matter of clinical neuroscience. *Biological Psychiatry*, 78(4), 224–230.
 43. Hesselgrave, N., et al. (2021). Harnessing psilocybin: Antidepressant-like behavioral and synaptic actions of psilocybin are independent of 5-HT2R activation in mice. *Proceedings of the National Academy of Sciences USA*, 118(17), e2022489118.
-44. Hinkle, J. T., et al. (2024). Adverse events in studies of classic psychedelics: A systematic review and meta-analysis. *JAMA Psychiatry*, 81(11), 1099–1108.
+44. Hinkle, J. T., et al. (2024). Adverse events in studies of classic psychedelics: A systematic review and meta-analysis. *JAMA Psychiatry*, 81(12), 1225–1235.
 45. Holze, F., et al. (2023). Lysergic acid diethylamide–assisted therapy in patients with anxiety: A randomized, double-blind, placebo-controlled phase II study. *Biological Psychiatry*, 93(3), 215–223.
 46. Holze, F., et al. (2024). LSD-assisted therapy in patients with anxiety: Open-label prospective 12-month follow-up. *The British Journal of Psychiatry*, 225(3), 362–370.
-47. Holze, F., et al. (2025). Efficacy and safety of low- versus high-dose-LSD-assisted therapy in patients with major depression. *Med*, doi: 10.1016/j.medj.2025.100654.
-48. Hutten, N. R. P. W., et al. (2022). LSD microdosing for ADHD: A double-blind, placebo-controlled RCT. *Frontiers in Psychiatry*.
+47. Muller, F., et al. (2025). Efficacy and safety of low- versus high-dose-LSD-assisted therapy in patients with major depression: A randomized trial. *Med*, doi: 10.1016/j.medj.2025.100725.
+48. Hutten, N. R. P. W., et al. (2025). Safety and efficacy of repeated low-dose LSD for ADHD treatment in adults: A randomized clinical trial. *JAMA Psychiatry*, 82(4), 375–384.
 49. Johnson, M. W., Richards, W. A., & Griffiths, R. R. (2008). Human hallucinogen research: Guidelines for safety. *Journal of Psychopharmacology*, 22(6), 603–620.
 50. Johnson, M. W., et al. (2014). Pilot study of the 5-HT2AR agonist psilocybin in the treatment of tobacco addiction. *Journal of Psychopharmacology*, 28(11), 983–992.
 51. Johnson, M. W., Garcia-Romeu, A., & Griffiths, R. R. (2017). Long-term follow-up of psilocybin-facilitated smoking cessation. *American Journal of Drug and Alcohol Abuse*, 43(1), 55–60.
 52. Jonas, D. E., et al. (2014). Pharmacotherapy for adults with alcohol use disorders in outpatient settings. *JAMA*, 311(18), 1889–1900.
 53. Knatz Peck, S., et al. (2023). Psilocybin therapy for females with anorexia nervosa: A phase 1, open-label feasibility study. *Nature Medicine*, 29, 1947–1953.
-54. Ko, K., et al. (2023). Psilocybin-assisted therapy for depression: A systematic review and meta-analysis. *Journal of Affective Disorders*, 331, 198–207.
+54. Ko, K., et al. (2023). Psychedelic therapy for depressive symptoms: A systematic review and meta-analysis. *Journal of Affective Disorders*, 322, 194–204.
 55. Krebs, T. S., & Johansen, P.-Ø. (2012). Lysergic acid diethylamide (LSD) for alcoholism: Meta-analysis of RCTs. *Journal of Psychopharmacology*, 26(7), 994–1002.
 56. Leucht, S., et al. (2012). Putting the efficacy of psychiatric and general medicine medication into perspective: Review of meta-analyses. *British Journal of Psychiatry*, 200(2), 97–106.
 57. Ly, C., et al. (2018). Psychedelics promote structural and functional neural plasticity. *Cell Reports*, 23(11), 3170–3182.
-58. Barrett, F. S., Zhou, Y., Carbonaro, T. M., Roberts, J. M., Smith, G. S., Griffiths, R. R., & Wong, D. F. (2021). Human cortical serotonin 2A receptor occupancy by psilocybin measured using [11C]MDL 100,907 dynamic PET. *Frontiers in Neuroergonomics*, 2, 784576.
+58. Barrett, F. S., Zhou, Y., Carbonaro, T. M., Roberts, J. M., Smith, G. S., Griffiths, R. R., & Wong, D. F. (2022). Human cortical serotonin 2A receptor occupancy by psilocybin measured using [11C]MDL 100,907 dynamic PET. *Frontiers in Neuroergonomics*, 2, 784576.
 59. Marseille, E., Kahn, J. G., Yazar-Klosinski, B., & Doblin, R. (2020). The cost-effectiveness of MDMA-assisted psychotherapy for the treatment of chronic, treatment-resistant PTSD. *PLOS ONE*, 15(10), e0239997.
 60. Marseille, E., Mitchell, J. M., & Kahn, J. G. (2022a). Updated cost-effectiveness of MDMA-assisted therapy for PTSD: Findings from a phase 3 trial. *PLOS ONE*, 17(2), e0263252.
 61. Marseille, E., Bertozzi, S. M., & Kahn, J. G. (2022b). The economics of psychedelic-assisted therapies: A research agenda. *Frontiers in Psychiatry*, 13, 1025726.
-62. McCrone, P., et al. (2023). Cost-effectiveness of psilocybin-assisted therapy for severe depression: Exploratory findings from a decision analytic model. *Psychological Medicine*, 53(16), 7913–7918.
+62. McCrone, P., et al. (2023). Cost-effectiveness of psilocybin-assisted therapy for severe depression: Exploratory findings from a decision analytic model. *Psychological Medicine*, 53(16), 7619–7626.
 63. McIntyre, R. S., et al. (2021). Synthesizing the evidence for ketamine and esketamine in treatment-resistant depression: An international expert opinion. *American Journal of Psychiatry*, 178(5), 383–399.
-64. McIntyre, R. S., et al. (2022). Real-world effectiveness of ketamine in treatment-resistant depression: A systematic review & meta-analysis. *Journal of Psychiatric Research*, 151, 693–709.
+64. Alnefeesi, Y., Chen-Li, D., Krane, E., et al. (2022). Real-world effectiveness of ketamine in treatment-resistant depression: A systematic review & meta-analysis. *Journal of Psychiatric Research*, 151, 693–709.
 65. McNamee, S., Devenot, N., & Buisson, M. (2023). Studying harms is key to improving psychedelic-assisted therapy. *JAMA Psychiatry*, 80(5), 411–412.
-66. Meikle, S., Carter, O., & Bedi, G. (2024). Psychedelic-assisted psychotherapy, patient vulnerability and abuses of power. *Australian & New Zealand Journal of Psychiatry*, 58(2), 100–103.
+66. Meikle, S., Carter, O., & Bedi, G. (2024). Psychedelic-assisted psychotherapy, patient vulnerability and abuses of power. *Australian & New Zealand Journal of Psychiatry*, 58(2), 104–106.
 67. Menon, V., et al. (2025). Randomized controlled trials of psilocybin-assisted therapy in the treatment of major depressive disorder. *Acta Psychiatrica Scandinavica*, 151(5), 557–571.
 68. Metaxa, A. M., & Clarke, M. (2024). Efficacy of psilocybin for treating symptoms of depression: Systematic review and meta-analysis. *BMJ*, 385, e078084.
 69. Michaels, T. I., et al. (2018). Inclusion of people of color in psychedelic-assisted psychotherapy: A review of the literature. *BMC Psychiatry*, 18(1), 245.
 70. Mitchell, J. M., et al. (2021). MDMA-assisted therapy for severe PTSD: A randomized, double-blind, placebo-controlled phase 3 study. *Nature Medicine*, 27(6), 1025–1033.
 71. Mitchell, J. M., et al. (2023). MDMA-assisted therapy for moderate to severe PTSD: A randomized, placebo-controlled phase 3 trial. *Nature Medicine*, 29(10), 2473–2480.
 72. Mithoefer, M. C., et al. (2013). Durability of improvement in PTSD symptoms and absence of harmful effects after MDMA-assisted psychotherapy: A prospective long-term follow-up study. *Journal of Psychopharmacology*, 27(1), 28–39.
-73. Mithoefer, M. C., et al. (2016). MDMA-assisted psychotherapy for treatment of PTSD: Study design and rationale for phase 3 trials. *Psychopharmacology*, 233(21–22), 3537–3549.
+73. Mithoefer, M. C., et al. (2019). MDMA-assisted psychotherapy for treatment of PTSD: Study design and rationale for phase 3 trials based on pooled analysis of six phase 2 RCTs. *Psychopharmacology*, 236, 2735–2745. [**RETRACTED August 2024**]
 74. Moreno, F. A., et al. (2006). Safety, tolerability, and efficacy of psilocybin in 9 patients with obsessive-compulsive disorder. *Journal of Clinical Psychiatry*, 67(11), 1735–1740.
 75. Noller, G. E., Frampton, C. M., & Yazar-Klosinski, B. (2018). Ibogaine treatment outcomes for opioid dependence from a twelve-month follow-up observational study. *American Journal of Drug and Alcohol Abuse*, 44(1), 37–46.
 76. Olson, D. E. (2018). Psychoplastogens: A promising class of plasticity-promoting neurotherapeutics. *Journal of Experimental Neuroscience*, 12, 1179069518800508.
@@ -710,8 +710,8 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 84. Preller, K. H., et al. (2017). The fabric of meaning and subjective effects in LSD-induced states depend on serotonin 2A receptor activation. *Current Biology*, 27(3), 451–457.
 85. Raison, C. L., et al. (2023). Single-dose psilocybin treatment for major depressive disorder: A randomized clinical trial. *JAMA*, 330(9), 843–853.
 86. Reckweg, J. T., et al. (2023). A phase 1/2 trial to assess safety and efficacy of a vaporized 5-methoxy-N,N-dimethyltryptamine formulation (GH001) in patients with treatment-resistant depression. *Frontiers in Psychiatry*, 14, 1133414.
-87. Ritchie, O. D., Donley, C. N., & Ritchie, G. D. (2023). From prohibited to prescribed: The rescheduling of MDMA and psilocybin in Australia. *Journal of Psychedelic Studies*, 7(3), 169–175.
-88. Rodriguez, C. I., et al. (2024). Safety, feasibility, tolerability, and clinical effects of repeated psilocybin dosing combined with non-directive support for OCD: Protocol. *Frontiers in Psychiatry*, 14, 1278823.
+87. Ritchie, O. D., Donley, C. N., & Ritchie, G. D. (2023). From prohibited to prescribed: The rescheduling of MDMA and psilocybin in Australia. *Drug Science, Policy and Law*, 9.
+88. Ching, T. H. W., et al. (2024). Safety, feasibility, tolerability, and clinical effects of repeated psilocybin dosing combined with non-directive support in the treatment of OCD: Protocol for a randomized, waitlist-controlled trial. *Frontiers in Psychiatry*, 14, 1278823.
 89. Rosenblat, J. D., et al. (2024). Psilocybin-assisted psychotherapy for treatment resistant depression: A randomized clinical trial evaluating repeated doses. *Med*, 5(3), 190–200.
 90. Ross, S., et al. (2016). Rapid and sustained symptom reduction following psilocybin treatment for anxiety and depression in patients with life-threatening cancer. *Journal of Psychopharmacology*, 30(12), 1165–1180.
 91. Rouaud, A., Calder, A. E., & Hasler, G. (2024). Microdosing psychedelics and the risk of cardiac fibrosis and valvulopathy. *Journal of Psychopharmacology*, 38(3), 217–224.
@@ -723,11 +723,11 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 97. Shahrour, G., et al. (2024). MDMA-assisted psychotherapy for the treatment of PTSD: A systematic review and meta-analysis of RCTs. *Neuropsychopharmacology Reports*, 44(4), 672–681.
 98. Shao, L.-X., et al. (2021). Psilocybin induces rapid and persistent growth of dendritic spines in frontal cortex in vivo. *Neuron*, 109(16), 2535–2544.
 99. Sloshower, J., et al. (2023). Psilocybin-assisted therapy for major depressive disorder: An exploratory placebo-controlled, fixed-order trial. *Journal of Psychopharmacology*, 37(7), 698–706.
-100. Stanicic, T., et al. (2025). MDMA-assisted therapy and current treatment options for chronic, treatment-resistant PTSD: Systematic literature review. *PLOS ONE*.
+100. Stanicic, F., et al. (2025). MDMA-assisted therapy and current treatment options for chronic, treatment-resistant PTSD: Systematic literature review. *PLOS ONE*, 20(7), e0327778.
 101. Stein, D. J., et al. (2006). Pharmacotherapy for post traumatic stress disorder (PTSD). *Cochrane Database of Systematic Reviews*.
 102. Sewell, R. A., Halpern, J. H., & Pope, H. G. Jr. (2006). Response of cluster headache to psilocybin and LSD. *Neurology*, 66(12), 1920–1922.
 103. Swieczkowski, D., et al. (2025). Efficacy and safety of psilocybin in the treatment of MDD: A dose-response network meta-analysis. *Psychiatry Research*, 344, 116337.
-104. Szabo, A. (2024). Cardiovascular safety of psychedelic medicine: Current status and future directions. *Pharmacological Reports*, 76, 1–14.
+104. Wsol, A. (2023). Cardiovascular safety of psychedelic medicine: Current status and future directions. *Pharmacological Reports*, 75(6), 1362–1380.
 105. Szigeti, B., et al. (2021). Self-blinding citizen science to explore psychedelic microdosing. *eLife*, 10, e62878.
 106. Thomas, G., et al. (2013). Ayahuasca-assisted therapy for addiction: Results from a preliminary observational study in Canada. *Current Drug Abuse Reviews*, 6(1), 30–42.
 107. Thrul, J., & Garcia-Romeu, A. (2021). Whitewashing psychedelics: Racial equity in the emerging field of psychedelic-assisted mental health research and treatment. *Drugs: Education, Prevention and Policy*, 28(3), 211–214.
@@ -738,6 +738,6 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 112. WHO (2023). *Depressive disorder (depression).* World Health Organization Fact Sheet. https://www.who.int/news-room/fact-sheets/detail/depression
 113. Wilkinson, S. T., et al. (2018). The effect of a single dose of intravenous ketamine on suicidal ideation: A systematic review and individual participant data meta-analysis. *American Journal of Psychiatry*, 175(2), 150–158.
 114. Williams, N. R., et al. (2024). Magnesium–ibogaine therapy in veterans with traumatic brain injuries. *Nature Medicine*, 30, 373–381.
-115. Yang, C., et al. (2024). The efficacy and safety of MDMA-assisted psychotherapy for treatment of PTSD: A systematic review and meta-analysis from RCTs. *Psychiatry Research*, 338, 115994.
+115. Yang, J., et al. (2024). The efficacy and safety of MDMA-assisted psychotherapy for treatment of PTSD: A systematic review and meta-analysis from RCTs. *Psychiatry Research*, 339, 116043.
 116. Yao, S., et al. (2024). Efficacy and safety of psychedelics for the treatment of mental disorders: A systematic review and meta-analysis. *Psychiatry Research*, 335, 115886.
 117. Yong, A. S. J., et al. (2025). Safety and efficacy of MDMA-assisted psychotherapy in PTSD: An overview of systematic reviews and meta-analyses. *Australian and New Zealand Journal of Psychiatry*.
