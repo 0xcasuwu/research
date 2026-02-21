@@ -20,7 +20,7 @@ We examine the neurobiological mechanisms of action — centering on 5-HT2A rece
 
 ### 1.1 The Burden of Treatment-Resistant Mental Illness
 
-Major depressive disorder affects over 280 million people globally and is the leading cause of disability worldwide (WHO, 2023). Post-traumatic stress disorder afflicts approximately 3.9% of the global population, with substantially higher prevalence among military veterans, refugees, and survivors of sexual violence. Substance use disorders account for over 500,000 deaths annually and impose enormous societal costs. Obsessive-compulsive disorder affects 2–3% of the global population, with approximately 40–60% of patients failing to achieve adequate response to first-line serotonergic pharmacotherapy.
+Major depressive disorder affects over 280 million people globally and is the leading cause of disability worldwide (WHO, 2023). Post-traumatic stress disorder has an estimated lifetime prevalence of approximately 3.9% globally, with substantially higher rates among military veterans, refugees, and survivors of sexual violence. Drug use disorders alone account for nearly 500,000 deaths annually, with alcohol-attributable mortality adding approximately 2.6 million more (WHO, 2024). Obsessive-compulsive disorder affects 1–3% of the global population, with approximately 40–60% of patients failing to achieve adequate response to first-line serotonergic pharmacotherapy.
 
 Despite decades of pharmacological development, treatment outcomes remain unsatisfactory for a significant proportion of patients. Approximately 30% of individuals with MDD do not respond adequately to two or more trials of antidepressant medication, meeting criteria for treatment-resistant depression (Rush et al., 2006). First-line SSRIs typically show modest effect sizes (Cohen's d ≈ 0.30 vs. placebo) and require 4–8 weeks to achieve full therapeutic effect (Cipriani et al., 2018). Publication bias inflates the apparent efficacy of antidepressants: Turner et al. (2008) demonstrated that when unpublished FDA-registered trial data are included, the aggregate effect size for 12 antidepressant drugs is 32% smaller than published literature suggests, with 94% of published trials appearing positive compared to only 51% per FDA records. For PTSD, only two medications — sertraline and paroxetine — hold FDA approval, with effect sizes that are similarly modest (d ≈ 0.3–0.4) and remission rates below 30% (Stein et al., 2006). These limitations have catalyzed a search for mechanistically novel interventions.
 
@@ -52,7 +52,7 @@ We additionally examine the neurobiological mechanisms of action, safety and adv
 
 Psilocybin is a prodrug of psilocin (4-OH-DMT), a non-selective serotonin receptor agonist with primary affinity for the 5-HT2A receptor. There is broad consensus that the subjective, behavioral, and neural effects of classic psychedelics are initiated via stimulation of cortical 5-HT2A receptors (Vollenweider & Preller, 2020). Human studies using the 5-HT2A/2C antagonist ketanserin demonstrate complete blockade of the psychedelic experience, confirming the necessary role of this receptor subtype (Preller et al., 2017).
 
-PET neuroimaging with [11C]MDL 100,907 in humans has quantified cortical 5-HT2A receptor occupancy following a standard psilocybin dose at approximately 39.5% (±10.9% SD) across all cortical regions, with preferential occupancy (63–75%) in regions of the default mode network, including the subgenual anterior cingulate cortex and bilateral angular gyri (Madsen et al., 2021).
+PET neuroimaging with [11C]MDL 100,907 in humans has quantified cortical 5-HT2A receptor occupancy following a standard psilocybin dose at approximately 39.5% (±10.9% SD) across all cortical regions, with preferential occupancy (63–75%) in regions of the default mode network, including the subgenual anterior cingulate cortex and bilateral angular gyri (Barrett et al., 2021).
 
 Downstream, 5-HT2A activation on layer V pyramidal neurons increases glutamatergic transmission in the prefrontal cortex while simultaneously enhancing GABAergic interneuron activity, producing a net desynchronization of cortical activity. This aligns with the "entropic brain hypothesis" proposed by Carhart-Harris et al. (2014), which posits that psychedelics increase the entropy (informational complexity) of spontaneous brain activity, temporarily dissolving the rigid, over-determined patterns of neural activity associated with pathological rumination.
 
@@ -94,7 +94,7 @@ Multiple systematic reviews and meta-analyses published between 2023 and 2025 ha
 
 | Meta-Analysis | k (studies) | N (participants) | Effect Size | Notes |
 |---|---|---|---|---|
-| Dai et al. (2024), *Frontiers in Psychiatry* | 8 RCTs | 524 | g = **-0.89** (I² = 70%) | Primary and secondary depression |
+| Fang et al. (2024), *Frontiers in Psychiatry* | 8 RCTs | 524 | g = **-0.89** (I² = 70%) | Primary and secondary depression |
 | Yao et al. (2024), *Psychiatry Research* | 126 articles (all psychedelics) | — | g = **-1.49** (psilocybin) | Psilocybin strongest of 4 psychedelics |
 | Ko et al. (2023), *J Affective Disorders* | 5 RCTs | — | MD = **-9.55** (Day 15 MADRS) | 25 mg dose SUCRA = 92.25% |
 | Metaxa & Clarke (2024), *BMJ* | 7 RCTs | 436 | g = **0.66** (I² = 0%) | Response RR = 2.17; Remission RR = 2.96 |
@@ -363,7 +363,7 @@ Ibogaine represents an exception, with documented QT prolongation and cardiac ar
 
 ### 9.6 Hallucinogen Persisting Perception Disorder (HPPD)
 
-HPPD Type 2 (chronic, persistent) is estimated at ~1 in 50,000 hallucinogen users (Orsolini et al., 2017). No cases have been reported in modern clinical research involving thousands of screened participants. Halpern et al. (2018) identified risk factors including pre-existing psychological vulnerability, polydrug use, and repeated high-dose use. Risk in controlled, screened, supported settings appears extremely low.
+HPPD Type 2 (chronic, persistent) is widely cited as rare, though precise prevalence estimates remain elusive due to underreporting and methodological challenges. Orsolini et al. (2017) systematically reviewed the HPPD literature, noting that overall prevalence "has been generally considered low" without quantifying a specific rate. Halpern et al. (2018) identified risk factors including pre-existing psychological vulnerability, polydrug use, and repeated high-dose use, noting that prevalence estimates range widely (from ~4.2% for any visual disturbance to extremely rare chronic forms). No cases have been reported in modern clinical research involving thousands of screened participants, suggesting that risk in controlled, screened, supported settings is extremely low.
 
 ### 9.7 Serotonin Toxicity
 
@@ -647,7 +647,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 21. Cipriani, A., et al. (2018). Comparative efficacy and acceptability of 21 antidepressant drugs for the acute treatment of adults with major depressive disorder. *The Lancet*, 391(10128), 1357–1366.
 22. Cuijpers, P., et al. (2013). A meta-analysis of cognitive-behavioural therapy for adult depression, alone and in comparison with other treatments. *Canadian Journal of Psychiatry*, 58(7), 376–385.
 23. Cuijpers, P., et al. (2023). Cognitive behavior therapy vs. control conditions, other psychotherapies, pharmacotherapies and combined treatment for depression. *World Psychiatry*, 22(1), 105–115.
-24. Dai, C., et al. (2024). Efficacy and acceptability of psilocybin for primary or secondary depression: A systematic review and meta-analysis of RCTs. *Frontiers in Psychiatry*, 15, 1359088.
+24. Fang, S., Yang, X., & Zhang, W. (2024). Efficacy and acceptability of psilocybin for primary or secondary depression: A systematic review and meta-analysis of RCTs. *Frontiers in Psychiatry*, 15, 1359088.
 25. Davis, A. K., et al. (2021). Effects of psilocybin-assisted therapy on major depressive disorder: A randomized clinical trial. *JAMA Psychiatry*, 78(5), 481–489.
 26. Daws, R. E., et al. (2022). Increased global integration in the brain after psilocybin therapy for depression. *Nature Medicine*, 28(4), 844–851.
 27. De Vos, C. M. H., Mason, N. L., & Kuypers, K. P. C. (2021). Psychedelics and neuroplasticity: A systematic review unraveling the biological underpinnings of psychedelics. *Frontiers in Psychiatry*, 12, 724606.
@@ -681,7 +681,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 55. Krebs, T. S., & Johansen, P.-Ø. (2012). Lysergic acid diethylamide (LSD) for alcoholism: Meta-analysis of RCTs. *Journal of Psychopharmacology*, 26(7), 994–1002.
 56. Leucht, S., et al. (2012). Putting the efficacy of psychiatric and general medicine medication into perspective: Review of meta-analyses. *British Journal of Psychiatry*, 200(2), 97–106.
 57. Ly, C., et al. (2018). Psychedelics promote structural and functional neural plasticity. *Cell Reports*, 23(11), 3170–3182.
-58. Madsen, M. K., et al. (2021). Human cortical serotonin 2A receptor occupancy by psilocybin measured using [11C]MDL 100,907 dynamic PET. *Frontiers in Neuroergonomics*, 2, 784576.
+58. Barrett, F. S., Zhou, Y., Carbonaro, T. M., Roberts, J. M., Smith, G. S., Griffiths, R. R., & Wong, D. F. (2021). Human cortical serotonin 2A receptor occupancy by psilocybin measured using [11C]MDL 100,907 dynamic PET. *Frontiers in Neuroergonomics*, 2, 784576.
 59. Marseille, E., Kahn, J. G., Yazar-Klosinski, B., & Doblin, R. (2020). The cost-effectiveness of MDMA-assisted psychotherapy for the treatment of chronic, treatment-resistant PTSD. *PLOS ONE*, 15(10), e0239997.
 60. Marseille, E., Mitchell, J. M., & Kahn, J. G. (2022a). Updated cost-effectiveness of MDMA-assisted therapy for PTSD: Findings from a phase 3 trial. *PLOS ONE*, 17(2), e0263252.
 61. Marseille, E., Bertozzi, S. M., & Kahn, J. G. (2022b). The economics of psychedelic-assisted therapies: A research agenda. *Frontiers in Psychiatry*, 13, 1025726.
