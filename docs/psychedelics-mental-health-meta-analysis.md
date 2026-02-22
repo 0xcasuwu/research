@@ -341,7 +341,7 @@ Thomas et al. (2013) conducted an observational study of ayahuasca-assisted ther
 
 ### 7.4 Meta-Analytic Overview
 
-Van der Meer et al. (2023) systematically reviewed 4 clinical trials (N=151) of psilocybin for SUDs (3 AUD, 1 TUD), finding beneficial effects in all. Alnahari et al. (2025) conducted a broader systematic review and meta-analysis of 30 studies evaluating LSD, psilocybin, ketamine, and ibogaine for SUDs, demonstrating positive results for abstinence, reduced substance use, craving, and withdrawal across compounds, though insufficient data to establish superiority of any specific psychedelic.
+Van der Meer et al. (2023) systematically reviewed 4 clinical trials (N=151) of psilocybin for SUDs (3 AUD, 1 TUD), finding beneficial effects in all. Keighley et al. (2025) conducted a broader systematic review and meta-analysis of 30 studies evaluating LSD, psilocybin, ketamine, and ibogaine for SUDs, demonstrating positive results for abstinence, reduced substance use, craving, and withdrawal across compounds, though insufficient data to establish superiority of any specific psychedelic.
 
 ---
 
@@ -557,7 +557,7 @@ The microdosing literature provides an important counterpoint to the high-dose t
 
 **Cavanna et al. (2022)** — Double-blind, placebo-controlled RCT (N=34) of 0.5g dried psilocybin mushrooms found no significant effects on divergent or convergent thinking vs. placebo. **Polito & Liknaitzky (2024)** systematically reviewed 19 placebo-controlled microdosing studies and found changes in neurobiology and physiology relative to placebo but no lasting effects on mood, cognition, or creativity from repeated administration.
 
-**Hutten et al. (2025)** — A randomized clinical trial of repeated low-dose LSD for ADHD treatment in adults found the intervention was safe but failed to demonstrate efficacy vs. placebo.
+**Mueller et al. (2025)** — A randomized clinical trial of repeated low-dose LSD for ADHD treatment in adults found the intervention was safe but failed to demonstrate efficacy vs. placebo.
 
 The contrast between null microdosing results and robust high-dose therapeutic effects supports the hypothesis that a full psychedelic experience — with its associated neuroplasticity, psychological insight, and mystical/peak experiences — is necessary for therapeutic benefit, rather than subtle pharmacological modulation.
 
@@ -676,7 +676,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 1. Aday, J. S., Mitzkovitz, C. M., Bloesch, E. K., Davoli, C. C., & Davis, A. K. (2020). Long-term effects of psychedelic drugs: A systematic review. *Neuroscience & Biobehavioral Reviews*, 113, 179–189.
 2. Hultgren, J., Hafsteinsson, M. H., & Gruneau Brulin, J. (2025). A dose of therapy with psilocybin—A meta-analysis of the relationship between the amount of therapy hours and treatment outcomes in psychedelic-assisted therapy. *General Hospital Psychiatry*, 96, 234–243.
 3. Agin-Liebes, G. I., et al. (2020). Long-term follow-up of psilocybin-assisted psychotherapy for psychiatric and existential distress in patients with life-threatening cancer. *Journal of Psychopharmacology*, 34(2), 155–166.
-4. Alnahari, N., et al. (2025). A systematic review and meta-analysis investigating the efficacy of various psychedelic drugs for the treatment of substance use disorder. *Healthcare*, 13(21), 2668.
+4. Keighley, E. E., Abo Hamza, E., Bedewy, D. A., Nalla, S., & Moustafa, A. A. (2025). A systematic review and meta-analysis investigating the efficacy of various psychedelic drugs for the treatment of substance use disorder. *Healthcare*, 13(21), 2668.
 5. Wong, S., Kwan, A. T. H., Teopiz, K. M., et al. (2024). A comparison between psilocybin and esketamine in treatment-resistant depression using number needed to treat (NNT): A systematic review. *Journal of Affective Disorders*, 350, 698–705.
 6. Barrett, F. S., Bradstreet, M. P., Leoutsakos, J.-M. S., Johnson, M. W., & Griffiths, R. R. (2016). The Challenging Experience Questionnaire: Characterization of challenging experiences with psilocybin mushrooms. *Journal of Psychopharmacology*, 30(12), 1279–1295.
 7. Bogenschutz, M. P., et al. (2022). Percentage of heavy drinking days following psilocybin-assisted psychotherapy vs placebo in the treatment of adult patients with alcohol use disorder. *JAMA Psychiatry*, 79(10), 953–962.
@@ -720,7 +720,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 45. Holze, F., et al. (2023). Lysergic acid diethylamide–assisted therapy in patients with anxiety: A randomized, double-blind, placebo-controlled phase II study. *Biological Psychiatry*, 93(3), 215–223.
 46. Holze, F., et al. (2024). LSD-assisted therapy in patients with anxiety: Open-label prospective 12-month follow-up. *The British Journal of Psychiatry*, 225(3), 362–370.
 47. Muller, F., et al. (2025). Efficacy and safety of low- versus high-dose-LSD-assisted therapy in patients with major depression: A randomized trial. *Med*, doi: 10.1016/j.medj.2025.100725.
-48. Hutten, N. R. P. W., et al. (2025). Safety and efficacy of repeated low-dose LSD for ADHD treatment in adults: A randomized clinical trial. *JAMA Psychiatry*, 82(4), 375–384.
+48. Mueller, L., Santos de Jesus, J., Schmid, Y., et al. (2025). Safety and efficacy of repeated low-dose LSD for ADHD treatment in adults: A randomized clinical trial. *JAMA Psychiatry*, 82(6), 555–562.
 49. Johnson, M. W., Richards, W. A., & Griffiths, R. R. (2008). Human hallucinogen research: Guidelines for safety. *Journal of Psychopharmacology*, 22(6), 603–620.
 50. Johnson, M. W., et al. (2014). Pilot study of the 5-HT2AR agonist psilocybin in the treatment of tobacco addiction. *Journal of Psychopharmacology*, 28(11), 983–992.
 51. Johnson, M. W., Garcia-Romeu, A., & Griffiths, R. R. (2017). Long-term follow-up of psilocybin-facilitated smoking cessation. *American Journal of Drug and Alcohol Abuse*, 43(1), 55–60.
@@ -798,5 +798,5 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 123. Nutt, D. J. (2009). Equasy — An overlooked addiction with implications for the current debate on drug harms. *Journal of Psychopharmacology*, 23(1), 3–5.
 124. Marks, M., & Cohen, I. G. (2021). Psychedelic therapy: A roadmap for wider acceptance and utilization. *Nature Medicine*, 27(10), 1669–1671.
 125. Hancock, G. (2015). *The Divine Spark: A Graham Hancock Reader — Psychedelics, Consciousness, and the Birth of Civilization*. Hay House.
-126. Boire, R. G. (2000). On cognitive liberty. *Journal of Cognitive Liberties*, 2(1), 7–22.
-127. Carhart-Harris, R. L., & Nutt, D. J. (2014). Was it a vision or a waking dream? *Frontiers in Psychiatry*, 5, 121.
+126. Boire, R. G. (1999/2000). On cognitive liberty. *Journal of Cognitive Liberties*, 1(1), 7–13.
+127. Carhart-Harris, R. L., & Nutt, D. J. (2014). Was it a vision or a waking dream? *Frontiers in Psychology*, 5, 255.
