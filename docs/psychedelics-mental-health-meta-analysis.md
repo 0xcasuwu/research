@@ -788,7 +788,7 @@ The meta-analytic evidence synthesized in this expanded review demonstrates that
 113. Wilkinson, S. T., et al. (2018). The effect of a single dose of intravenous ketamine on suicidal ideation: A systematic review and individual participant data meta-analysis. *American Journal of Psychiatry*, 175(2), 150–158.
 114. Williams, N. R., et al. (2024). Magnesium–ibogaine therapy in veterans with traumatic brain injuries. *Nature Medicine*, 30, 373–381.
 115. Yang, J., et al. (2024). The efficacy and safety of MDMA-assisted psychotherapy for treatment of PTSD: A systematic review and meta-analysis from RCTs. *Psychiatry Research*, 339, 116043.
-116. Yao, S., et al. (2024). Efficacy and safety of psychedelics for the treatment of mental disorders: A systematic review and meta-analysis. *Psychiatry Research*, 335, 115886.
+116. Yao, Y., et al. (2024). Efficacy and safety of psychedelics for the treatment of mental disorders: A systematic review and meta-analysis. *Psychiatry Research*, 335, 115886.
 117. Yong, A. S. J., et al. (2025). Safety and efficacy of MDMA-assisted psychotherapy in PTSD: An overview of systematic reviews and meta-analyses. *Australian and New Zealand Journal of Psychiatry*.
 118. Baum, D. (2016). Legalize it all: How to win the war on drugs. *Harper's Magazine*, April 2016.
 119. Nutt, D. J., King, L. A., & Phillips, L. D. (2010). Drug harms in the UK: A multicriteria decision analysis. *The Lancet*, 376(9752), 1558–1565.
