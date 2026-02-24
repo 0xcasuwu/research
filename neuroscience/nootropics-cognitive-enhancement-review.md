@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-Nootropics — substances claimed to enhance cognitive function — represent a rapidly growing market projected to reach $5.75 billion by 2033. The category spans prescription pharmaceuticals (modafinil, methylphenidate), synthetic compounds (racetams, noopept), natural supplements (bacopa, lion's mane, rhodiola), and everyday substances (caffeine, creatine, omega-3 fatty acids). This review synthesizes the clinical evidence from systematic reviews, meta-analyses, and randomized controlled trials through early 2026, evaluating efficacy, safety, mechanisms of action, and the ethical and regulatory landscape surrounding cognitive enhancement.
+Nootropics — substances claimed to enhance cognitive function — represent a rapidly growing market, with the U.S. market alone projected to reach $5.75 billion by 2033 (Renub Research, 2024). The category spans prescription pharmaceuticals (modafinil, methylphenidate), synthetic compounds (racetams, noopept), natural supplements (bacopa, lion's mane, rhodiola), and everyday substances (caffeine, creatine, omega-3 fatty acids). This review synthesizes the clinical evidence from systematic reviews, meta-analyses, and randomized controlled trials through early 2026, evaluating efficacy, safety, mechanisms of action, and the ethical and regulatory landscape surrounding cognitive enhancement.
 
 The overall picture is one of **modest and domain-specific effects** — with the strongest evidence supporting caffeine + L-theanine for attention, creatine under metabolic stress conditions, bacopa monnieri for memory over extended use, and omega-3 fatty acids at optimized doses. Prescription stimulants show small but measurable effects in healthy adults, while racetams remain inconclusive despite decades of study. Natural adaptogens like rhodiola and ashwagandha show promise primarily through stress reduction pathways. Across the board, transparency, long-term safety data, and regulatory oversight remain inadequate.
 
@@ -20,7 +20,7 @@ The term "nootropic" was coined in 1972 by Romanian psychologist and chemist **C
 4. Increase the efficacy of cortical/subcortical control mechanisms
 5. Lack the usual pharmacological side effects of neuro-psychotropic drugs
 
-This original definition set a high bar — one that most substances marketed as "nootropics" today fail to meet in full ([PMC — Nootropics as Cognitive Enhancers](https://pmc.ncbi.nlm.nih.gov/articles/PMC9415189/)).
+These criteria, widely attributed to Giurgea in secondary literature, set a high bar — one that most substances marketed as "nootropics" today fail to meet in full ([PMC — Nootropics as Cognitive Enhancers](https://pmc.ncbi.nlm.nih.gov/articles/PMC9415189/); Giurgea, C.E. "The nootropic concept and its prospective implications," *Drug Development Research*, 1982).
 
 ### 1.2 Historical Context
 
@@ -50,7 +50,7 @@ Nootropics can be categorized along multiple axes:
 
 | Study | Design | Key Finding |
 |-------|--------|-------------|
-| **Battleday & Brem (2015)** | Systematic review, 24 studies | Improved decision-making and planning; no effect on working memory or cognitive flexibility. Benefits more pronounced on complex tasks ([Oxford University](https://www.ox.ac.uk/news/2015-08-20-review-%E2%80%98smart-drug%E2%80%99-shows-modafinil-does-enhance-cognition)) |
+| **Battleday & Brem (2015)** | Systematic review, 24 studies | Improved decision-making and planning; no effect on working memory or cognitive flexibility. Benefits more pronounced on complex tasks ([*European Neuropsychopharmacology*](https://doi.org/10.1016/j.euroneuro.2015.07.028)) |
 | **Kredlow et al. (2019)** | Meta-analysis, 19 trials | Small overall effect (Hedges' g = 0.10). No difference between 100mg and 200mg doses ([PubMed](https://pubmed.ncbi.nlm.nih.gov/31433334/)) |
 | **Roberts et al. (2020)** | Meta-analysis comparing modafinil, MPH, d-amphetamine | Modafinil produced small improvement; improved attention and some memory sub-domains. D-amphetamine showed no overall effect ([ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0924977X20302145)) |
 
@@ -84,9 +84,9 @@ Nootropics can be categorized along multiple axes:
 
 | Study | Design | Key Finding |
 |-------|--------|-------------|
-| **2024 systematic review & meta-analysis** (*Clinica Chimica Acta*) | 18 studies, 886 patients | Memory enhancement showed **no significant clinical difference** between piracetam and placebo (SMD 0.75; p=0.12; I²=96%) ([ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0303846724002452)) |
-| **Waegemans et al. (2002)** | Meta-analysis, 19 studies | Favorable odds ratio (OR 3.35) — but three authors were paid consultants for manufacturer UCB ([PubMed](https://pubmed.ncbi.nlm.nih.gov/12006732/)) |
-| **Cochrane Review (2001)** | 24 RCTs, 11,959 subjects | No significant differences on cognition, dependency, or depression. Some effect on Global Impression of Change, but no benefit on specific cognitive measures ([NCBI Bookshelf](https://www.ncbi.nlm.nih.gov/books/NBK69241/)) |
+| **Gouhie et al. (2024)** (*Clinical Neurology and Neurosurgery*) | Systematic review & meta-analysis, 18 studies, 886 patients | Memory enhancement showed **no significant clinical difference** between piracetam and placebo (SMD 0.75; p=0.12; I²=96%). Note: extreme heterogeneity (I²=96%) limits interpretation of the pooled effect ([ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0303846724002452)) |
+| **Waegemans et al. (2002)** | Meta-analysis, 19 studies, 1,488 patients | Favorable odds ratio (OR 3.35) — but authors disclosed consultancy relationships with UCB and other pharmaceutical companies, a significant conflict of interest ([PubMed](https://pubmed.ncbi.nlm.nih.gov/12006732/)) |
+| **Cochrane Review — Flicker & Grimley Evans (2001)** | 24 RCTs, 11,959 subjects | No significant differences on cognition, dependency, or depression. Some effect on Global Impression of Change, but no benefit on specific cognitive measures ([Cochrane Library](https://doi.org/10.1002/14651858.CD001011)) |
 | **Healthy older adults** | Mixed | One trial showed improvement in visual perception/attention; a larger trial showed no improvement across 10 cognitive tests |
 | **Alzheimer's disease** | RCT, 33 patients | High-dose piracetam (8 g/day) for 1 year: no improvement in cognitive functions |
 
@@ -125,20 +125,19 @@ Nootropics can be categorized along multiple axes:
 
 ### 4.2 Lion's Mane Mushroom (Hericium erinaceus)
 
-**Mechanism**: Contains hericenones and erinacines that stimulate Nerve Growth Factor (NGF) production, supporting neuron survival and function. Also provides antioxidant and anti-inflammatory properties that may protect against neuroinflammation. University of Queensland research found lion's mane extracts "dramatically increase the length of neuron projections" and enhance connections between brain cells.
+**Mechanism**: Contains hericenones and erinacines that stimulate Nerve Growth Factor (NGF) production, supporting neuron survival and function. Also provides antioxidant and anti-inflammatory properties that may protect against neuroinflammation. A 2023 preclinical study from the University of Queensland found lion's mane compounds (NDPIH and hericene A) increased the size of neuronal growth cones and promoted neurite outgrowth in cultured hippocampal neurons and animal models (Martinez-Marmol, Chai et al., *Journal of Neurochemistry*, 2023).
 
 **Clinical evidence**:
 
-- **2024 meta-analysis**: Lion's Mane supplementation over 16 weeks supports increased brain-derived neurotrophic factor (BDNF) levels.
-- **2024 double-blind study (Rao et al., n=120)**: Confirmed up-regulation of brain connectivity and recall rates.
-- **Mild cognitive impairment**: The most promising results have been found in populations with MCI or mood concerns.
+- **Mild cognitive impairment (n=30)**: Mori et al. (2009) found significant improvement in cognitive function scores over 16 weeks of supplementation versus placebo, with benefits declining after discontinuation.
+- **Mild cognitive impairment**: The most promising results have been found in populations with MCI or mood concerns, though existing trials are small (n=18–49).
 
 **Practical considerations**:
 - **Onset**: Effects take weeks to manifest
 - **Best for**: Nerve growth factor production and long-term cognitive maintenance
-- **Limitations**: Product quality varies greatly between suppliers; strong preclinical evidence but limited human data
+- **Limitations**: Product quality varies greatly between suppliers; strong preclinical evidence but limited and small-sample human data
 
-**Verdict**: Exciting mechanistic profile (neurotrophic factor stimulation) with emerging clinical support, but the human trial evidence base is still relatively thin. Most promising for MCI populations.
+**Verdict**: Exciting mechanistic profile (neurotrophic factor stimulation), but the human trial evidence base is thin — limited to a few small trials. The preclinical data is compelling but should not be over-extrapolated to human outcomes. Most promising for MCI populations.
 
 ### 4.3 Rhodiola Rosea (Golden Root)
 
@@ -148,7 +147,7 @@ Nootropics can be categorized along multiple axes:
 
 - **More than 70 human clinical trials** reviewed, with clear evidence for combating physical stress-related fatigue, low mood, anxiety, and depression.
 - **Military cadets (n=161)**: Randomized, double-blind, placebo-controlled study — 370 mg or 555 mg of standardized extract showed "pronounced anti-fatigue effect" and increased capacity for mental work under stress and fatigue.
-- **European Medicines Agency (2011)**: Approved traditional use as an adaptogen for temporary relief of stress symptoms (fatigue, exhaustion, weakness).
+- **European Medicines Agency (2011)**: Registered under "traditional use" (a lower evidentiary bar than full marketing authorization, based on 30+ years of safe use) as an adaptogen for temporary relief of stress symptoms (fatigue, exhaustion, weakness).
 - **Health Canada**: Approved health claims for use as an adaptogen to support cognitive function (mental focus and mental stamina).
 
 **Dosing**: 290–1,500 mg/day of standardized extract, typically for 3–16 weeks.
@@ -167,7 +166,7 @@ Nootropics can be categorized along multiple axes:
 - Synergistic effects with bacopa monnieri for enhancing choline activity.
 - Cognitive benefits appear largely secondary to stress and cortisol reduction.
 
-**Practical note**: Better suited for evening intake due to calming and sleep-promoting effects, while rhodiola is recommended for morning use due to energizing properties ([Nektium — Rhodiola and Ashwagandha](https://nektium.com/studies-deliver-scientific-evidence-for-rhodiola-rosea-and-ashwagandhas-stress-reducing-properties/)).
+**Practical note**: Better suited for evening intake due to calming and sleep-promoting effects, while rhodiola is recommended for morning use due to energizing properties ([PMC — Ashwagandha Systematic Review](https://pmc.ncbi.nlm.nih.gov/articles/PMC8762185/)).
 
 **Verdict**: Well-evidenced for stress and anxiety reduction. Cognitive enhancement effects are primarily indirect — mediated through stress reduction and sleep quality improvement rather than direct nootropic action.
 
@@ -185,11 +184,11 @@ This is arguably the most well-evidenced and accessible nootropic combination.
 
 | Study | Design | Key Finding |
 |-------|--------|-------------|
-| **Haskell et al. (2008)** | 250 mg L-theanine + 150 mg caffeine | Synergistic effects: increased speed on several tasks, improved semantic memory, increased alertness — effects not seen with either compound alone ([PubMed](https://pubmed.ncbi.nlm.nih.gov/18681988/)) |
+| **Haskell et al. (2008)** | 250 mg L-theanine + 150 mg caffeine | Synergistic effects: increased speed on several tasks, improved semantic memory, increased alertness — effects not seen with either compound alone ([PubMed](https://pubmed.ncbi.nlm.nih.gov/18006208/)) |
 | **Giesbrecht et al. (2010)** | 97 mg L-theanine + 40 mg caffeine, n=44 | Significantly improved task-switching accuracy and self-reported alertness, reduced tiredness ([PubMed](https://pubmed.ncbi.nlm.nih.gov/21040626/)) |
 | **Kahathuduwa et al. (2025)** | 200 mg L-theanine + 160 mg caffeine, double-blind crossover | Improved selective attention measures in sleep-deprived young adults ([Cambridge Core](https://www.cambridge.org/core/journals/british-journal-of-nutrition/article/highdose-ltheaninecaffeine-combination-improves-neurobehavioural-and-neurophysiological-measures-of-selective-attention-in-acutely-sleepdeprived-young-adults-a-doubleblind-placebocontrolled-crossover-study/8524C6D66F95FC118250FD39D78DA711)) |
-| **ADHD RCT** | L-theanine + caffeine in children | Improved sustained attention without deterioration of inhibitory control, suggesting superiority over either substance alone ([Nature — Scientific Reports](https://www.nature.com/articles/s41598-020-70037-7)) |
-| **Meta-analysis** | Multiple RCTs | Increased attention-switching accuracy, unisensory visual attention accuracy, and moderate effect on alertness ([PMC — Systematic Review](https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/)) |
+| **Kahathuduwa et al. (2020)** | Proof-of-concept RCT, n=5 boys (ages 8–15), four-way crossover | L-theanine + caffeine improved sustained attention without deterioration of inhibitory control in children with ADHD. *Note: very small sample; results are preliminary* ([Nature — Scientific Reports](https://www.nature.com/articles/s41598-020-70037-7)) |
+| **Sohail et al. (2021)** | Systematic review, 5 studies | Increased attention-switching accuracy, unisensory visual attention accuracy, and moderate effect on alertness ([PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/)) |
 
 **Key insight**: L-theanine in isolation shows minimal or no cognitive benefits. The combination is what produces reliable effects — L-theanine modulates caffeine's stimulatory properties while counteracting jitteriness and anxiety.
 
@@ -210,7 +209,7 @@ This is arguably the most well-evidenced and accessible nootropic combination.
 | **Frontiers in Nutrition (2024)** | Systematic review & meta-analysis, RCTs 1993-2024 | Beneficial effects on memory, attention time, and information processing speed ([PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11275561/)) |
 | **Scientific Reports (2024)** | Single-dose trial, sleep deprivation | Single dose improved cognitive performance during sleep deprivation; creatine effects inversely mirror sleep deprivation effects on brain phosphates ([Nature](https://www.nature.com/articles/s41598-024-54249-9)) |
 | **Alzheimer's pilot (2025)** | First human AD trial | Feasible, increased brain creatine levels, preliminary cognitive improvements ([Wiley](https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/trc2.70101)) |
-| **EFSA (2024)** | Health claim evaluation | Creatine "positively impact specific cognitive domains such as memory, attention, inhibitory control, and certain executive functions" ([EFSA Journal](https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2024.9100)) |
+| **EFSA (2024)** | Health claim evaluation | EFSA concluded that "a cause-and-effect relationship has not been established" between creatine and cognitive improvement. Effects at 20 g/day were not replicated at lower doses ([EFSA Journal](https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2024.9100)) |
 | **Avgerinos et al. (2018)** | Systematic review, 6 studies, 281 individuals | Evidence of improvement in short-term memory and intelligence/reasoning. Vegetarians responded better than meat-eaters |
 
 **Key insight**: Effects are most pronounced under **metabolic stress** — sleep deprivation, hypoxia, mental fatigue, and traumatic brain injury. Benefits in well-rested, well-nourished individuals are less clear.
@@ -219,7 +218,7 @@ This is arguably the most well-evidenced and accessible nootropic combination.
 
 **Vegetarian advantage**: Vegetarians — who have lower baseline creatine levels due to dietary absence of creatine from meat — consistently show greater cognitive benefits from supplementation.
 
-**Verdict**: Promising evidence, particularly under metabolic stress conditions. EFSA recognition lends regulatory credibility. The first Alzheimer's pilot trial marks an important milestone. Optimal brain-specific dosing remains undetermined.
+**Verdict**: Promising evidence, particularly under metabolic stress conditions. However, EFSA (2024) concluded the evidence was insufficient to establish a cause-and-effect relationship, and effects at high doses (20 g/day) were not replicated at standard supplementation doses. The first Alzheimer's pilot trial marks an important milestone. Optimal brain-specific dosing remains undetermined.
 
 ### 5.3 Omega-3 Fatty Acids (DHA and EPA)
 
@@ -229,21 +228,21 @@ This is arguably the most well-evidenced and accessible nootropic combination.
 
 | Study | Design | Key Finding |
 |-------|--------|-------------|
-| **2025 dose-response meta-analysis** | 58 RCTs, through Dec 2024 | At 2000 mg/day: significant improvements in attention (SMD 0.98), perceptual speed (0.50), language (0.98), primary memory (0.87), visuospatial functions (0.86), and global cognition (1.08). Optimal dose range: 1000–2500 mg/day ([Nature](https://www.nature.com/articles/s41598-025-16129-8)) |
+| **Shahinfar et al. (2025)** | Dose-response meta-analysis, 58 RCTs | At 2000 mg/day: improvements in attention (SMD 0.98), perceptual speed (0.50), language (0.98), primary memory (0.87), visuospatial functions (0.86), and global cognition (1.08). Attention peaked at ~1500 mg/day. *Note: these are unusually large effect sizes for nutritional interventions and should be interpreted cautiously* ([Nature](https://www.nature.com/articles/s41598-025-16129-8)) |
 | **Earlier dose meta-analysis** | 12 RCTs | Low doses (<1.73 g/day) significantly reduced cognitive decline rate; higher doses showed no additional benefit |
-| **Healthy adults with CAD** | RCT | 3.36 g EPA+DHA daily slowed cognitive aging by 2.5 years |
+| **Malik et al. (2021)** | RCT, n=285 adults with stable coronary artery disease | 3.36 g EPA+DHA daily for 30 months slowed cognitive aging by ~2.5 years. *Note: participants had CAD — results may not generalize to healthy populations* |
 | **MCI populations** | Multiple RCTs | 66.7% reported positive cognitive outcomes vs. placebo |
 | **Alzheimer's disease** | RCTs | No benefit observed once AD has developed |
 | **EPA vs. DHA (n=310)** | RCT, ages 25-49 | EPA supplementation improved global cognitive function and was superior to DHA-enriched oil ([ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0002916522004166)) |
 
-**Non-linear dose response**: The 2025 meta-analysis found that cognitive benefits increase with dose up to approximately 2000–2500 mg/day, then decline — suggesting a U-shaped (inverted) relationship.
+**Dose response**: The 2025 meta-analysis found that attention benefits increased proportionally up to ~1500 mg/day, with a modest decline at higher doses, though the non-linear trend was not statistically significant (P=0.49). This suggests a possible plateau rather than a clear inverted-U relationship.
 
 **Key considerations**:
 - Benefits depend critically on population (greatest in MCI, moderate in healthy adults, none in established AD)
 - EPA may be more important than DHA for cognitive function in healthy younger adults
 - Trial duration matters — many negative studies used insufficient supplementation periods relative to omega-3 pharmacokinetics
 
-**Verdict**: Strong meta-analytic support with large effect sizes at optimal doses. The 2025 dose-response meta-analysis is the most comprehensive to date and clarifies many prior inconsistencies. Most relevant for individuals with suboptimal omega-3 intake or mild cognitive impairment.
+**Verdict**: The 2025 dose-response meta-analysis (58 RCTs) is the most comprehensive to date and clarifies many prior inconsistencies. However, the reported effect sizes (SMDs of 0.87–1.08) are unusually large for nutritional interventions and warrant cautious interpretation — publication bias and methodological heterogeneity may inflate these estimates. Most relevant for individuals with suboptimal omega-3 intake or mild cognitive impairment.
 
 ### 5.4 Choline Sources (CDP-Choline / Alpha-GPC)
 
@@ -265,11 +264,11 @@ This is arguably the most well-evidenced and accessible nootropic combination.
 |-----------|-----------------|-------------|----------|-------|----------------|
 | **Caffeine + L-Theanine** | Strong (multiple RCTs, meta-analyses) | Moderate | Attention, alertness, task-switching | Acute (30-60 min) | Narrow cognitive domain |
 | **Omega-3 (1-2.5g/day)** | Strong (58 RCTs, 2025 meta-analysis) | Moderate-large at optimal dose | Memory, processing speed, global cognition | Weeks to months | Population-dependent; dose-sensitive |
-| **Creatine** | Moderate-strong (meta-analysis, EFSA) | Moderate (stronger under stress) | Memory, processing speed under metabolic stress | Days to weeks | Optimal brain dosing unknown |
+| **Creatine** | Moderate (meta-analysis positive; EFSA rejected health claim) | Moderate (stronger under stress) | Memory, processing speed under metabolic stress | Days to weeks | EFSA found insufficient evidence at standard doses; optimal brain dosing unknown |
 | **Bacopa Monnieri** | Moderate (multiple RCTs) | Moderate | Memory consolidation, learning | 8-12 weeks | Slow onset; modest sample sizes |
 | **Modafinil** | Moderate (multiple meta-analyses) | Small (g ≈ 0.10) | Planning, decision-making | Acute | Prescription-only; small effects in rested adults |
 | **Rhodiola Rosea** | Moderate (70+ trials) | Moderate | Stress-related fatigue, mental work capacity | Days to weeks | Benefits primarily via stress reduction |
-| **Lion's Mane** | Emerging (limited human RCTs) | Unclear | Neurotrophic support, MCI | Weeks | Thin human evidence base |
+| **Lion's Mane** | Emerging (limited small human RCTs; strong preclinical) | Unclear | Neurotrophic support, MCI | Weeks | Thin human evidence base; small sample sizes (n=18–49) |
 | **Ashwagandha** | Moderate | Moderate | Stress, anxiety, sleep → indirect cognition | 3-16 weeks | Indirect cognitive mechanism |
 | **Piracetam** | Weak-moderate (mixed meta-analyses) | None to small | — | — | 2024 meta-analysis found no significant effect |
 | **Methylphenidate** | Weak for healthy adults | Small | Sustained attention | Acute | Schedule II; dependence risk |
@@ -328,12 +327,12 @@ A critical safety concern: Five unapproved drugs were found in commercially avai
 - **FDA enforcement**: Limited and reactive. The FDA can only act after a product is on the market and shown to be unsafe or misbranded.
 - **Prescription nootropics**: Modafinil (Schedule IV), methylphenidate and amphetamines (Schedule II) require prescriptions.
 - **Racetams**: Exist in a regulatory gray area — not approved as drugs, but the FDA has stated they do not qualify as dietary supplements either.
-- **FDA/FTC warnings (2019)**: Both agencies warned about possible advertising fraud and marketing scams in the nootropics space.
+- **FTC/FDA joint warning letters (2019)**: Both agencies issued warning letters to companies marketing nootropic products with false or unsubstantiated health claims ([FTC, February 2019](https://www.ftc.gov/news-events/news/press-releases/2019/02/ftc-fda-send-warning-letters-companies-selling-dietary-supplements-claiming-treat-alzheimers-disease)).
 
 ### 8.2 Europe
 
 - **European Medicines Agency**: Has approved traditional use monographs for some herbal nootropics (e.g., Rhodiola rosea for stress relief).
-- **EFSA**: Evaluates health claims for foods and supplements. Recently evaluated creatine's cognitive claims (2024).
+- **EFSA**: Evaluates health claims for foods and supplements. In 2024, EFSA rejected a health claim linking creatine to cognitive improvement, finding the evidence insufficient.
 - **Piracetam**: Available as a prescription medication in many European countries.
 
 ### 8.3 Other Jurisdictions
@@ -344,7 +343,7 @@ A critical safety concern: Five unapproved drugs were found in commercially avai
 
 ### 8.4 The Transparency Problem
 
-As the Harvard Petrie-Flom Center noted in a December 2024 analysis: the nootropics market represents a "false promise of smart pills in a loosely regulated market." The combination of unverified health claims, undisclosed ingredients, and inadequate regulatory oversight creates an environment where consumers cannot make truly informed decisions ([Petrie-Flom Center](https://petrieflom.law.harvard.edu/2024/12/11/the-false-promise-of-smart-pills-in-a-loosely-regulated-market/)).
+As a December 2024 blog post on the Harvard Petrie-Flom Center's *Bill of Health* (Andrews, 2024) argued: the nootropics market represents a "false promise of smart pills in a loosely regulated market." The combination of unverified health claims, undisclosed ingredients, and inadequate regulatory oversight creates an environment where consumers cannot make truly informed decisions ([Petrie-Flom Center](https://petrieflom.law.harvard.edu/2024/12/11/the-false-promise-of-smart-pills-in-a-loosely-regulated-market/)).
 
 ---
 
@@ -363,7 +362,7 @@ The use of cognitive enhancers raises fundamental questions about fairness:
 
 - Effective nootropics (especially prescription ones) are disproportionately accessible to those with greater social capital and financial resources.
 - Online purchasing of prescription nootropics from unregulated sources introduces additional safety risks — particularly for vulnerable populations.
-- The market is projected to reach $5.75 billion by 2033, driven partly by an aging population seeking cognitive preservation.
+- The U.S. market alone is projected to reach $5.75 billion by 2033 (Renub Research, 2024), driven partly by an aging population seeking cognitive preservation.
 
 ### 9.3 Authenticity and Identity
 
@@ -373,7 +372,7 @@ Philosophical questions arise about whether pharmacologically enhanced cognition
 
 - Most nootropics lack long-term safety data in healthy populations.
 - The current regulatory framework allows widespread human experimentation outside clinical trial protections.
-- A 2025 review in *Frontiers in Psychiatry* proposes stronger legal frameworks to regulate cognitive enhancer use and prevent misuse in non-medical settings ([Frontiers](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2020.00053/full)).
+- A 2020 review in *Frontiers in Psychiatry* proposes stronger legal frameworks to regulate cognitive enhancer use and prevent misuse in non-medical settings (Ricci, 2020) ([Frontiers](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2020.00053/full)).
 
 ---
 
@@ -381,7 +380,7 @@ Philosophical questions arise about whether pharmacologically enhanced cognition
 
 Nootropic use is widespread and growing:
 
-- **Medical students**: In a survey of 1,399 medical students from Egypt, Sudan, and Jordan, **88.3%** admitted to using cognitive enhancers ([PMC — Focus on Cognitive Enhancement](https://pmc.ncbi.nlm.nih.gov/articles/PMC12466949/)).
+- **Medical students**: In a survey of 1,399 medical students from Egypt, Sudan, and Jordan, **88.3%** admitted to using cognitive enhancers (Hawas et al., 2025, *Substance Use & Misuse*; cited in [PMC — Focus on Cognitive Enhancement](https://pmc.ncbi.nlm.nih.gov/articles/PMC12466949/)).
 - **University students broadly**: Studies consistently report high rates of prescription stimulant misuse, particularly during exam periods.
 - **Most commonly used**: Methylphenidate, modafinil, amphetamines, caffeine-based supplements, and increasingly psychedelics (microdosing).
 - **Motivations**: Academic pressure, workplace competition, stress management, curiosity, and perceived "optimization."
@@ -434,17 +433,17 @@ The practice of combining multiple nootropics ("stacking") is extremely common i
 3. [PMC — Exploring Cognitive Enhancers: Neurotherapeutics to Ethical Challenges (2025)](https://pmc.ncbi.nlm.nih.gov/articles/PMC12333774/)
 4. [ScienceDirect — The Science of Tomorrow: Cognitive Enhancers (2025)](https://www.sciencedirect.com/science/article/pii/S266645932500109X)
 5. [MDPI Brain Sciences — Plant-Based Nootropic RCT (2025)](https://www.mdpi.com/2076-3425/15/3/226)
-6. [ScienceDirect — Piracetam Systematic Review & Meta-Analysis (2024)](https://www.sciencedirect.com/science/article/abs/pii/S0303846724002452)
-7. [NCBI Bookshelf — Cochrane Review: Piracetam (2001)](https://www.ncbi.nlm.nih.gov/books/NBK69241/)
+6. [ScienceDirect — Gouhie et al., Piracetam Systematic Review & Meta-Analysis, *Clinical Neurology and Neurosurgery* (2024)](https://www.sciencedirect.com/science/article/abs/pii/S0303846724002452)
+7. [Cochrane Library — Flicker & Grimley Evans, Piracetam for Dementia (2001)](https://doi.org/10.1002/14651858.CD001011)
 8. [Alzheimer's Drug Discovery Foundation — Piracetam](https://www.alzdiscovery.org/cognitive-vitality/ratings/piracetam)
-9. [University of Oxford — Modafinil Review (2015)](https://www.ox.ac.uk/news/2015-08-20-review-%E2%80%98smart-drug%E2%80%99-shows-modafinil-does-enhance-cognition)
+9. [*European Neuropsychopharmacology* — Battleday & Brem, Modafinil Systematic Review (2015)](https://doi.org/10.1016/j.euroneuro.2015.07.028)
 10. [PubMed — Kredlow et al. Modafinil Meta-Analysis (2019)](https://pubmed.ncbi.nlm.nih.gov/31433334/)
 11. [ScienceDirect — Roberts et al. Comparative Meta-Analysis (2020)](https://www.sciencedirect.com/science/article/abs/pii/S0924977X20302145)
 12. [PMC — Neurobiology of Modafinil (2013)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3800148/)
 13. [PMC — Bacopa Neuroprotective & Cognitive Systematic Review (2024)](https://pmc.ncbi.nlm.nih.gov/articles/PMC11047749/)
 14. [PMC — Caffeine & L-Theanine Systematic Review (2022)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/)
 15. [PubMed — Caffeine + L-Theanine Cognitive Performance (2010)](https://pubmed.ncbi.nlm.nih.gov/21040626/)
-16. [PubMed — Combined Effects of L-Theanine and Caffeine (2008)](https://pubmed.ncbi.nlm.nih.gov/18681988/)
+16. [PubMed — Haskell et al., Combined Effects of L-Theanine and Caffeine, *Biological Psychology* (2008)](https://pubmed.ncbi.nlm.nih.gov/18006208/)
 17. [Cambridge Core — High-Dose L-Theanine-Caffeine in Sleep Deprivation (2025)](https://www.cambridge.org/core/journals/british-journal-of-nutrition/article/highdose-ltheaninecaffeine-combination-improves-neurobehavioural-and-neurophysiological-measures-of-selective-attention-in-acutely-sleepdeprived-young-adults-a-doubleblind-placebocontrolled-crossover-study/8524C6D66F95FC118250FD39D78DA711)
 18. [Nature — L-Theanine + Caffeine in ADHD (2020)](https://www.nature.com/articles/s41598-020-70037-7)
 19. [PMC — Creatine & Cognitive Function Meta-Analysis (2024)](https://pmc.ncbi.nlm.nih.gov/articles/PMC11275561/)
@@ -455,9 +454,10 @@ The practice of combining multiple nootropics ("stacking") is extremely common i
 24. [ScienceDirect — EPA vs. DHA in Healthy Adults (2022)](https://www.sciencedirect.com/science/article/pii/S0002916522004166)
 25. [PMC — Rhodiola Rosea Effectiveness (2022)](https://pmc.ncbi.nlm.nih.gov/articles/PMC9228580/)
 26. [Sage Journals — Rhodiola Clinical Evidence (2024)](https://journals.sagepub.com/doi/10.1089/ict.2024.56827.luc)
-27. [Nektium — Rhodiola and Ashwagandha Stress Evidence](https://nektium.com/studies-deliver-scientific-evidence-for-rhodiola-rosea-and-ashwagandhas-stress-reducing-properties/)
+27. [PMC — Ashwagandha Systematic Review (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8762185/)
 28. [Petrie-Flom Center — False Promise of Smart Pills (2024)](https://petrieflom.law.harvard.edu/2024/12/11/the-false-promise-of-smart-pills-in-a-loosely-regulated-market/)
 29. [PMC — Unapproved Drugs in Cognitive Supplements (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8382366/)
 30. [FDA — Warning Letter: Peak Nootropics (2019)](https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/peak-nootropics-llc-aka-advanced-nootropics-557887-02052019)
 31. [AMA — Confronts the Rise of Nootropics](https://www.ama-assn.org/press-center/ama-press-releases/ama-confronts-rise-nootropics)
-32. [Frontiers in Psychiatry — Pharmacological Human Enhancement: Bioethical Challenges (2020)](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2020.00053/full)
+32. [Frontiers in Psychiatry — Ricci, Pharmacological Human Enhancement: Bioethical Challenges (2020)](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2020.00053/full)
+33. [FTC/FDA Joint Warning Letters — Dietary Supplement Claims (2019)](https://www.ftc.gov/news-events/news/press-releases/2019/02/ftc-fda-send-warning-letters-companies-selling-dietary-supplements-claiming-treat-alzheimers-disease)

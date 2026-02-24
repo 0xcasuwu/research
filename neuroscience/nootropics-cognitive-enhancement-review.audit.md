@@ -4,6 +4,8 @@
 **Paper:** `neuroscience/nootropics-cognitive-enhancement-review.md`
 **Method:** Systematic citation verification (URL accessibility + content matching), methodological review, bias analysis, and coverage gap identification. Every cited URL was fetched and cross-referenced against the claims made.
 
+> **Status: ALL ISSUES CORRECTED.** All critical, high, and moderate issues identified below have been fixed in the paper. See the "Action" line under each issue for what was changed.
+
 ---
 
 ## Audit Summary
