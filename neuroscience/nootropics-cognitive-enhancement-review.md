@@ -426,6 +426,50 @@ The practice of combining multiple nootropics ("stacking") is extremely common i
 
 ---
 
+## Appendix A: Citation Audit
+
+**Date:** 2026-02-24 | **Method:** Systematic verification of all 32 cited URLs — each was fetched, content-matched against claims, and cross-referenced with primary databases (PubMed, PMC, Cochrane, EFSA). All issues identified below have been corrected in the current version of this document.
+
+| Citations checked | Critical errors found & fixed | High-severity | Moderate | Minor | Clean |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| 32 | 4 | 3 | 8 | 6 | 15 |
+
+### Critical Errors (Corrected)
+
+1. **Fabricated citation removed (Section 4.2):** An original draft cited "Rao et al., 2024 (n=120)" for lion's mane — this study does not exist in any scientific database. It was traced only to supplement marketing websites. The section was rewritten to reflect the actual evidence base (small trials, n=18–49).
+
+2. **EFSA misrepresentation corrected (Section 5.2):** EFSA's 2024 creatine evaluation was originally presented as endorsing cognitive benefits. In fact, EFSA explicitly *rejected* the health claim, concluding "a cause-and-effect relationship has not been established." The entry, verdict, and evidence summary table were all corrected.
+
+3. **Wrong citation URL fixed (Section 5.1):** The Haskell et al. (2008) entry originally linked to PubMed 18681988 (Owen et al. — a different study with different dosages). Corrected to PubMed 18006208, the actual Haskell et al. paper in *Biological Psychology*.
+
+4. **Publication date corrected (Section 9.4):** A Frontiers in Psychiatry article was dated "2025" — the DOI itself contains "2020." Corrected to 2020 (Ricci, 2020).
+
+### High-Severity Issues (Corrected)
+
+5. **Journal name (Section 3.1):** Piracetam meta-analysis journal corrected from *Clinica Chimica Acta* to *Clinical Neurology and Neurosurgery*.
+6. **Cochrane URL (Section 3.1):** Link pointed to Waegemans DARE assessment, not the Cochrane Review. Replaced with correct Cochrane Library DOI.
+7. **ADHD study disclosure (Section 5.1):** L-theanine + caffeine ADHD study now identified as proof-of-concept with n=5.
+
+### Moderate Issues (Corrected)
+
+8. Sohail et al. relabeled from "meta-analysis" to "systematic review" (5 studies, qualitative synthesis only).
+9. Nektium industry marketing page replaced with peer-reviewed ashwagandha systematic review (PMC8762185).
+10. UQ lion's mane study labeled as preclinical; quoted language corrected to match actual findings.
+11. $5.75B market figure clarified as U.S.-only with source attribution (Renub Research, 2024).
+12. FDA/FTC warning language corrected to "false or unsubstantiated health claims" with citation added.
+13. Malik et al. omega-3 study now discloses participants had stable coronary artery disease.
+14. Giurgea five criteria given proper primary source citation.
+15. Omega-3 effect sizes (SMD 0.87–1.08) flagged as unusually large for nutritional interventions with cautionary note.
+
+### Methodological Notes
+
+- **Industry conflicts of interest** are present in multiple cited sources: Waegemans/UCB consultancy, Natac affiliation in rhodiola review, BASF funding of EPA/DHA trial. Readers should weigh these accordingly.
+- **Publication bias** in nootropic literature disproportionately reports positive findings, especially in supplement research. Effect sizes reported here may be inflated.
+- **Expectancy/placebo effects** are not adequately controlled in many studies, particularly for subjective outcomes like "alertness" or "mental work capacity."
+- **Extreme heterogeneity** (e.g., piracetam I²=96%) in several meta-analyses limits the interpretability of pooled effects.
+
+---
+
 ## Sources
 
 1. [PMC — Focus on Cognitive Enhancement: Narrative Overview (2025)](https://pmc.ncbi.nlm.nih.gov/articles/PMC12466949/)
