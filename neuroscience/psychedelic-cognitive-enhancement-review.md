@@ -200,7 +200,8 @@ Additional preclinical findings:
 **BDNF modulation:**
 - Increases BDNF expression in hippocampus and amygdala, reversing stress-induced BDNF-CREB downregulation
 - Activates downstream TrkB-mTOR-ERK pathways supporting synaptic strengthening
-- In fibromyalgia models, reversed decreased BDNF expression and pCREB levels in hippocampus and medial prefrontal cortex
+- In fibromyalgia models, reversed decreased BDNF expression and pCREB levels in hippocampus and medial prefrontal cortex ([Kim et al., 2017; PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC5507774/))
+- Proteomics analysis (Tiraboschi et al., 2010; *Journal of Proteome Research*) identified 11 differentially expressed proteins in tianeptine-treated hippocampal neurons, including proteins involved in neurite growth, synaptogenesis, and synaptic activity homeostasis
 
 **Behavioral outcomes in rodents:**
 - Reverses chronic stress-induced spatial memory deficits (Morris water maze, radial arm maze)
@@ -219,8 +220,8 @@ Additional preclinical findings:
 **Garcia-Alberca, Gris, de la Guia, & Mendoza (2022; *Journal of Alzheimer's Disease*):**
 - 12-month retrospective observational study; N=126 AD patients with comorbid depression
 - Tianeptine group (n=38) vs. other antidepressants (n=88, largely SSRIs)
-- Tianeptine group showed statistically significant cognitive improvement at 12 months on MMSE, RAVLT (verbal episodic memory), Category Fluency, Letter Fluency, and Boston Naming Test
-- **The other antidepressants group did NOT show cognitive improvement** — despite equivalent antidepressant efficacy
+- Tianeptine group showed statistically significant cognitive improvement at 12 months on MMSE (F(1,124) = 13.427, p<0.001; +0.97 points), RAVLT (F(1,124) = 6.390, p<0.001), Category Fluency, Letter Fluency, and Boston Naming Test
+- **The other antidepressants group did NOT show cognitive improvement** — despite equivalent antidepressant efficacy on depression scales
 - Limitation: Retrospective, non-randomized, unequal groups ([PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9398087/))
 
 **Nickel et al. (2003; *Journal of Clinical Psychopharmacology*):**
