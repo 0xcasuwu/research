@@ -172,14 +172,14 @@ Downstream signaling proceeds through the BDNF → TrkB → PI3K-Akt-mTOR and MA
 
 ### 4.1 Pharmacology: Not an SSRI
 
-Tianeptine has been persistently misclassified as a "selective serotonin reuptake enhancer" (SSRE) — a designation based on early, now-discredited pharmacological models. Current understanding identifies tianeptine as:
+Tianeptine — discovered by the French Society of Medical Research in the 1960s, marketed as Stablon (France) since 1989 and approved in ~66 countries — has been persistently misclassified as a "selective serotonin reuptake enhancer" (SSRE). This designation is now considered outdated and irrelevant to its therapeutic effects. Current understanding identifies tianeptine as:
 
-- **Full mu-opioid receptor (MOR) agonist** (EC50 ~194 nM) — the primary mechanism of its antidepressant and anxiolytic effects ([Gassaway et al., 2014; *Translational Psychiatry*](https://www.nature.com/articles/tp201430))
-- **Delta-opioid receptor (DOR) agonist** (weaker affinity)
-- **Glutamatergic modulator** — normalizes stress-induced alterations in glutamate transmission, particularly in the amygdala and hippocampus
-- **AMPA receptor potentiator** — enhances AMPA-mediated synaptic transmission, linking to neuroplasticity cascades
+- **Full mu-opioid receptor (MOR) agonist** (Ki = 383 nM; EC50 ~194 nM for G-protein activation) — the primary mechanism of its antidepressant and anxiolytic effects. Screened at 51 CNS receptors by NIMH's Psychoactive Drug Screening Program with no significant affinity at monoaminergic receptors or transporters ([Gassaway et al., 2014; *Translational Psychiatry*](https://www.nature.com/articles/tp201430))
+- **Delta-opioid receptor (DOR) agonist** (~200-fold lower potency than MOR; EC50 ~37.4 uM). Inactive at kappa-opioid receptor.
+- **Glutamatergic modulator** — normalizes stress-induced alterations in glutamate transmission via MOR activation on hippocampal interneurons, decreasing PKA activity in dentate granule cells and reducing NMDA receptor hyperactivation ([McEwen et al., 2010; *Molecular Psychiatry*](https://www.nature.com/articles/mp200980))
+- **AMPA receptor potentiator** — increases phosphorylation of GluA1 subunits at Ser831 (CaMKII/PKC site) and Ser845 (PKA site) in frontal cortex and hippocampal CA3, enhancing AMPA-mediated synaptic transmission ([Svenningsson et al., 2007](https://pubmed.ncbi.nlm.nih.gov/18088278/); [Bhatt et al., 2012](https://pubmed.ncbi.nlm.nih.gov/22056552/))
 
-The opioid mechanism was definitively demonstrated when naltrexone (an opioid antagonist) fully blocked tianeptine's antidepressant effects in clinical studies.
+The opioid mechanism was definitively demonstrated by Samuels et al. (2017), who showed that MOR-knockout mice and MOR antagonists completely abolished tianeptine's antidepressant-like behavioral effects ([*Neuropsychopharmacology*](https://www.nature.com/articles/npp201760)). Han et al. (2022) further refined this, demonstrating that MOR expression specifically on somatostatin-positive (SST+) GABAergic interneurons in the ventral hippocampus is necessary and sufficient for these effects — and critically, that this mechanism is dissociable from opioid-like effects such as analgesia and conditioned place preference ([*Neuropsychopharmacology*](https://www.nature.com/articles/s41386-021-01192-2)).
 
 ### 4.2 Cognitive Enhancement Evidence
 
@@ -187,48 +187,82 @@ The opioid mechanism was definitively demonstrated when naltrexone (an opioid an
 
 Tianeptine has demonstrated robust cognitive effects in animal models, primarily through stress-reversal and hippocampal plasticity mechanisms:
 
-**Hippocampal neuroplasticity:**
-- Tianeptine prevents and reverses stress-induced hippocampal atrophy — specifically, it restores dendritic length and branching of CA3 pyramidal neurons that are shortened by chronic stress (Watanabe et al., 1992; McEwen et al., 2010)
+**Hippocampal neuroplasticity — the landmark Czeh et al. (2001) study:**
+In a *PNAS* study using tree shrews (*Tupaia belangeri*) — a primate-adjacent model with high translational validity — Czeh, Michaelis, Watanabe, Frahm, de Biurrun, van Kampen, Bartolomucci, & Fuchs demonstrated that chronic psychosocial stress reduced N-acetyl-aspartate (-13%), creatine/phosphocreatine (-15%), choline compounds (-13%), and hippocampal neurogenesis (-33%). **Tianeptine (50 mg/kg for 28 days) prevented ALL of these stress-induced changes.** Robert Sapolsky, in a commentary in the same *PNAS* issue, called this "the first such demonstration with an animal model of depression" ([*PNAS*](https://www.pnas.org/doi/abs/10.1073/pnas.211427898)).
+
+Additional preclinical findings:
+- Prevents AND reverses stress-induced dendritic atrophy (debranching, shortening) in CA3 pyramidal neurons (Watanabe et al., 1992; McEwen et al., 2010)
+- Prevents stress-induced dendritic hypertrophy in the basolateral amygdala
 - Enhances hippocampal long-term potentiation (LTP) — the cellular substrate of learning and memory
-- Restores neurogenesis in the dentate gyrus suppressed by chronic stress
+- Stabilizes surface diffusion of synaptic AMPA receptors via CaMKII-stargazin-PSD-95 pathway
+- **Important nuance:** Han et al. (2022) found that unlike fluoxetine, tianeptine does NOT promote hippocampal neurogenesis — suggesting its neuroplasticity operates through synaptic strengthening/AMPA potentiation rather than new neuron generation
 
 **BDNF modulation:**
-- Increases BDNF expression in hippocampus, reversing stress-induced BDNF downregulation
+- Increases BDNF expression in hippocampus and amygdala, reversing stress-induced BDNF-CREB downregulation
 - Activates downstream TrkB-mTOR-ERK pathways supporting synaptic strengthening
+- In fibromyalgia models, reversed decreased BDNF expression and pCREB levels in hippocampus and medial prefrontal cortex
 
 **Behavioral outcomes in rodents:**
 - Reverses chronic stress-induced spatial memory deficits (Morris water maze, radial arm maze)
+- Zoladz et al. (2008, 2010): Pre-training tianeptine (10 mg/kg) prevented predator stress-induced memory impairment. Dose-response showed 1-10 mg/kg enhanced 24-hour memory consolidation; lower doses (0.25-0.5 mg/kg) were ineffective ([*Pharmaceuticals*; PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4034085/))
 - Normalizes stress-impaired novel object recognition
 - Restores cognitive flexibility in attentional set-shifting paradigms after chronic unpredictable stress
 
 #### 4.2.2 Clinical Evidence (Limited but Positive)
 
-**Comparison with SSRIs on cognitive measures:**
+**Klasik, Krysta, & Krupka-Matuszczyk (2011; *Psychiatria Danubina*):**
+- Open-label, 3-month monotherapy; N=20 depressed patients
+- Vienna Test System: short-term memory, reaction time, attention
+- Significant improvement in ALL assessed cognitive domains
+- Limitation: Small sample, no control group ([PubMed](https://pubmed.ncbi.nlm.nih.gov/21894095/))
 
-- **Jeon et al. (2014; *Human Psychopharmacology*):** Tianeptine (37.5 mg/day) vs. escitalopram in elderly patients with depression. Both improved depression; tianeptine showed greater improvements in memory domains (word list recall, constructional praxis recall) on the CERAD neuropsychological battery.
+**Garcia-Alberca, Gris, de la Guia, & Mendoza (2022; *Journal of Alzheimer's Disease*):**
+- 12-month retrospective observational study; N=126 AD patients with comorbid depression
+- Tianeptine group (n=38) vs. other antidepressants (n=88, largely SSRIs)
+- Tianeptine group showed statistically significant cognitive improvement at 12 months on MMSE, RAVLT (verbal episodic memory), Category Fluency, Letter Fluency, and Boston Naming Test
+- **The other antidepressants group did NOT show cognitive improvement** — despite equivalent antidepressant efficacy
+- Limitation: Retrospective, non-randomized, unequal groups ([PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9398087/))
 
-- **Klasik et al. (2011):** Tianeptine demonstrated cognitive improvements in depressed patients including gains in attention, psychomotor speed, verbal fluency, and executive function, with a profile suggesting benefits beyond simple mood improvement.
+**Nickel et al. (2003; *Journal of Clinical Psychopharmacology*):**
+- Double-blind RCT; tianeptine vs. paroxetine; 42 days; N=44 depressed inpatients (Max Planck Institute)
+- Both drugs equally improved alertness, selective attention, and visual problem-solving
+- NO significant cognitive differences between groups ([PubMed](https://pubmed.ncbi.nlm.nih.gov/12640217/))
 
-- **Nickel et al. (2003; *European Psychiatry*):** Tianeptine improved cognitive performance in depressed patients, with benefits in processing speed and sustained attention.
+**Tonix Phase 2 UPLIFT Trial (TNX-601 ER) — FAILED (Oct 2023):**
+- Double-blind, randomized, multicenter, placebo-controlled; N=132; moderate-to-severe MDD
+- Extended-release racemic tianeptine, once-daily dosing, 6 weeks
+- **Primary endpoint (MADRS) did NOT achieve clinical or statistical significance vs. placebo**
+- Tonix discontinued development; pivoted to TNX-4300 (estianeptine, the S-isomer), claiming it mediates neuroplasticity while the R-isomer drives off-target MOR activity
 
-**Cognitive effects in specific populations:**
-
-- Multiple studies in elderly depressed populations report that tianeptine improves or preserves cognitive function — contrasting with SSRIs, which can produce cognitive dulling in some patients
-- Tianeptine does not impair psychomotor performance, driving ability, or vigilance — a meaningful advantage over sedating antidepressants
+**Healthy individuals — weak and contradictory:**
+- Zoladz et al. (2010) reported acute cognitive improvement in healthy subjects, classifying it as a potential nootropic via AMPA agonism — but this has not been robustly replicated
+- FDA review documents reported *diminished* cognitive and psychomotor performance in healthy individuals, directly contradicting nootropic claims
+- The improvements appear specific to depressed or stressed populations
 
 **Stress-cognition interaction:**
 - The strongest clinical signal is tianeptine's ability to protect cognition under stress conditions. In non-stressed healthy volunteers, cognitive enhancement effects are minimal. This parallels the preclinical literature showing robust effects only in stressed animals.
 
 ### 4.3 Safety and Regulatory Concerns
 
-Tianeptine's mu-opioid agonism creates significant abuse and addiction liability:
+Tianeptine's mu-opioid agonism creates significant abuse and addiction liability, producing a remarkable paradox: a legitimate prescription antidepressant in 66 countries that has simultaneously caused a US public health crisis.
 
-- **FDA warnings (2018, updated 2022):** Multiple reports of abuse, dependence, and withdrawal symptoms at supratherapeutic doses (typically 100-1000+ mg/day vs. therapeutic 37.5 mg/day)
-- **Scheduled substance:** Classified as a controlled substance in Michigan, Alabama, Minnesota, and several other US states as of 2025. Not FDA-approved in the United States.
-- **Available by prescription** in France, Russia, and many other countries (brand names: Stablon, Coaxil, Tatinol)
-- **Marketed as a supplement** in the US under names like "Tianaa," "ZaZa," and "gas station heroin" — presenting severe public health risks
-- **Withdrawal syndrome:** Can be severe, resembling opioid withdrawal (anxiety, insomnia, myalgia, nausea, tachycardia), particularly at high doses
-- At therapeutic doses (12.5 mg TID), abuse potential and side effects are reported as low in controlled medical settings
+**Abuse epidemiology:**
+- US poison control calls: 11 total (2000-2013) → 38 (2015) → 83 (2016) → 151 (2020) → 350+ (2024) — a ~30-fold increase ([El Zahran et al., 2018; CDC *MMWR*](https://www.cdc.gov/mmwr/volumes/67/wr/mm6730a2.htm))
+- Demographics: 82% male, 57% aged 21-40; common co-exposures: phenibut, ethanol, benzodiazepines
+- Recreational doses: typically 50-10,000+ mg/day (1.3x to 250x the therapeutic 37.5 mg/day). Mean among documented abusers: ~1,469 mg/day ([Springer & Cubala, 2018](https://pubmed.ncbi.nlm.nih.gov/29494783/))
+- At least 6 documented fatalities; withdrawal is severe and identical to classical opioid withdrawal (responsive to buprenorphine/naloxone)
+
+**FDA actions:**
+- November 2023: Consumer warning against all tianeptine products
+- January 2024: Letter to retailers urging removal; Import Alert to detain shipments at US borders
+- February 2024: Product recalls (Super Chill Products)
+- Proposed STAND Against Emerging Opioids Act (Jan 2024, bipartisan) would classify as Schedule III
+
+**US state scheduling (as of early 2025):** Michigan (Schedule II, 2018 — first state), Alabama (Schedule I, 2021), Minnesota, Georgia, Ohio (Schedule I, ~2022), Indiana, Kentucky (banned), Tennessee (Schedule II), Florida (Schedule I, 2024), North Carolina (Schedule II, effective Dec 2024), Virginia (Schedule I, 2024), and others. NOT federally DEA-scheduled.
+
+**International:** Prescription drug in ~66 countries (France, Russia, Argentina, Singapore, India, etc.). France reclassified as narcotic with 28-day max prescriptions in 2012. Italy banned entirely in 2020. Russia classified Schedule III since 2010.
+
+**The safety paradox:** At therapeutic doses (12.5 mg TID), tianeptine has decades of favorable safety data in European clinical use — low sedation, no cognitive impairment, no weight gain, no sexual dysfunction. The crisis is driven by unregulated US availability as a "supplement" under names like "ZaZa," "Tianaa," "Neptune's Fix," and "gas station heroin."
 
 ### 4.4 Summary Assessment
 
@@ -255,7 +289,7 @@ All four substances converge on neuroplasticity-related signaling, though throug
 | **Sigma-1 receptor** | Minimal | Minimal | Significant | None |
 | **BDNF upregulation** | Yes (via 5-HT2A → glutamate) | Yes (direct TrkB + indirect) | Yes (demonstrated in RCT) | Yes (stress reversal) |
 | **mTOR activation** | Yes (confirmed in humans) | Yes | Yes | Yes (indirect) |
-| **Hippocampal neurogenesis** | Limited evidence | Limited evidence | Yes (S1R-mediated, confirmed in vivo) | Yes (stress reversal) |
+| **Hippocampal neurogenesis** | Limited evidence | Limited evidence | Yes (S1R-mediated, confirmed in vivo) | No (Han et al., 2022) |
 | **DMN disruption** | Robust | Robust | Robust | None documented |
 | **AMPA potentiation** | Indirect (via glutamate) | Indirect (via glutamate) | Indirect (via glutamate) | Direct |
 
@@ -361,3 +395,15 @@ Laboratory cognitive tasks may not capture the kinds of real-world cognitive cha
 28. SPL026 Phase IIa DMT trial (2025). *Nature Medicine*. [Nature](https://www.nature.com/articles/s41591-025-04154-z)
 29. COMPASS Pathways Phase 3 (Feb 2026). [BusinessWire](https://www.businesswire.com/news/home/20260217100836/en/)
 30. MindMed MM-120 Phase 2b (2025). *JAMA*. [JAMA](https://jamanetwork.com/journals/jama/article-abstract/2838505)
+31. Samuels, B.A., et al. (2017). "The behavioral effects of the antidepressant tianeptine require the mu-opioid receptor." *Neuropsychopharmacology*, 42(10), 2052-2063. [Nature](https://www.nature.com/articles/npp201760)
+32. Han, J., et al. (2022). "Mu opioid receptors on hippocampal GABAergic interneurons are critical for the antidepressant effects of tianeptine." *Neuropsychopharmacology*, 47(7), 1387-1397. [Nature](https://www.nature.com/articles/s41386-021-01192-2)
+33. McEwen, B.S., et al. (2010). "The neurobiological properties of tianeptine (Stablon): from monoamine hypothesis to glutamatergic modulation." *Molecular Psychiatry*, 15(3), 237-249. [Nature](https://www.nature.com/articles/mp200980)
+34. Czeh, B., et al. (2001). "Stress-induced changes in cerebral metabolites, hippocampal volume, and cell proliferation are prevented by antidepressant treatment with tianeptine." *PNAS*, 98(22), 12796-12801. [PNAS](https://www.pnas.org/doi/abs/10.1073/pnas.211427898)
+35. Klasik, A., et al. (2011). "Effect of tianeptine on cognitive functions in patients with depressive disorders." *Psychiatria Danubina*, 23(Suppl 1), S18-S22. [PubMed](https://pubmed.ncbi.nlm.nih.gov/21894095/)
+36. Garcia-Alberca, J.M., et al. (2022). "Effects of tianeptine treatment on depression and cognitive function in patients with Alzheimer's disease." *Journal of Alzheimer's Disease*, 88(2), 707-720. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9398087/)
+37. Nickel, T., et al. (2003). "Clinical and neurobiological effects of tianeptine and paroxetine in major depression." *Journal of Clinical Psychopharmacology*, 23(2), 155-168. [PubMed](https://pubmed.ncbi.nlm.nih.gov/12640217/)
+38. El Zahran, T., et al. (2018). "Characteristics of tianeptine exposures reported to the National Poison Data System." *MMWR*, 67(30), 815-818. [CDC](https://www.cdc.gov/mmwr/volumes/67/wr/mm6730a2.htm)
+39. Springer, B.L. & Cubala, W.J. (2018). "Tianeptine abuse and dependence in psychiatric patients." *Journal of Psychoactive Drugs*, 50(3), 275-280. [PubMed](https://pubmed.ncbi.nlm.nih.gov/29494783/)
+40. Nishio, T., et al. (2024). "Classics in Chemical Neuroscience: Tianeptine." *ACS Chemical Neuroscience*, 15(21), 3863-3873. [ACS](https://pubs.acs.org/doi/10.1021/acschemneuro.4c00519)
+41. Svenningsson, P., et al. (2007). "Involvement of AMPA receptor phosphorylation in antidepressant actions with special reference to tianeptine." *European Journal of Neuroscience*, 26, 3509-3517. [PubMed](https://pubmed.ncbi.nlm.nih.gov/18088278/)
+42. Zoladz, P.R., et al. (2010). "Beneficial effects of tianeptine on hippocampus-dependent long-term memory." *Pharmaceuticals*, 3(10), 3143-3166. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4034085/)
